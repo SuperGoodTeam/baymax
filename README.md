@@ -4,5 +4,7 @@ This is a repo for code as well as for archived CAD sketches (so that we can be 
 
 Contributors:
 
-* Put names here
+* Daniel Kor
 * Jan Tache
+* Kevin Chow
+* Rachel Chan
