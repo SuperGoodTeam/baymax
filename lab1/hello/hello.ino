@@ -7,7 +7,7 @@ int COUNTER_MAX=10000;
 boolean wasLow = false;
 
 void setup()
-{ 
+{
 	#include <phys253setup.txt>
 	while(!startbutton())
 	{
@@ -53,7 +53,7 @@ void updateFrequency()
 {
 	long frq = 1.0/(((millis() - lastTime)/1000.0) / COUNTER_MAX);
 	LCD.clear(); LCD.home();
-	LCD.print(frq); 
+	LCD.print(frq);
 	counter=0;
 	lastTime=millis();
 }
