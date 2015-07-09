@@ -8,6 +8,7 @@ version: 0.1
 #include <phys253.h>
 #include <LiquidCrystal.h>
 //#include <Servo253.h>
+#include <avr/interrupt.h>
 
 #include <EEPROMex.h>
 #include <EEPROMVar.h>
@@ -67,6 +68,10 @@ boolean clawOpen=false;
 
 #define KNOB_MAX 1023
 
+//============== INTERRUPTS ==============
+volatile unsigned int INT_0 = 0;
+ISR(INT0_vect) {LCD.clear(); LCD.home(); LCD.print("INT0: "); LCD.print(INT_0++);};
+
 //============== STATES ==============
 enum RobotState {
   INITIALISING, PAST_DOOR, FOLLOW_TAPE_1, COLLECT_ITEM_1, FOLLOW_TAPE_2, COLLECT_ITEM_2, COLLECT_ITEM_3, COLLECT_ITEM_4, COLLECT_ITEM_5, COLLECT_ITEM_6, UP_RAMP, PAST_RAMP, IR, ZIPLINE, FINISHED, TEST, MAIN_MENU, STATE_MENU, TAPE_MENU, DRIVE, NUM_STATES
@@ -100,12 +105,15 @@ void setup() {
   setBasearmServo(BASESERVO_POSITION_START);
   setBaseServo(BASE_POSITION_START);
   //other stuff goes here
+  
+  enableExternalInterrupt(INT0, RISING);
+
 }
 
 void loop() {
-    if (stopbutton()) {
+    /*if (stopbutton()) {
 		switchState(MAIN_MENU);  
-	}
+	}*/
         
 	switch(currentState) {
 	//==============
@@ -399,4 +407,26 @@ void checkClawOpen(){
    else {
     clawOpen=false; 
    } 
+}
+
+//============== INTERRUPT FUNCTIONS ==============
+void enableExternalInterrupt(unsigned int INTX, unsigned int mode)
+{
+	if (INTX > 3 || mode > 3 || mode == 1) return;
+	cli();
+	/* Allow pin to trigger interrupts        */
+	EIMSK |= (1 << INTX);
+	/* Clear the interrupt configuration bits */
+	EICRA &= ~(1 << (INTX*2+0));
+	EICRA &= ~(1 << (INTX*2+1));
+	/* Set new interrupt configuration bits   */
+	EICRA |= (mode & (1 << 1)) << (INTX*2+0);
+	EICRA |= (mode & (1 << 0)) << (INTX*2+1);
+	sei();
+}
+ 
+void disableExternalInterrupt(unsigned int INTX)
+{
+	if (INTX > 3) return;
+	EIMSK &= ~(1 << INTX);
 }
