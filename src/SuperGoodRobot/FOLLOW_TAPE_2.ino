@@ -2,11 +2,8 @@
 short speed_2=baseSpeed+0;
 
 void start_followtape_2() {
-	motor.speed(MOTOR_LEFT,0); //set motors to 0 at first
-	motor.speed(MOTOR_RIGHT,0);
-	while(!startbutton()){
-		TapeMenu();
-	}
+	//motor.speed(MOTOR_LEFT,0); //set motors to 0 at first
+	//motor.speed(MOTOR_RIGHT,0);
 }
 
 void readFollowTape_2() {
