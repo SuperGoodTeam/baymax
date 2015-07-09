@@ -5,7 +5,9 @@ void start_tape_menu() {
 }
 
 void tapeMenu() { //activates the tape menu
-    if (stopbutton()){
+   delay(1000);
+   LCD.clear();
+    if (startbutton()){
       printstate++;
     }
     
@@ -26,7 +28,7 @@ void tapeMenu() { //activates the tape menu
     }
     else if (printstate==3){
       baseSpeed=knob(6)/4;
-      LCD.print("baseSpeed: 6: "+String(baseSpeed));
+      LCD.print("bSpeed: 6: "+String(baseSpeed));
     }
     else if(printstate==4){
       loadFlag=knob(6);

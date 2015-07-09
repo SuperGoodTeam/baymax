@@ -1,7 +1,10 @@
 void start_main_menu() {
+        motor.speed(MOTOR_LEFT,0); //set motors to 0 at first
+        motor.speed(MOTOR_RIGHT,0);
 	delay(500);
 	LCD.clear();
 	LCD.home();
+
 }
 
 void mainMenu() {

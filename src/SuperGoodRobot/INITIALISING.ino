@@ -6,6 +6,13 @@ void start_initialising() {
 	delay(100);
 	if (startbutton()) {
 		currentPlan=(Plan)tempPlan;
-		switchState(FOLLOW_TAPE_1);
+		
+		//delete this later
+		if (currentPlan==TEST_DRIVE){
+			switchState(DRIVE);
+		}
+		else {
+			switchState(FOLLOW_TAPE_1);
+		}
 	}
 }

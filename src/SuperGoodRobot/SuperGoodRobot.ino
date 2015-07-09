@@ -69,10 +69,10 @@ boolean clawOpen=false;
 
 //============== STATES ==============
 enum RobotState {
-  INITIALISING, PAST_DOOR, FOLLOW_TAPE_1, COLLECT_ITEM_1, FOLLOW_TAPE_2, COLLECT_ITEM_2, COLLECT_ITEM_3, COLLECT_ITEM_4, COLLECT_ITEM_5, COLLECT_ITEM_6, UP_RAMP, PAST_RAMP, IR, ZIPLINE, FINISHED, TEST, MAIN_MENU, STATE_MENU, TAPE_MENU, NUM_STATES
+  INITIALISING, PAST_DOOR, FOLLOW_TAPE_1, COLLECT_ITEM_1, FOLLOW_TAPE_2, COLLECT_ITEM_2, COLLECT_ITEM_3, COLLECT_ITEM_4, COLLECT_ITEM_5, COLLECT_ITEM_6, UP_RAMP, PAST_RAMP, IR, ZIPLINE, FINISHED, TEST, MAIN_MENU, STATE_MENU, TAPE_MENU, DRIVE, NUM_STATES
 };
 enum Plan { 
-	FULL, NOT4, NOT5, NUM_PLAN //placeholder for lack of len(enum) function, don't delete
+	FULL, NOT4, NOT5, TEST_DRIVE, NUM_PLAN //placeholder for lack of len(enum) function, don't delete
 };
 
 //SET STATES
@@ -114,7 +114,7 @@ void loop() {
 		break;
 	//==============
 	case FOLLOW_TAPE_1:
-		/*motor.speed(MOTOR_LEFT,0); //set motors to 0 at first
+		motor.speed(MOTOR_LEFT,0); //set motors to 0 at first
 		motor.speed(MOTOR_RIGHT,0);
 		while (noSideTape!=true) {
 			readFollowTape_1();
@@ -122,7 +122,7 @@ void loop() {
 		}
 		if (noSideTape==true) {
 			switchState(COLLECT_ITEM_1);
-		}*/
+		}
 		break;
 	//==============
    case COLLECT_ITEM_1:
@@ -147,12 +147,12 @@ void loop() {
 		break;
    //==============
    case COLLECT_ITEM_2:
-		collect_item_2();
+		/*collect_item_2();
 		while(noSideTape==true) { //go until you can't see sidetape anymore
 			readFollowTape_2();
 			checkSideTape();
 		}
-		switchState(FOLLOW_TAPE_3);
+		switchState(FOLLOW_TAPE_3);*/
 		break;
    //==============
    case COLLECT_ITEM_3:
@@ -181,6 +181,9 @@ void loop() {
    break;
    case TAPE_MENU:
 	tapeMenu();
+   break;
+   case DRIVE:
+	readFollowTape();
    break;
   }
 }
@@ -242,6 +245,9 @@ void setupState(byte byteRobotState)
   case TAPE_MENU:
 	start_tape_menu();
     break;
+  case DRIVE:
+    start_followtape();
+    break;
   }
 }
 
@@ -289,6 +295,8 @@ void exitState(byte byteRobotState)
     break;
   case TAPE_MENU:
     break;
+  case DRIVE:
+	break;
   }
 }
 
@@ -301,21 +309,21 @@ String byteStateToString(byte byteRobotState) {
 	case PAST_DOOR:
 		return("PAST DOOR");
 	case FOLLOW_TAPE_1:
-		return("FOLLOW TAPE 1");
+		return("TAPE 1");
 	case COLLECT_ITEM_1:
-		return("COLLECT ITEM 1");
+		return("ITEM 1");
 	case FOLLOW_TAPE_2:
-		return("FOLLOW TAPE 2`");
+		return("TAPE 2");
 	case COLLECT_ITEM_2:
-		return("COLLECT ITEM 2");
+		return("ITEM 2");
 	case COLLECT_ITEM_3:
-		return("COLLECT ITEM 3");
+		return("ITEM 3");
 	case COLLECT_ITEM_4:
-		return("COLLECT ITEM 4");
+		return("ITEM 4");
 	case COLLECT_ITEM_5:
-		return("COLLECT ITEM 5");
+		return("ITEM 5");
 	case COLLECT_ITEM_6:
-		return("COLLECT ITEM 6");
+		return("ITEM 6");
 	case UP_RAMP:
 		return("UP RAMP");
 	case PAST_RAMP:
@@ -334,6 +342,8 @@ String byteStateToString(byte byteRobotState) {
 		return("STATE MENU");
 	case TAPE_MENU:
 		return("TAPE MENU");
+	case DRIVE:
+		return("FOLLOW TAPE");
 	}
 }
 
@@ -356,6 +366,8 @@ String bytePlanToString(byte byte_Plan){
     return("ALL BUT 4");
   case NOT5:
     return("ALL BUT 5");
+  case TEST_DRIVE:
+    return("TEST DRIVE");
   }
 }
 
