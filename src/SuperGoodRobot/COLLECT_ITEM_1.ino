@@ -54,13 +54,6 @@ void collect_item_1() {
 	}
 }
 
-void exit_collect_item_1() {
-	while (!stopbutton() && noSideTape!=true) {
-		readFollowTape_1();			
-		checkSideTape();
-	}
-}
-
 void checkItemSensor_1() {
    if (digitalRead(SWITCH_PLUSH_DETECT)){
     item_1_collected=true;

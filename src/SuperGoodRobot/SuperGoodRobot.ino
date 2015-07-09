@@ -62,7 +62,7 @@ version: 0.1
 
 //FLAGS
 boolean upRamp=false;
-boolean noSideTape=true;
+boolean sideTapePresent=false;
 boolean clawOpen=false;
 
 #define KNOB_MAX 1023
@@ -114,20 +114,20 @@ void loop() {
 		break;
 	//==============
 	case FOLLOW_TAPE_1:
-		motor.speed(MOTOR_LEFT,0); //set motors to 0 at first
-		motor.speed(MOTOR_RIGHT,0);
-		while (noSideTape!=true) {
+		while (sideTapePresent!=true) {
 			readFollowTape_1();
 			checkSideTape();
 		}
-		if (noSideTape==true) {
+		motor.speed(MOTOR_LEFT,0); //set motors to 0 at first
+		motor.speed(MOTOR_RIGHT,0);
+		if (sideTapePresent==true) {
 			switchState(COLLECT_ITEM_1);
 		}
 		break;
 	//==============
    case COLLECT_ITEM_1:
 		collect_item_1();
-		while(noSideTape==true) { //go until you can't see sidetape anymore
+		while(sideTapePresent==true) { //go until you can't see sidetape anymore
 			readFollowTape_1();
 			checkSideTape();
 		}
@@ -135,20 +135,20 @@ void loop() {
    break;
    //==============
    case FOLLOW_TAPE_2:
-		motor.speed(MOTOR_LEFT,0); //set motors to 0 at first
-		motor.speed(MOTOR_RIGHT,0);
-		while (noSideTape!=true) {
+		while (sideTapePresent!=true) {
 			readFollowTape_2();
 			checkSideTape();
 		}
-		if (noSideTape==true) {
+		motor.speed(MOTOR_LEFT,0); //set motors to 0 at first
+		motor.speed(MOTOR_RIGHT,0);
+		if (sideTapePresent==true) {
 			switchState(COLLECT_ITEM_2);
 		}
 		break;
    //==============
    case COLLECT_ITEM_2:
 		/*collect_item_2();
-		while(noSideTape==true) { //go until you can't see sidetape anymore
+		while(sideTapePresent==true) { //go until you can't see sidetape anymore
 			readFollowTape_2();
 			checkSideTape();
 		}
@@ -263,7 +263,6 @@ void exitState(byte byteRobotState)
   case FOLLOW_TAPE_1: //nothing, really
     break;
   case COLLECT_ITEM_1:
-	exit_collect_item_1();
 	break;
   case FOLLOW_TAPE_2: //nothing, really
     break;
@@ -385,11 +384,11 @@ void setBaseServo(int angle) {
 }
 
 void checkSideTape() {
-	if (analogRead(TAPE_SENSOR_SIDE) < QRD_THRESHOLD) {
-		noSideTape=false;
+	if (analogRead(TAPE_SENSOR_SIDE) > QRD_THRESHOLD) {
+		sideTapePresent=true;
 	}
 	else {
-		noSideTape=true;
+		sideTapePresent=false;
 	}
 }
 
