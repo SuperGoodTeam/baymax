@@ -126,16 +126,16 @@ void loop() {
 		break;
 	//==============
    case COLLECT_ITEM_1:
-		/*collect_item_1();
+		collect_item_1();
 		while(noSideTape==true) { //go until you can't see sidetape anymore
 			readFollowTape_1();
 			checkSideTape();
 		}
-		switchState(FOLLOW_TAPE_2);*/
+		switchState(FOLLOW_TAPE_2);
    break;
    //==============
    case FOLLOW_TAPE_2:
-		/*motor.speed(MOTOR_LEFT,0); //set motors to 0 at first
+		motor.speed(MOTOR_LEFT,0); //set motors to 0 at first
 		motor.speed(MOTOR_RIGHT,0);
 		while (noSideTape!=true) {
 			readFollowTape_2();
@@ -143,7 +143,7 @@ void loop() {
 		}
 		if (noSideTape==true) {
 			switchState(COLLECT_ITEM_2);
-		}*/
+		}
 		break;
    //==============
    case COLLECT_ITEM_2:
@@ -152,8 +152,8 @@ void loop() {
 			readFollowTape_2();
 			checkSideTape();
 		}
-		switchState(FOLLOW_TAPE_2);
-   break;
+		switchState(FOLLOW_TAPE_3);
+		break;
    //==============
    case COLLECT_ITEM_3:
    break;
