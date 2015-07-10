@@ -72,7 +72,7 @@ boolean previousSwitchVal=true;
 #define STANDARD_DELAY_2 200 //ms for faster things
 //============== STATES ==============
 enum RobotState {
-  INITIALISING, PAST_DOOR, FOLLOW_TAPE_1, COLLECT_ITEM_1, FOLLOW_TAPE_2, COLLECT_ITEM_2, COLLECT_ITEM_3, COLLECT_ITEM_4, COLLECT_ITEM_5, COLLECT_ITEM_6, UP_RAMP, PAST_RAMP, IR, ZIPLINE, FINISHED, TEST,DRIVE, CLAW_ARM_TEST, MAIN_MENU, STATE_MENU, TAPE_MENU, NUM_STATES
+	INITIALISING, PAST_DOOR, FOLLOW_TAPE_1, COLLECT_ITEM_1, FOLLOW_TAPE_2, COLLECT_ITEM_2, COLLECT_ITEM_3, COLLECT_ITEM_4, COLLECT_ITEM_5, COLLECT_ITEM_6, UP_RAMP, PAST_RAMP, IR, ZIPLINE, FINISHED, TEST,DRIVE, CLAW_ARM_TEST, MAIN_MENU, STATE_MENU, TAPE_MENU, NUM_STATES
 };
 enum Plan { 
 	FULL, NOT4, NOT5, TEST_DRIVE, NUM_PLAN //placeholder for lack of len(enum) function, don't delete
@@ -93,26 +93,24 @@ ISR(INT0_vect) {
 
 //============== SETUP ==============
 void setup() {
-  #include <phys253setup.txt>  
-  
-  portMode(0, INPUT) ;
-  portMode(1, OUTPUT) ;
-  
-  LCD.clear();
-  LCD.home();
+	#include <phys253setup.txt>  
+	portMode(0, INPUT) ;
+	portMode(1, OUTPUT) ;
 
-  RCServo0.attach(RCServo0Output) ;
-  RCServo1.attach(RCServo1Output) ;
-  RCServo2.attach(RCServo2Output) ;
+	LCD.clear();
+	LCD.home();
 
-  //initiate servos
-  setForearmServo(FOREARMSERVO_POSITION_START);
-  setBasearmServo(BASESERVO_POSITION_START);
-  setBaseServo(BASE_POSITION_START);
-  //other stuff goes here
-  
-  //enableExternalInterrupt(INT0, RISING);
-  
+	RCServo0.attach(RCServo0Output) ;
+	RCServo1.attach(RCServo1Output) ;
+	RCServo2.attach(RCServo2Output) ;
+
+	//initiate servos
+	setForearmServo(FOREARMSERVO_POSITION_START);
+	setBasearmServo(BASESERVO_POSITION_START);
+	setBaseServo(BASE_POSITION_START);
+	//other stuff goes here
+
+	//enableExternalInterrupt(INT0, RISING);  
 }
 
 void loop() {
@@ -121,7 +119,7 @@ void loop() {
 		switchState(MAIN_MENU);
 //		previousSwitchVal=digitalRead(0);
 	}
-        
+
 	switch(currentState) {
 	//==============
 	case INITIALISING:
@@ -140,7 +138,7 @@ void loop() {
 		}
 		break;
 	//==============
-   case COLLECT_ITEM_1:
+	case COLLECT_ITEM_1:
 		collect_item_1();
 		while(sideTapePresent==true) { //go until you can't see sidetape anymore
 			LCD.clear();
@@ -152,9 +150,9 @@ void loop() {
 		if (sideTapePresent==false) {
 		switchState(FOLLOW_TAPE_2);
 		}
-   break;
-   //==============
-   case FOLLOW_TAPE_2:
+		break;
+	//==============
+	case FOLLOW_TAPE_2:
 		while (sideTapePresent!=true) {
 			readFollowTape_2();
 			checkSideTape();
@@ -165,8 +163,8 @@ void loop() {
 			switchState(COLLECT_ITEM_2);
 		}
 		break;
-   //==============
-   case COLLECT_ITEM_2:
+	//==============
+	case COLLECT_ITEM_2:
 		/*collect_item_2();
 		while(sideTapePresent==true) { //go until you can't see sidetape anymore
 			readFollowTape_2();
@@ -174,40 +172,40 @@ void loop() {
 		}
 		switchState(FOLLOW_TAPE_3);*/
 		break;
-   //==============
-   case COLLECT_ITEM_3:
-   break;
-   case COLLECT_ITEM_4:
-   break;
-   case COLLECT_ITEM_5:
-   break;
-   case COLLECT_ITEM_6:
-   break;
-   case UP_RAMP:
-   break;
-   case PAST_RAMP:
-   break;
-   case IR:
-   break;
-   case ZIPLINE:
-   break;
-   case FINISHED:
-   break;
-   case CLAW_ARM_TEST:
-   	claw_arm_test();
-   break;
-   case DRIVE:
+	//==============
+	case COLLECT_ITEM_3:
+	break;
+	case COLLECT_ITEM_4:
+	break;
+	case COLLECT_ITEM_5:
+	break;
+	case COLLECT_ITEM_6:
+	break;
+	case UP_RAMP:
+	break;
+	case PAST_RAMP:
+	break;
+	case IR:
+	break;
+	case ZIPLINE:
+	break;
+	case FINISHED:
+	break;
+	case CLAW_ARM_TEST:
+		claw_arm_test();
+	break;
+	case DRIVE:
 	readFollowTape();
-   break;
-   case MAIN_MENU:
+	break;
+	case MAIN_MENU:
 	mainMenu();
-   break;
-   case STATE_MENU:
+	break;
+	case STATE_MENU:
 	stateMenu();
-   break;
-   case TAPE_MENU:
+	break;
+	case TAPE_MENU:
 	tapeMenu();
-   break;
+	break;
   }
 }
 
@@ -222,108 +220,108 @@ void switchState(byte byteRobotState){
 
 void setupState(byte byteRobotState)
 {
-  RobotState state = (RobotState)byteRobotState;
-  switch (state)
-  {
-  case PAST_DOOR:
-    break;
-  case FOLLOW_TAPE_1:
-	start_followtape_1();
-	break;
-  case COLLECT_ITEM_1:
-	start_collect_item_1();
-	break;
-  case FOLLOW_TAPE_2:
-	start_followtape_2();
-	break;
-  case COLLECT_ITEM_2:
-	start_collect_item_2();
-	break;
-  case COLLECT_ITEM_3:
-	break;
-  case COLLECT_ITEM_4:
-	break;
-  case COLLECT_ITEM_5:
-	break;
-  case COLLECT_ITEM_6:
-	break;
-  case UP_RAMP:
-    break;
-  case PAST_RAMP:
-    break;
-  case IR:
-    break;
-  case ZIPLINE:
-    break;
-  case FINISHED:
-    break;
-  case TEST:
-    break;
-  case CLAW_ARM_TEST:
-	start_claw_arm_test();
-	break;
-  case MAIN_MENU:
-	start_main_menu();
-    break;
-  case STATE_MENU:
-	start_state_menu();
-    break;
-  case TAPE_MENU:
-	start_tape_menu();
-    break;
-  case DRIVE:
-    start_followtape();
-    break;
+	RobotState state = (RobotState)byteRobotState;
+	switch (state)
+	{
+	case PAST_DOOR:
+		break;
+	case FOLLOW_TAPE_1:
+		start_followtape_1();
+		break;
+	case COLLECT_ITEM_1:
+		start_collect_item_1();
+		break;
+	case FOLLOW_TAPE_2:
+		start_followtape_2();
+		break;
+	case COLLECT_ITEM_2:
+		start_collect_item_2();
+		break;
+	case COLLECT_ITEM_3:
+		break;
+	case COLLECT_ITEM_4:
+		break;
+	case COLLECT_ITEM_5:
+		break;
+	case COLLECT_ITEM_6:
+		break;
+	case UP_RAMP:
+		break;
+	case PAST_RAMP:
+		break;
+	case IR:
+		break;
+	case ZIPLINE:
+		break;
+	case FINISHED:
+		break;
+	case TEST:
+		break;
+	case CLAW_ARM_TEST:
+		start_claw_arm_test();
+		break;
+	case MAIN_MENU:
+		start_main_menu();
+		break;
+	case STATE_MENU:
+		start_state_menu();
+		break;
+	case TAPE_MENU:
+		start_tape_menu();
+		break;
+	case DRIVE:
+		start_followtape();
+		break;
   }
 }
 
 void exitState(byte byteRobotState)
 {
-  RobotState state = (RobotState)byteRobotState;
-  switch (state)
-  {
-  case INITIALISING:
-	break;
-  case PAST_DOOR:
-    break;
-  case FOLLOW_TAPE_1: //nothing, really
-    break;
-  case COLLECT_ITEM_1:
-	break;
-  case FOLLOW_TAPE_2: //nothing, really
-    break;
-  case COLLECT_ITEM_2:
-	break;
-  case COLLECT_ITEM_3:
-	break;
-  case COLLECT_ITEM_4:
-	break;
-  case COLLECT_ITEM_5:
-	break;
-  case COLLECT_ITEM_6:
-	break;
-  case UP_RAMP:
-    break;
-  case PAST_RAMP:
-    break;
-  case IR:
-    break;
-  case ZIPLINE:
-    break;
-  case FINISHED:
-    break;
-  case TEST:
-    break;
-  case CLAW_ARM_TEST:
-    break;
-  case DRIVE:
-	break;
-  case MAIN_MENU:
-    break;
-  case STATE_MENU:
-    break;
-  case TAPE_MENU:
-    break;
+	RobotState state = (RobotState)byteRobotState;
+	switch (state)
+	{
+	case INITIALISING:
+		break;
+	case PAST_DOOR:
+		break;
+	case FOLLOW_TAPE_1: //nothing, really
+		break;
+	case COLLECT_ITEM_1:
+		break;
+	case FOLLOW_TAPE_2: //nothing, really
+		break;
+	case COLLECT_ITEM_2:
+		break;
+	case COLLECT_ITEM_3:
+		break;
+	case COLLECT_ITEM_4:
+		break;
+	case COLLECT_ITEM_5:
+		break;
+	case COLLECT_ITEM_6:
+		break;
+	case UP_RAMP:
+		break;
+	case PAST_RAMP:
+		break;
+	case IR:
+		break;
+	case ZIPLINE:
+		break;
+	case FINISHED:
+		break;
+	case TEST:
+		break;
+	case CLAW_ARM_TEST:
+		break;
+	case DRIVE:
+		break;
+	case MAIN_MENU:
+		break;
+	case STATE_MENU:
+		break;
+	case TAPE_MENU:
+		break;
   }
 }
 
@@ -387,16 +385,16 @@ void LCDStateChangePrint(byte byteRobotState) {
 }
 
 String bytePlanToString(byte byte_Plan){
-  Plan stringPlan = (Plan)byte_Plan;
-  switch(stringPlan) {
-  case FULL:
-   return("FULL");
-  case NOT4:
-    return("ALL BUT 4");
-  case NOT5:
-    return("ALL BUT 5");
-  case TEST_DRIVE:
-    return("TEST DRIVE");
+	Plan stringPlan = (Plan)byte_Plan;
+	switch(stringPlan) {
+	case FULL:
+		return("FULL");
+	case NOT4:
+		return("ALL BUT 4");
+	case NOT5:
+		return("ALL BUT 5");
+	case TEST_DRIVE:
+		return("TEST DRIVE");
   }
 }
 
