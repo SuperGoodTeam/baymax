@@ -68,10 +68,6 @@ boolean clawOpen=false;
 
 #define KNOB_MAX 1023
 
-//============== INTERRUPTS ==============
-volatile unsigned int INT_0 = 0;
-ISR(INT0_vect) {LCD.clear(); LCD.home(); LCD.print("INT0: "); LCD.print(INT_0++);};
-
 //============== STATES ==============
 enum RobotState {
   INITIALISING, PAST_DOOR, FOLLOW_TAPE_1, COLLECT_ITEM_1, FOLLOW_TAPE_2, COLLECT_ITEM_2, COLLECT_ITEM_3, COLLECT_ITEM_4, COLLECT_ITEM_5, COLLECT_ITEM_6, UP_RAMP, PAST_RAMP, IR, ZIPLINE, FINISHED, TEST, MAIN_MENU, STATE_MENU, TAPE_MENU, DRIVE, NUM_STATES
@@ -85,6 +81,13 @@ RobotState currentState = INITIALISING;
 RobotState lastState = INITIALISING;  
 
 Plan currentPlan=FULL;
+
+//============== INTERRUPTS ==============
+/*volatile unsigned int INT_0 = 0;
+ISR(INT0_vect) {LCD.clear(); LCD.home(); LCD.print("INT0: "); LCD.print(INT_0++);};
+ISR(INT0_vect) {
+  switchState(MAIN_MENU);
+}*/
 
 //============== SETUP ==============
 void setup() {
@@ -106,14 +109,15 @@ void setup() {
   setBaseServo(BASE_POSITION_START);
   //other stuff goes here
   
-  enableExternalInterrupt(INT0, RISING);
+  //enableExternalInterrupt(INT0, RISING);
 
 }
 
 void loop() {
-    /*if (stopbutton()) {
+
+    if (stopbutton()) {
 		switchState(MAIN_MENU);  
-	}*/
+	}
         
 	switch(currentState) {
 	//==============
@@ -136,10 +140,15 @@ void loop() {
    case COLLECT_ITEM_1:
 		collect_item_1();
 		while(sideTapePresent==true) { //go until you can't see sidetape anymore
+                        LCD.clear();
+                        LCD.print("Following sidetape");
+                        delay(500);
 			readFollowTape_1();
 			checkSideTape();
 		}
-		switchState(FOLLOW_TAPE_2);
+                if (sideTapePresent==false) {
+		        switchState(FOLLOW_TAPE_2);
+		}
    break;
    //==============
    case FOLLOW_TAPE_2:
@@ -350,7 +359,7 @@ String byteStateToString(byte byteRobotState) {
 	case TAPE_MENU:
 		return("TAPE MENU");
 	case DRIVE:
-		return("FOLLOW TAPE");
+		return("TEST DRIVE");
 	}
 }
 
@@ -410,23 +419,18 @@ void checkClawOpen(){
 }
 
 //============== INTERRUPT FUNCTIONS ==============
-void enableExternalInterrupt(unsigned int INTX, unsigned int mode)
-{
+/*void enableExternalInterrupt(unsigned int INTX, unsigned int mode) {
 	if (INTX > 3 || mode > 3 || mode == 1) return;
 	cli();
-	/* Allow pin to trigger interrupts        */
 	EIMSK |= (1 << INTX);
-	/* Clear the interrupt configuration bits */
 	EICRA &= ~(1 << (INTX*2+0));
 	EICRA &= ~(1 << (INTX*2+1));
-	/* Set new interrupt configuration bits   */
 	EICRA |= (mode & (1 << 1)) << (INTX*2+0);
 	EICRA |= (mode & (1 << 0)) << (INTX*2+1);
 	sei();
 }
- 
-void disableExternalInterrupt(unsigned int INTX)
-{
+
+void disableExternalInterrupt(unsigned int INTX) {
 	if (INTX > 3) return;
 	EIMSK &= ~(1 << INTX);
-}
+}*/

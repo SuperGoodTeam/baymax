@@ -24,6 +24,9 @@ void start_collect_item_1() {
 	setBasearmServo(BASESERVO_POSITION_1_A);
 	setBaseServo(BASE_POSITION_1_A);
 	while (!SWITCH_CLAW_OPEN) {
+		LCD.clear();
+		LCD.print("Claw opening");
+		delay(100); //temp
 		motor.speed(MOTOR_CLAW, SPEED_CLAW_OPEN);
 	}
 }
@@ -36,9 +39,12 @@ void collect_item_1() {
 	
 	delay(1000); //pause for a second
 	
-	while (item_1_collected==false) {
+	while (item_1_collected==false) { //temp, change later
+		LCD.clear();
+		LCD.print("Claw closing");
+		delay(100); //temp
 		motor.speed(MOTOR_CLAW, SPEED_CLAW_CLOSE);
-                checkItemSensor_1();
+		checkItemSensor_1();
 	}
 	
 	delay(1000); //for safety
@@ -49,6 +55,9 @@ void collect_item_1() {
 	setForearmServo(FOREARMSERVO_POSITION_1_C); //some angle
 	
 	while (SWITCH_CLAW_OPEN==false) {
+		LCD.clear();
+		LCD.print("Claw opening 2");
+		delay(100); //temp
 		motor.speed(MOTOR_CLAW, SPEED_CLAW_OPEN);
                 checkClawOpen();
 	}
