@@ -1,14 +1,14 @@
 void start_main_menu() {
         motor.speed(MOTOR_LEFT,0); //set motors to 0 at first
         motor.speed(MOTOR_RIGHT,0);
-	delay(500);
+	delay(STANDARD_DELAY_1);
 	LCD.clear();
 	LCD.home();
 
 }
 
 void mainMenu() {
-	delay(100);
+	delay(STANDARD_DELAY_1);
 	LCD.clear();
 	byte menuChoice=constrain((byte)map(knob(6),0,KNOB_MAX,0,2),0,1);
 	LCD.print("MENU: "+byteMenuChoiceToString(menuChoice));

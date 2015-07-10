@@ -1,11 +1,11 @@
 void start_tape_menu() {
-   delay(500);
+   delay(STANDARD_DELAY_1);
    LCD.clear();
    LCD.home();
 }
 
 void tapeMenu() { //activates the tape menu
-   delay(1000);
+   delay(STANDARD_DELAY_1);
    LCD.clear();
     if (startbutton()){
       printstate++;
@@ -23,7 +23,7 @@ void tapeMenu() { //activates the tape menu
       LCD.print("kp: 6:  "+String(kp));
     }
     else if (printstate==2){
-      kd=knob(7)/10;
+      kd=knob(7)/5;
       LCD.print("kd: 7: "+String(kd));
     }
     else if (printstate==3){
@@ -52,7 +52,7 @@ void tapeMenu() { //activates the tape menu
 }
 
 void exit_tape_menu() {
-   delay(1000);
+   delay(STANDARD_DELAY_1);
    LCD.clear();
    LCD.home();
 }

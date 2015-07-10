@@ -34,14 +34,14 @@ void collect_item_2() {
 	setBaseServo(BASE_POSITION_2_B); //some angle
 	setBasearmServo(BASESERVO_POSITION_2_B); //some angle
 	
-	delay(1000); //pause for a second
+	delay(STANDARD_DELAY_1); //pause for a second
 	
 	while (item_2_collected==false) {
 		motor.speed(MOTOR_CLAW, SPEED_CLAW_CLOSE);
                 checkItemSensor_2();
 	}
 	
-	delay(1000); //for safety
+	delay(STANDARD_DELAY_1); //for safety
 	
 	//now reverse that exactly
 	setBasearmServo(BASESERVO_POSITION_2_C); //some angle
@@ -56,9 +56,9 @@ void collect_item_2() {
 
 void checkItemSensor_2() {
    if (digitalRead(SWITCH_PLUSH_DETECT)){
-    item_2_collected=true;
+    item_2_collected=false;
    } 
    else {
-    item_2_collected=false; 
+    item_2_collected=true; 
    }
 }

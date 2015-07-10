@@ -1,6 +1,6 @@
 /* ENPH 253 PRELIMINARY CODE
 last updated: 070815
-version: 0.1
+version: 0.2
 
 */
 
@@ -65,12 +65,14 @@ version: 0.1
 boolean upRamp=false;
 boolean sideTapePresent=false;
 boolean clawOpen=false;
+boolean previousSwitchVal=true;
 
 #define KNOB_MAX 1023
-
+#define STANDARD_DELAY_1 500 //ms
+#define STANDARD_DELAY_2 200 //ms for faster things
 //============== STATES ==============
 enum RobotState {
-  INITIALISING, PAST_DOOR, FOLLOW_TAPE_1, COLLECT_ITEM_1, FOLLOW_TAPE_2, COLLECT_ITEM_2, COLLECT_ITEM_3, COLLECT_ITEM_4, COLLECT_ITEM_5, COLLECT_ITEM_6, UP_RAMP, PAST_RAMP, IR, ZIPLINE, FINISHED, TEST, MAIN_MENU, STATE_MENU, TAPE_MENU, DRIVE, NUM_STATES
+  INITIALISING, PAST_DOOR, FOLLOW_TAPE_1, COLLECT_ITEM_1, FOLLOW_TAPE_2, COLLECT_ITEM_2, COLLECT_ITEM_3, COLLECT_ITEM_4, COLLECT_ITEM_5, COLLECT_ITEM_6, UP_RAMP, PAST_RAMP, IR, ZIPLINE, FINISHED, TEST,DRIVE, CLAW_ARM_TEST, MAIN_MENU, STATE_MENU, TAPE_MENU, NUM_STATES
 };
 enum Plan { 
 	FULL, NOT4, NOT5, TEST_DRIVE, NUM_PLAN //placeholder for lack of len(enum) function, don't delete
@@ -110,13 +112,14 @@ void setup() {
   //other stuff goes here
   
   //enableExternalInterrupt(INT0, RISING);
-
+  
 }
 
 void loop() {
-
+//	if (digitalRead(0)!=previousSwitchVal) {
     if (stopbutton()) {
-		switchState(MAIN_MENU);  
+		switchState(MAIN_MENU);
+//		previousSwitchVal=digitalRead(0);
 	}
         
 	switch(currentState) {
@@ -140,14 +143,14 @@ void loop() {
    case COLLECT_ITEM_1:
 		collect_item_1();
 		while(sideTapePresent==true) { //go until you can't see sidetape anymore
-                        LCD.clear();
-                        LCD.print("Following sidetape");
-                        delay(500);
+			LCD.clear();
+			LCD.print("Following sidetape");
+			delay(STANDARD_DELAY_1);
 			readFollowTape_1();
 			checkSideTape();
 		}
-                if (sideTapePresent==false) {
-		        switchState(FOLLOW_TAPE_2);
+		if (sideTapePresent==false) {
+		switchState(FOLLOW_TAPE_2);
 		}
    break;
    //==============
@@ -190,6 +193,12 @@ void loop() {
    break;
    case FINISHED:
    break;
+   case CLAW_ARM_TEST:
+		claw_arm_test();
+   break;
+   case DRIVE:
+	readFollowTape();
+   break;
    case MAIN_MENU:
 	mainMenu();
    break;
@@ -198,9 +207,6 @@ void loop() {
    break;
    case TAPE_MENU:
 	tapeMenu();
-   break;
-   case DRIVE:
-	readFollowTape();
    break;
   }
 }
@@ -253,6 +259,9 @@ void setupState(byte byteRobotState)
     break;
   case TEST:
     break;
+  case CLAW_ARM_TEST:
+	start_claw_arm_test();
+	break;
   case MAIN_MENU:
 	start_main_menu();
     break;
@@ -305,14 +314,16 @@ void exitState(byte byteRobotState)
     break;
   case TEST:
     break;
+  case CLAW_ARM_TEST:
+    break;
+  case DRIVE:
+	break;
   case MAIN_MENU:
     break;
   case STATE_MENU:
     break;
   case TAPE_MENU:
     break;
-  case DRIVE:
-	break;
   }
 }
 
@@ -352,14 +363,16 @@ String byteStateToString(byte byteRobotState) {
 		return("FINISHED");
 	case TEST:
 		return("TESTING");
+	case CLAW_ARM_TEST:
+		return("CLAW ARM TEST");
+	case DRIVE:
+		return("TEST DRIVE");
 	case MAIN_MENU:
 		return("MAIN_MENU");
 	case STATE_MENU:
 		return("STATE MENU");
 	case TAPE_MENU:
 		return("TAPE MENU");
-	case DRIVE:
-		return("TEST DRIVE");
 	}
 }
 
@@ -411,10 +424,10 @@ void checkSideTape() {
 
 void checkClawOpen(){
  if (digitalRead(SWITCH_CLAW_OPEN)){
-    clawOpen=true;
+    clawOpen=false;
    } 
    else {
-    clawOpen=false; 
+    clawOpen=true; 
    } 
 }
 
