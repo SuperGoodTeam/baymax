@@ -194,7 +194,7 @@ void loop() {
    case FINISHED:
    break;
    case CLAW_ARM_TEST:
-		claw_arm_test();
+   	claw_arm_test();
    break;
    case DRIVE:
 	readFollowTape();
