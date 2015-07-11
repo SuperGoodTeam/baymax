@@ -6,7 +6,7 @@ void start_followtape() {
 }
 
 void readFollowTape() {
-	readQRDErrCalc();
+    readQRDErrCalc();
     motor.speed(MOTOR_LEFT, -baseSpeed - con);
     motor.speed(MOTOR_RIGHT, +baseSpeed - con);
 }

@@ -1,8 +1,7 @@
 #include "TAPE_FOLLOWING.h"
 
 void start_followtape_1() {
-	//motor.speed(MOTOR_LEFT,0); //set motors to 0 at first
-	//motor.speed(MOTOR_RIGHT,0);
+	//motor_rest();
 }
 
 void readFollowTape_1() {

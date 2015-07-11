@@ -52,7 +52,8 @@ void tapeMenu() { //activates the tape menu
 }
 
 void exit_tape_menu() {
-   delay(STANDARD_DELAY_1);
-   LCD.clear();
-   LCD.home();
+	delay(STANDARD_DELAY_1);
+	LCD.clear();
+	LCD.home();
+	switchMenu(NO_MENU);
 }
