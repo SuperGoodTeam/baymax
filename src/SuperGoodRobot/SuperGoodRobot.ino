@@ -1,6 +1,7 @@
 /* ENPH 253 PRELIMINARY CODE
 last updated: 071015
-version: 0.3
+version: 0.4
+changelog: menu and plan enums added & integrated
 
 */
 
@@ -70,6 +71,7 @@ boolean previousSwitchVal=true;
 #define KNOB_MAX 1023
 #define STANDARD_DELAY_1 500 //ms
 #define STANDARD_DELAY_2 200 //ms for faster things
+
 //============== STATES ==============
 enum RobotState {
 	REST, INITIALISING, PAST_DOOR, FOLLOW_TAPE_1, COLLECT_ITEM_1, FOLLOW_TAPE_2, COLLECT_ITEM_2, COLLECT_ITEM_3, COLLECT_ITEM_4, COLLECT_ITEM_5, COLLECT_ITEM_6, UP_RAMP, PAST_RAMP, IR, ZIPLINE, FINISHED, TEST, DRIVE, CLAW_ARM_TEST, NUM_STATES
@@ -167,7 +169,7 @@ void loop() {
 			collect_item_1();
 			while(sideTapePresent==true) { //go until you can't see sidetape anymore
 				LCD.clear();
-				LCD.print("Following sidetape");
+				LCD.print("ST: "+String(analogRead(TAPE_SENSOR_SIDE)));
 				delay(STANDARD_DELAY_1);
 				readFollowTape_1();
 				checkSideTape();
