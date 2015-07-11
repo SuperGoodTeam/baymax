@@ -167,7 +167,7 @@ void loop() {
 			collect_item_1();
 			while(sideTapePresent==true) { //go until you can't see sidetape anymore
 				LCD.clear();
-				LCD.print("Following sidetape");
+				LCD.print("ST: "+String(analogRead(TAPE_SENSOR_SIDE)));
 				delay(STANDARD_DELAY_1);
 				readFollowTape_1();
 				checkSideTape();
