@@ -5,8 +5,11 @@ version: 1.0
 */
 
 //============== DEBUG ==============
-#ifndef DEBUG 
-	# define D(x) x 
+
+#define DEBUG
+
+#ifdef DEBUG 
+	# define D(x) x
 #else 
 	# define D(x) 
 #endif

@@ -16,9 +16,9 @@ void claw_arm_test() {
 		
 	LCD.clear();
 	LCD.setCursor(0,0);
-	LCD.print("F: "+String(forearm_position)+"B: "+basearm_position);
+	LCD.print("F: "+String(forearm_position)+" B: "+basearm_position);
 	LCD.setCursor(0,1);
-	LCD.print("O: "+String(digitalRead(SWITCH_CLAW_OPEN))+"P: "+String(digitalRead(SWITCH_PLUSH_DETECT)));
+	LCD.print("O: "+String(digitalRead(SWITCH_CLAW_OPEN))+" P: "+String(digitalRead(SWITCH_PLUSH_DETECT)));
 	delay(STANDARD_DELAY_2);
 	
 	if (startbutton()){

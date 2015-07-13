@@ -2,7 +2,7 @@
 void switchState(byte byteRobotState){
 	RobotState newState=(RobotState)byteRobotState;
 	exitState(currentState);
-	LCDStateChangePrint(byteRobotState);
+	D(LCDStateChangePrint(byteRobotState);)
 	setupState(newState); //simple for now
 	currentState=newState;
 }
