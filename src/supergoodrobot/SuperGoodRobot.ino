@@ -13,53 +13,52 @@ version: 1.0
 #include <EEPROMex.h>
 #include <EEPROMVar.h>
 
-#include "TAPE_FOLLOWING.h"
-
 //============== PINS ==============
 //ANALOG IO
-#define TAPE_SENSOR_LEFT 0
-#define TAPE_SENSOR_RIGHT 1
-#define IR_FRONT_1 2
-#define IR_FRONT_2 3
-#define IR_SIDE 4
-#define TAPE_SENSOR_SIDE 5
-#define TAPE_SENSOR_FRONT 7
+const byte TAPE_SENSOR_LEFT = 0;
+const byte TAPE_SENSOR_RIGHT = 1;
+const byte IR_FRONT_1 = 2;
+const byte IR_FRONT_2 = 3;
+const byte IR_SIDE = 4;
+const byte TAPE_SENSOR_SIDE = 5;
+const byte TAPE_SENSOR_FRONT = 7;
 
 //SERVOS
-#define SERVO_FOREARM 0
-#define SERVO_BASEARM 1
-#define SERVO_BASE 2
+const byte SERVO_FOREARM = 0;
+const byte SERVO_BASEARM = 1;
+const byte SERVO_BASE = 2;
 
 //MOTORS
-#define MOTOR_LEFT 0
-#define MOTOR_RIGHT 1
-#define MOTOR_CLAW 2
+const byte MOTOR_LEFT = 0;
+const byte MOTOR_RIGHT = 1;
+const byte MOTOR_CLAW = 2;
 
 //DIGITAL IO
 //INPUT
-#define SWITCH_CLAW_OPEN 4
-#define SWITCH_CLAW_CLOSE 5
-#define SWITCH_PLUSH_DETECT 6
-#define HOOK_ARM_TOUCH_ON 7
-#define HOOK_ARM_TOUCH_OFF 8
+const byte SWITCH_CLAW_OPEN = 4;
+const byte SWITCH_CLAW_CLOSE = 5;
+const byte SWITCH_PLUSH_DETECT = 6;
+const byte HOOK_ARM_TOUCH_ON = 7;
+const byte HOOK_ARM_TOUCH_OFF = 8;
 
 //OUTPUT
-#define HOOK_ARM_RETRACT 15
-#define HOOK_ARM_SPRING_UP 14
-#define INTAKE_ROLLER_MOTOR 12
+const byte HOOK_ARM_RETRACT = 15;
+const byte HOOK_ARM_SPRING_UP = 14;
+const byte INTAKE_ROLLER_MOTOR = 12;
 
 //============== DRIVE SETTINGS ==============
 //QRD DRIVE
-#define QRD_THRESHOLD 200
+const int QRD_THRESHOLD = 200;
+#include "TAPE_FOLLOWING.h"
 
 //IR DRIVE
 
 //ARM CONSTANTS
 
 //SERVO POSITIONS
-#define BASESERVO_POSITION_START 90//some number
-#define FOREARMSERVO_POSITION_START 90//some number
-#define BASE_POSITION_START 90//some number
+const int BASESERVO_POSITION_START = 90;//some number
+const int FOREARMSERVO_POSITION_START = 90;//some number
+const int BASE_POSITION_START = 90;//some number
 
 //FLAGS
 boolean upRamp=false;
@@ -67,9 +66,13 @@ boolean sideTapePresent=false;
 boolean clawOpen=false;
 boolean previousSwitchVal=true;
 
-#define KNOB_MAX 1023
-#define STANDARD_DELAY_1 500 //ms
-#define STANDARD_DELAY_2 200 //ms for faster things
+//CLAW PARAMS
+const int SPEED_CLAW_OPEN = 90;//some number
+const int SPEED_CLAW_CLOSE = 90;//some number
+
+const int KNOB_MAX = 1023;
+const int STANDARD_DELAY_1 = 500; //ms
+const int STANDARD_DELAY_2 = 200; //ms for faster things
 
 //============== STATES ==============
 enum RobotState {

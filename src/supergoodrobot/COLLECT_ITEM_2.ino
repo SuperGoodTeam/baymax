@@ -1,20 +1,17 @@
 //starting position
-#define FOREARMSERVO_POSITION_2_A 90//some number
-#define BASESERVO_POSITION_2_A 90//some number
-#define BASE_POSITION_2_A 90//some number
+const int FOREARMSERVO_POSITION_2_A = 90;//some number
+const int BASESERVO_POSITION_2_A = 90;//some number
+const int BASE_POSITION_2_A = 90;//some number
 
 //getting item position
-#define FOREARMSERVO_POSITION_2_B 90//some number
-#define BASESERVO_POSITION_2_B 90//some number
-#define BASE_POSITION_2_B 90//some number
+const int FOREARMSERVO_POSITION_2_B = 90;//some number
+const int BASESERVO_POSITION_2_B = 90;//some number
+const int BASE_POSITION_2_B = 90;//some number
 
 //dropping item position
-#define FOREARMSERVO_POSITION_2_C 90//some number
-#define BASESERVO_POSITION_2_C 90//some number
-#define BASE_POSITION_2_C 90//some number
-
-#define SPEED_CLAW_OPEN 90//some number
-#define SPEED_CLAW_CLOSE 90//some number
+const int FOREARMSERVO_POSITION_2_C = 90;//some number
+const int BASESERVO_POSITION_2_C = 90;//some number
+const int BASE_POSITION_2_C = 90;//some number
 
 boolean item_2_collected=false;
 
@@ -23,7 +20,7 @@ void start_collect_item_2() {
 	setForearmServo(FOREARMSERVO_POSITION_2_A);
 	setBasearmServo(BASESERVO_POSITION_2_A);
 	setBaseServo(BASE_POSITION_2_A);
-	while (!SWITCH_CLAW_OPEN) {
+	while (!clawOpen) {
 		motor.speed(MOTOR_CLAW, SPEED_CLAW_OPEN);
 	}
 }
@@ -48,17 +45,17 @@ void collect_item_2() {
 	setBaseServo(BASE_POSITION_2_C); //some angle
 	setForearmServo(FOREARMSERVO_POSITION_2_C); //some angle
 	
-	while (SWITCH_CLAW_OPEN==false) {
+	while (!clawOpen) {
 		motor.speed(MOTOR_CLAW, SPEED_CLAW_OPEN);
-                checkClawOpen();
+		checkClawOpen();
 	}	
 }
 
 void checkItemSensor_2() {
-   if (digitalRead(SWITCH_PLUSH_DETECT)){
-    item_2_collected=false;
-   } 
-   else {
-    item_2_collected=true; 
-   }
+	if (digitalRead(SWITCH_PLUSH_DETECT)){
+		item_2_collected=false;
+	} 
+	else {//switch press is low
+		item_2_collected=true; 
+	}
 }

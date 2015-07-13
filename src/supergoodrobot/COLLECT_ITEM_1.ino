@@ -1,20 +1,17 @@
 //starting position
-#define FOREARMSERVO_POSITION_1_A 90//some number
-#define BASESERVO_POSITION_1_A 90//some number
-#define BASE_POSITION_1_A 90//some number
+const int FOREARMSERVO_POSITION_1_A = 90;//some number
+const int BASESERVO_POSITION_1_A = 90;//some number
+const int BASE_POSITION_1_A = 90;//some number
 
 //getting item position
-#define FOREARMSERVO_POSITION_1_B 30//some number
-#define BASESERVO_POSITION_1_B 30//some number
-#define BASE_POSITION_1_B 90//some number
+const int FOREARMSERVO_POSITION_1_B = 30;//some number
+const int BASESERVO_POSITION_1_B = 30;//some number
+const int BASE_POSITION_1_B = 90;//some number
 
 //dropping item position
-#define FOREARMSERVO_POSITION_1_C 90//some number
-#define BASESERVO_POSITION_1_C 90//some number
-#define BASE_POSITION_1_C 90//some number
-
-#define SPEED_CLAW_OPEN 90//some number
-#define SPEED_CLAW_CLOSE 90//some number
+const int FOREARMSERVO_POSITION_1_C = 90;//some number
+const int BASESERVO_POSITION_1_C = 90;//some number
+const int BASE_POSITION_1_C = 90;//some number
 
 boolean item_1_collected=false;
 

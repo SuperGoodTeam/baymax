@@ -10,14 +10,14 @@
 //#include <EEPROMex.h>
 //#include <EEPROMVar.h>
 
-//DRIVE PARAMS
-#define TAPE_SENSOR_LEFT 0
-#define TAPE_SENSOR_RIGHT 1
+// //DRIVE PARAMS
+// #define TAPE_SENSOR_LEFT 0
+// #define TAPE_SENSOR_RIGHT 1
 
-//QRD DRIVE
-#define QRD_THRESHOLD 200
+// //QRD DRIVE
+// #define QRD_THRESHOLD 200
 
-#define NUM_PRINTSTATES 6
+const byte NUM_PRINTSTATES = 6;
 
   short saveFlag=500;
   short loadFlag=500;
