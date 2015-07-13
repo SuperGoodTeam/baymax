@@ -4,6 +4,13 @@ version: 1.0
 
 */
 
+//============== DEBUG ==============
+#ifndef DEBUG 
+	# define D(x) x 
+#else 
+	# define D(x) 
+#endif
+
 //============== LIBRARIES ==============
 #include <phys253.h>
 #include <LiquidCrystal.h>
@@ -72,7 +79,7 @@ const int SPEED_CLAW_CLOSE = 90;//some number
 
 const int KNOB_MAX = 1023;
 const int STANDARD_DELAY_1 = 500; //ms
-const int STANDARD_DELAY_2 = 200; //ms for faster things
+const int STANDARD_DELAY_2 = 50; //ms for faster things
 
 //============== STATES ==============
 enum RobotState {
@@ -152,9 +159,10 @@ void loop() {
 	case COLLECT_ITEM_1:
 		collect_item_1();
 		while(sideTapePresent==true) { //go until you can't see sidetape anymore
-			LCD.clear();
-			LCD.print("Following sidetape");
-			delay(STANDARD_DELAY_1);
+			
+			D(LCD.clear();
+			LCD.print("Following sidetape");)
+			
 			readFollowTape_1();
 			checkSideTape();
 		}

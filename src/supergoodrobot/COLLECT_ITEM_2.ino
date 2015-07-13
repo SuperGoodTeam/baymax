@@ -35,7 +35,7 @@ void collect_item_2() {
 	
 	while (item_2_collected==false) {
 		motor.speed(MOTOR_CLAW, SPEED_CLAW_CLOSE);
-                checkItemSensor_2();
+		checkItemSensor_2();
 	}
 	
 	delay(STANDARD_DELAY_1); //for safety

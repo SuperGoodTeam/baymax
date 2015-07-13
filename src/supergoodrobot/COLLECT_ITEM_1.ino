@@ -21,9 +21,10 @@ void start_collect_item_1() {
 	setBasearmServo(BASESERVO_POSITION_1_A);
 	setBaseServo(BASE_POSITION_1_A);
 	while (!clawOpen) {
-		LCD.clear();
-		LCD.print("Claw opening");
-		delay(STANDARD_DELAY_1); //temp
+		
+		D(LCD.clear();
+		LCD.print("Claw opening");)
+		
 		motor.speed(MOTOR_CLAW, SPEED_CLAW_OPEN);
 	}
 }
@@ -37,9 +38,10 @@ void collect_item_1() {
 	delay(STANDARD_DELAY_1); //pause for a second
 	
 	while (item_1_collected==false) { //temp, change later
-		LCD.clear();
-		LCD.print("Claw closing");
-		delay(STANDARD_DELAY_1); //temp
+		
+		D(LCD.clear();
+		LCD.print("Claw closing");)
+		
 		motor.speed(MOTOR_CLAW, SPEED_CLAW_CLOSE);
 		checkItemSensor_1();
 	}
