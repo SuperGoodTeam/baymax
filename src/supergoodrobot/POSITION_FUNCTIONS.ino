@@ -1,4 +1,7 @@
 //============== SET POSITION/CHECK FUNCTIONS ==============
+int currentPosition = 0;
+
+//============== SETTING FUNCTIONS ==============
 void setForearmServo(int angle) {
 	RCServo0.write(angle);
 }
@@ -7,8 +10,32 @@ void setBasearmServo(int angle) {
 	RCServo1.write(angle);
 }
 
-void setBaseServo(int angle) {
+/*void setBaseServo(int angle) {
 	RCServo2.write(angle);
+}*/
+
+void setBaseMotor(int voltagePosition) {
+	if (voltagePosition < 256 || voltagePosition > 256*3 || SPEED_BASE_MOTOR > 153.6) {
+		LCD.clear();
+		LCD.print("Invalid base parameters");
+		delay(STANDARD_DELAY_1);
+	} //just to be safe
+	else{
+		currentPosition=readMotorBase();
+		while (voltagePosition < currentPosition) {
+			currentPosition=readMotorBase();
+			motor.speed(MOTOR_BASE, SPEED_BASE_MOTOR); 
+		}
+		while (voltagePosition > currentPosition) {
+			currentPosition=readMotorBase();
+			motor.speed(MOTOR_BASE, -SPEED_BASE_MOTOR); 
+		}
+	}
+}
+
+//============== READING FUNCTIONS ==============
+int readMotorBase() {
+	return analogRead(MOTOR_BASE_SENSOR);
 }
 
 void checkSideTape() {

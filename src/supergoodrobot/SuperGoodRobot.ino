@@ -31,17 +31,20 @@ const byte IR_FRONT_1 = 2;
 const byte IR_FRONT_2 = 3;
 const byte IR_SIDE = 4;
 const byte TAPE_SENSOR_SIDE = 5;
+
+const byte MOTOR_BASE_SENSOR = 6;
+
 const byte TAPE_SENSOR_FRONT = 7;
 
 //SERVOS
 const byte SERVO_FOREARM = 0;
 const byte SERVO_BASEARM = 1;
-const byte SERVO_BASE = 2;
 
 //MOTORS
 const byte MOTOR_LEFT = 0;
 const byte MOTOR_RIGHT = 1;
-const byte MOTOR_CLAW = 2;
+const byte MOTOR_BASE = 2; //do not vary speed above 153.6
+const byte MOTOR_CLAW = 3;
 
 //DIGITAL IO
 //INPUT
@@ -61,14 +64,17 @@ const byte INTAKE_ROLLER_MOTOR = 12;
 const int QRD_THRESHOLD = 200;
 #include "TAPE_FOLLOWING.h"
 
+//BASE DRIVE
+const int SPEED_BASE_MOTOR = 90; //some number; do not go past 153.6
+
 //IR DRIVE
 
 //ARM CONSTANTS
 
 //SERVO POSITIONS
-const int BASESERVO_POSITION_START = 90;//some number
-const int FOREARMSERVO_POSITION_START = 90;//some number
-const int BASE_POSITION_START = 90;//some number
+const int BASEARMSERVO_POSITION_START = 45;//some number
+const int FOREARMSERVO_POSITION_START = 45;//some number
+const int BASE_POSITION_START = 512;//some number
 
 //FLAGS
 boolean upRamp=false;
@@ -123,12 +129,11 @@ void setup() {
 
 	RCServo0.attach(RCServo0Output) ;
 	RCServo1.attach(RCServo1Output) ;
-	RCServo2.attach(RCServo2Output) ;
-
+	
 	//initiate servos
 	setForearmServo(FOREARMSERVO_POSITION_START);
-	setBasearmServo(BASESERVO_POSITION_START);
-	setBaseServo(BASE_POSITION_START);
+	setBasearmServo(BASEARMSERVO_POSITION_START);
+	setBaseMotor(BASE_POSITION_START);
 	//other stuff goes here
 
 	//enableExternalInterrupt(INT0, RISING);  
