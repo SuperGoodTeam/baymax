@@ -25,10 +25,16 @@ void setBaseMotor(int voltagePosition) {
 		while (voltagePosition < currentPosition) {
 			currentPosition=readMotorBase();
 			motor.speed(MOTOR_BASE, SPEED_BASE_MOTOR); 
+			D(LCD.clear();
+			LCD.print("BM + "+String(voltagePosition)+String(currentPosition));
+			delay(STANDARD_DELAY_1);)
 		}
 		while (voltagePosition > currentPosition) {
 			currentPosition=readMotorBase();
 			motor.speed(MOTOR_BASE, -SPEED_BASE_MOTOR); 
+			D(LCD.clear();
+			LCD.print("BM - "+String(voltagePosition)+String(currentPosition));
+			delay(STANDARD_DELAY_1);)
 		}
 	}
 }

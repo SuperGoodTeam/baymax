@@ -1,7 +1,6 @@
 /* ENPH 253 PRELIMINARY CODE
 last updated: 071315
 version: 1.0
-
 */
 
 //============== DEBUG ==============
@@ -27,7 +26,7 @@ version: 1.0
 //ANALOG IO
 const byte TAPE_SENSOR_LEFT = 0;
 const byte TAPE_SENSOR_RIGHT = 1;
-const byte IR_FRONT_1 = 2;
+//const byte IR_FRONT_1 = 2; //uncomment this later
 const byte IR_FRONT_2 = 3;
 const byte IR_SIDE = 4;
 const byte TAPE_SENSOR_SIDE = 5;
@@ -74,7 +73,7 @@ const int SPEED_BASE_MOTOR = 90; //some number; do not go past 153.6
 //SERVO POSITIONS
 const int BASEARMSERVO_POSITION_START = 45;//some number
 const int FOREARMSERVO_POSITION_START = 45;//some number
-const int BASE_POSITION_START = 512;//some number
+const int BASE_POSITION_START = 0;//some number
 
 //FLAGS
 boolean upRamp=false;

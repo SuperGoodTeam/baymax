@@ -1,8 +1,11 @@
+const byte MOTOR_ON_SWITCH = 2;
+
 void start_claw_arm_test() {
 	LCD.clear();
 	LCD.home();
 	setForearmServo(0);
 	setBasearmServo(0);
+	setBaseMotor(0);
 }
 
 void claw_arm_test() {
@@ -12,32 +15,37 @@ void claw_arm_test() {
 
 	setForearmServo(FOREARM_POSITION);
 	setBasearmServo(BASEARM_POSITION);
-		
+	
 	LCD.clear();
 	LCD.setCursor(0,0);
 	LCD.print("F: "+String(FOREARM_POSITION)+" B: "+BASEARM_POSITION);
-	/*LCD.setCursor(0,1);
-	LCD.print("O: "+String(digitalRead(SWITCH_CLAW_OPEN))+" P: "+String(digitalRead(SWITCH_PLUSH_DETECT)));*/
+	LCD.setCursor(0,1);
+	checkClawOpen();
+	LCD.print("O: "+String(clawOpen)+" P: "+String(digitalRead(SWITCH_PLUSH_DETECT)));
 	delay(STANDARD_DELAY_2);
 	
+	while (!digitalRead(MOTOR_ON_SWITCH)){
+		setBaseMotor(map(knob(6),0,KNOB_MAX,256,256*3));
+	}
+	
 	if (startbutton()){
-		if (clawOpen!=true){
-			while (!clawOpen && !startbutton()){
+		if (!clawOpen){
+			while (!clawOpen && startbutton()){
 				motor.speed(MOTOR_CLAW, SPEED_CLAW_OPEN);
-				checkClawOpen;
+				checkClawOpen();
 				D(LCD.setCursor(0,1);
 				LCD.print("Claw opening test");
-				delay(STANDARD_DELAY_2);)
+				delay(STANDARD_DELAY_1);)
 			}
 		}
 		
 		else{
-			while (clawOpen && !startbutton()){
+			while (clawOpen && startbutton()){
 				motor.speed(MOTOR_CLAW, SPEED_CLAW_CLOSE);
-				checkClawOpen;
+				checkClawOpen();
 				D(LCD.setCursor(0,1);
 				LCD.print("Claw closing test");
-				delay(STANDARD_DELAY_2);)
+				delay(STANDARD_DELAY_1);)
 			}
 		}
 	}

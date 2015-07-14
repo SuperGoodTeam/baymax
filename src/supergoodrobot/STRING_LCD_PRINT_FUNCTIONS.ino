@@ -39,7 +39,7 @@ String byteStateToString(byte byteRobotState) {
 	case DRIVE:
 		return("TEST DRIVE");
 	case MAIN_MENU:
-		return("MAIN_MENU");
+		return("MAIN MENU");
 	}
 }
 
