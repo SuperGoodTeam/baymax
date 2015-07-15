@@ -36,6 +36,8 @@ String byteStateToString(byte byteRobotState) {
 		return("TESTING");
 	case CLAW_ARM_TEST:
 		return("CLAW ARM TEST");
+	case BASE_MOTOR_TEST:
+		return("BASE MOTOR TEST");
 	case DRIVE:
 		return("TEST DRIVE");
 	case MAIN_MENU:
@@ -66,6 +68,8 @@ String bytePlanToString(byte byte_Plan){
 		return("TEST DRIVE");
 	case TEST_CLAW:
 		return("TEST CLAW");
+	case TEST_BASE_MOTOR:
+		return("TEST BASE MOTOR");
   }
 }
 

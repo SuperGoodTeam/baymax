@@ -26,12 +26,12 @@ version: 1.0
 //ANALOG IO
 const byte TAPE_SENSOR_LEFT = 0;
 const byte TAPE_SENSOR_RIGHT = 1;
-//const byte IR_FRONT_1 = 2; //uncomment this later
+const byte IR_FRONT_1 = 2; //uncomment this later
 const byte IR_FRONT_2 = 3;
 const byte IR_SIDE = 4;
 const byte TAPE_SENSOR_SIDE = 5;
 
-const byte MOTOR_BASE_SENSOR = 6;
+const byte MOTOR_BASE_SENSOR = 6; //this should be 6?
 
 const byte TAPE_SENSOR_FRONT = 7;
 
@@ -91,7 +91,7 @@ const int STANDARD_DELAY_2 = 50; //ms for faster things
 
 //============== STATES ==============
 enum RobotState {
-	INITIALISING, PAST_DOOR, FOLLOW_TAPE_1, COLLECT_ITEM_1, FOLLOW_TAPE_2, COLLECT_ITEM_2, COLLECT_ITEM_3, COLLECT_ITEM_4, COLLECT_ITEM_5, COLLECT_ITEM_6, UP_RAMP, PAST_RAMP, IR, ZIPLINE, FINISHED, TEST,DRIVE, CLAW_ARM_TEST, MAIN_MENU, NUM_STATES
+	INITIALISING, PAST_DOOR, FOLLOW_TAPE_1, COLLECT_ITEM_1, FOLLOW_TAPE_2, COLLECT_ITEM_2, COLLECT_ITEM_3, COLLECT_ITEM_4, COLLECT_ITEM_5, COLLECT_ITEM_6, UP_RAMP, PAST_RAMP, IR, ZIPLINE, FINISHED, TEST,DRIVE, CLAW_ARM_TEST, BASE_MOTOR_TEST, MAIN_MENU, NUM_STATES
 };
 
 enum subMenu {
@@ -99,7 +99,7 @@ enum subMenu {
 };
 
 enum Plan { 
-	FULL, NOT4, NOT5, TEST_DRIVE, TEST_CLAW, NUM_PLAN //placeholder for lack of len(enum) function, don't delete
+	FULL, NOT4, NOT5, TEST_DRIVE, TEST_CLAW, TEST_BASE_MOTOR, NUM_PLAN //placeholder for lack of len(enum) function, don't delete
 };
 
 //SET STATES
@@ -132,7 +132,7 @@ void setup() {
 	//initiate servos
 	setForearmServo(FOREARMSERVO_POSITION_START);
 	setBasearmServo(BASEARMSERVO_POSITION_START);
-	setBaseMotor(BASE_POSITION_START);
+	//setBaseMotor(BASE_POSITION_START);
 	//other stuff goes here
 
 	//enableExternalInterrupt(INT0, RISING);  
@@ -221,6 +221,9 @@ void loop() {
 		break;
 	case DRIVE:
 		readFollowTape();
+		break;
+	case BASE_MOTOR_TEST:
+		base_motor_test();
 		break;
 	case MAIN_MENU:
 		if (currentSubMenu==NO_SUBMENU){

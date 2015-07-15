@@ -22,19 +22,23 @@ void setBaseMotor(int voltagePosition) {
 	} //just to be safe
 	else{
 		currentPosition=readMotorBase();
-		while (voltagePosition < currentPosition) {
-			currentPosition=readMotorBase();
-			motor.speed(MOTOR_BASE, SPEED_BASE_MOTOR); 
-			D(LCD.clear();
-			LCD.print("BM + "+String(voltagePosition)+String(currentPosition));
-			delay(STANDARD_DELAY_1);)
-		}
-		while (voltagePosition > currentPosition) {
-			currentPosition=readMotorBase();
-			motor.speed(MOTOR_BASE, -SPEED_BASE_MOTOR); 
-			D(LCD.clear();
-			LCD.print("BM - "+String(voltagePosition)+String(currentPosition));
-			delay(STANDARD_DELAY_1);)
+		while (voltagePosition != currentPosition){
+			if (voltagePosition < currentPosition) {
+				currentPosition=readMotorBase();
+				D(currentPosition=knob(7);)//turn this off later
+				motor.speed(MOTOR_BASE, SPEED_BASE_MOTOR); 
+				D(LCD.clear();
+				LCD.print("BM +: "+String(voltagePosition)+" "+String(currentPosition));
+				delay(STANDARD_DELAY_2);)
+			}
+			else if (voltagePosition > currentPosition) {
+				currentPosition=readMotorBase();
+				D(currentPosition=knob(7);)
+				motor.speed(MOTOR_BASE, -SPEED_BASE_MOTOR); 
+				D(LCD.clear();
+				LCD.print("BM -: "+String(voltagePosition)+" "+String(currentPosition));
+				delay(STANDARD_DELAY_2);)
+			}
 		}
 	}
 }

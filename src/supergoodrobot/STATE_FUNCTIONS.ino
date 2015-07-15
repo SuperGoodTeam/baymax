@@ -49,6 +49,9 @@ void setupState(byte byteRobotState)
 	case CLAW_ARM_TEST:
 		start_claw_arm_test();
 		break;
+	case BASE_MOTOR_TEST:
+		start_base_motor_test();
+		break;
 	case MAIN_MENU:
 		start_main_menu();
 		break;
@@ -97,6 +100,8 @@ void exitState(byte byteRobotState)
 		break;
 	case CLAW_ARM_TEST:
 		break;
+	case BASE_MOTOR_TEST:
+		break;
 	case DRIVE:
 		break;
 	case MAIN_MENU:
@@ -111,6 +116,9 @@ void switchPlan(byte byte_Plan){
 	}
 	else if (newPlan==TEST_CLAW){
 		switchState(CLAW_ARM_TEST);
+	}
+	else if (newPlan=TEST_BASE_MOTOR){
+		switchState(BASE_MOTOR_TEST);
 	}
 	else {
 		switchState(FOLLOW_TAPE_1);
