@@ -2,7 +2,7 @@
 #define FOLLOWBOTTOMTAPE_H_INCLUDED
 
 namespace followbottomtape {
-    
+
     void FollowBottomTapeLoop();
 }
 

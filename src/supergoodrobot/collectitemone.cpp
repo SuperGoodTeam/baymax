@@ -9,30 +9,30 @@
 namespace collectitemone {
 
     void CollectItemOne() {
-	servocontrol::SetBasearmServo(libconstants::kBasearmStartItemOne);
-	servocontrol::SetForearmServo(libconstants::kForearmStartItemOne);
-	servocontrol::SetPivotarmServo(libconstants::kPivotarmStartItemOne);
+        servocontrol::SetBasearmServo(libconstants::kBasearmStartItemOne);
+        servocontrol::SetForearmServo(libconstants::kForearmStartItemOne);
+        servocontrol::SetPivotarmServo(libconstants::kPivotarmStartItemOne);
 
-	delay(libconstants::kWaitServoTurn);
-	
-	servocontrol::SetBasearmServo(libconstants::kBasearmGrabItemOne);
-	servocontrol::SetForearmServo(libconstants::kForearmGrabItemOne);
-	servocontrol::SetPivotarmServo(libconstants::kPivotarmGrabItemOne);
+        delay(libconstants::kWaitServoTurn);
 
-	delay(libconstants::kWaitServoDown);
+        servocontrol::SetBasearmServo(libconstants::kBasearmGrabItemOne);
+        servocontrol::SetForearmServo(libconstants::kForearmGrabItemOne);
+        servocontrol::SetPivotarmServo(libconstants::kPivotarmGrabItemOne);
 
-	motor.speed(libconstants::kClawMotor, libconstants::kClawSpeed);
+        delay(libconstants::kWaitServoDown);
 
-	delay(libconstants::kWaitClawGrab);
+        motor.speed(libconstants::kClawMotor, libconstants::kClawSpeed);
 
-	servocontrol::SetBasearmServo(libconstants::kBasearmRetreiveItemOne);
-	servocontrol::SetForearmServo(libconstants::kForearmRetreiveItemOne);
-	servocontrol::SetPivotarmServo(libconstants::kPivotarmRetreiveItemOne);
-	delay(libconstants::kWaitServoUp);
+        delay(libconstants::kWaitClawGrab);
 
-	while (!digitalRead(libconstants::kClawOpenSwitch)) {
-	    motor.speed(libconstants::kClawMotor, -libconstants::kClawSpeed);
-	}
+        servocontrol::SetBasearmServo(libconstants::kBasearmRetreiveItemOne);
+        servocontrol::SetForearmServo(libconstants::kForearmRetreiveItemOne);
+        servocontrol::SetPivotarmServo(libconstants::kPivotarmRetreiveItemOne);
+        delay(libconstants::kWaitServoUp);
+
+        while (!digitalRead(libconstants::kClawOpenSwitch)) {
+            motor.speed(libconstants::kClawMotor, -libconstants::kClawSpeed);
+        }
 
     }
 }

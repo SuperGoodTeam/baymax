@@ -34,12 +34,12 @@ namespace libconstants {
     //OUT
     const uint8_t kHookarmRelease = 14;
     const uint8_t kHookarmRaiseToggle = 15;
-    
+
     /*============GEOMETRIC CONSTANTS============*/
 
     // Servos
     const uint8_t kServoDegreesMax = 180;
-    
+
     const uint16_t kBasearmStartPosition = 90;
     const uint16_t kForearmStartPosition = 90;
     const uint16_t kPivotarmStartPosition = 90;
@@ -69,7 +69,7 @@ namespace libconstants {
     const uint16_t kPivotarmRetreiveItemTwo = 90;
 
     const int16_t kPivotarmSpeed = 128;
-    
+
     // Claw
     const int16_t kClawSpeed = 90;
 

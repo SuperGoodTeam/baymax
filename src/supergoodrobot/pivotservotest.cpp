@@ -9,21 +9,21 @@
 namespace pivotservotest {
 
     void PivotServoTestLoop() {
-	int pivotservoposition = 90;
-	bool moveservo = false;
+        int pivotservoposition = 90;
+        bool moveservo = false;
 
-	if (startbutton())
-	    moveservo = !moveservo;
+        if (startbutton())
+            moveservo = !moveservo;
 
-	if (moveservo)
-	    servocontrol::SetPivotarmServo(pivotservoposition);
-	else {
-	    pivotservoposition = map(knob(6), 0, libconstants::kKnobMax, 0, libconstants::kServoDegreesMax);
-	    LCD.clear();
-	    LCD.print("Pivot: 6: " + String(pivotservoposition));
-	    delay(libconstants::kShortDelay);
-	}
+        if (moveservo)
+            servocontrol::SetPivotarmServo(pivotservoposition);
+        else {
+            pivotservoposition = map(knob(6), 0, libconstants::kKnobMax, 0, libconstants::kServoDegreesMax);
+            LCD.clear();
+            LCD.print("Pivot: 6: " + String(pivotservoposition));
+            delay(libconstants::kShortDelay);
+        }
     }
-    
-    
+
+
 }

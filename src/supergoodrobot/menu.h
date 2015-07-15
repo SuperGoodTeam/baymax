@@ -6,43 +6,43 @@
 namespace menu {
 
     enum MainMenu {
-	kStrategies,
-	kParameters,
-	kStart,
-	kMainMenuMax
+        kStrategies,
+        kParameters,
+        kStart,
+        kMainMenuMax
     };
-    
+
     enum Strategy {
-	kFull,
-	kStartTwo,
-	kStartThree,
-	kStartFour,
-	kStartFive,
-	kStartSix,
-	kSkipFour,
-	kSkipFive,
-	kSkipSix,
+        kFull,
+        kStartTwo,
+        kStartThree,
+        kStartFour,
+        kStartFive,
+        kStartSix,
+        kSkipFour,
+        kSkipFive,
+        kSkipSix,
         kSkipFiveAndSix,
-	kClawTest,
-	kTapeTest,
-	kIrTest,
-	kStrategyMax
+        kClawTest,
+        kTapeTest,
+        kIrTest,
+        kStrategyMax
     };
 
     enum ParameterMenu {
-	kDisplay,
-	kLoad,
-	kSave,
-	kProportionalGain,
-	kDerivativeGain,
-	kBaseSpeed,
-	kParameterMenuMax
+        kDisplay,
+        kLoad,
+        kSave,
+        kProportionalGain,
+        kDerivativeGain,
+        kBaseSpeed,
+        kParameterMenuMax
     };
 
     enum Menu {
-	kMainMenu,
-	kStrategyMenu,
-	kParameterMenu
+        kMainMenu,
+        kStrategyMenu,
+        kParameterMenu
     };
 
     extern Menu currentmenu;

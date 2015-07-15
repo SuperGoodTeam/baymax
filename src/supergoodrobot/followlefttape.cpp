@@ -5,7 +5,7 @@
 namespace followlefttape {
 
     void FollowLeftTapeLoop() {
-	
-	drivecontrol::FollowTapeLoop(0, 0);
+
+        drivecontrol::FollowTapeLoop(0, 0);
     }
 }

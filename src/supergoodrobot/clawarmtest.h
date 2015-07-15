@@ -2,7 +2,7 @@
 #define CLAWARMTEST_H_INCLUDED
 
 namespace clawarmtest {
-    
+
     void ClawArmTestLoop();
 }
 

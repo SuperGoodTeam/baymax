@@ -12,27 +12,27 @@ namespace servocontrol {
 
     void SetForearmServo(uint8_t angle) {
 
-	RCServo0.write(angle);
+        RCServo0.write(angle);
     }
 
     void SetBasearmServo(uint8_t angle) {
 
-	RCServo1.write(angle);
+        RCServo1.write(angle);
     }
 
     void SetPivotarmServo(uint8_t angle) {
-	desiredreading = angle * libconstants::kPivotReadingPerDegree + 256;
-	
-	do {
-	    pivotarmreading = analogRead(libconstants::kMotorBaseSensor);
+        desiredreading = angle * libconstants::kPivotReadingPerDegree + 256;
 
-	    if (desiredreading > pivotarmreading)
-		motor.speed(libconstants::kPivotarmMotor, libconstants::kPivotarmSpeed);
-	    else
-		motor.speed(libconstants::kPivotarmMotor, -libconstants::kPivotarmSpeed);
+        do {
+            pivotarmreading = analogRead(libconstants::kMotorBaseSensor);
 
-	} while ((pivotarmreading - desiredreading) > 1); //Imperfect system
+            if (desiredreading > pivotarmreading)
+                motor.speed(libconstants::kPivotarmMotor, libconstants::kPivotarmSpeed);
+            else
+                motor.speed(libconstants::kPivotarmMotor, -libconstants::kPivotarmSpeed);
 
-	motor.speed(libconstants::kPivotarmMotor, 0);
+        } while ((pivotarmreading - desiredreading) > 1); //Imperfect system
+
+        motor.speed(libconstants::kPivotarmMotor, 0);
     }
 }

@@ -9,10 +9,10 @@ namespace statemanager {
 
     void SwitchState(RobotState nextstate) {
 
-	SetupState(nextstate);
+        SetupState(nextstate);
 
-	currentstate = nextstate;
-	
+        currentstate = nextstate;
+
         /*Update as more changes need to be made
           i.e setup/takedown procedures*/
     }
@@ -22,7 +22,7 @@ namespace statemanager {
         switch (nextstate) {
 
         case kMenu:
-	    menu::currentmenu = menu::kMainMenu;
+            menu::currentmenu = menu::kMainMenu;
             break;
 
         default:
@@ -42,9 +42,9 @@ namespace statemanager {
         case kTapeTest:
             return "Tape Test";
             break;
-	case kPivotTest:
-	    return "Pivot Test";
-	    break;
+        case kPivotTest:
+            return "Pivot Test";
+            break;
         case kInitializing:
             return "Initializing";
             break;

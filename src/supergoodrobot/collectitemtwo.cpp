@@ -9,31 +9,31 @@
 namespace collectitemtwo {
 
     void CollectItemTwo() {
-	servocontrol::SetBasearmServo(libconstants::kBasearmStartItemTwo);
-	servocontrol::SetForearmServo(libconstants::kForearmStartItemTwo);
-	servocontrol::SetPivotarmServo(libconstants::kPivotarmStartItemTwo);
+        servocontrol::SetBasearmServo(libconstants::kBasearmStartItemTwo);
+        servocontrol::SetForearmServo(libconstants::kForearmStartItemTwo);
+        servocontrol::SetPivotarmServo(libconstants::kPivotarmStartItemTwo);
 
-	delay(libconstants::kWaitServoTurn);
-	
-	servocontrol::SetBasearmServo(libconstants::kBasearmGrabItemTwo);
-	servocontrol::SetForearmServo(libconstants::kForearmGrabItemTwo);
-	servocontrol::SetPivotarmServo(libconstants::kPivotarmGrabItemTwo);
+        delay(libconstants::kWaitServoTurn);
 
-	delay(libconstants::kWaitServoDown);
+        servocontrol::SetBasearmServo(libconstants::kBasearmGrabItemTwo);
+        servocontrol::SetForearmServo(libconstants::kForearmGrabItemTwo);
+        servocontrol::SetPivotarmServo(libconstants::kPivotarmGrabItemTwo);
 
-	motor.speed(libconstants::kClawMotor, libconstants::kClawSpeed);
+        delay(libconstants::kWaitServoDown);
 
-	delay(libconstants::kWaitClawGrab);
+        motor.speed(libconstants::kClawMotor, libconstants::kClawSpeed);
 
-	servocontrol::SetBasearmServo(libconstants::kBasearmRetreiveItemTwo);
-	servocontrol::SetForearmServo(libconstants::kForearmRetreiveItemTwo);
-	servocontrol::SetPivotarmServo(libconstants::kPivotarmRetreiveItemTwo);
-	
-	delay(libconstants::kWaitServoUp);
+        delay(libconstants::kWaitClawGrab);
 
-	while (!digitalRead(libconstants::kClawOpenSwitch)) {
-	    motor.speed(libconstants::kClawMotor, -libconstants::kClawSpeed);
-	}
+        servocontrol::SetBasearmServo(libconstants::kBasearmRetreiveItemTwo);
+        servocontrol::SetForearmServo(libconstants::kForearmRetreiveItemTwo);
+        servocontrol::SetPivotarmServo(libconstants::kPivotarmRetreiveItemTwo);
+
+        delay(libconstants::kWaitServoUp);
+
+        while (!digitalRead(libconstants::kClawOpenSwitch)) {
+            motor.speed(libconstants::kClawMotor, -libconstants::kClawSpeed);
+        }
 
     }
 }

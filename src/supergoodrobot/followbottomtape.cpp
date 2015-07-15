@@ -5,6 +5,6 @@
 namespace followbottomtape {
 
     void FollowBottomTapeLoop() {
-	drivecontrol::FollowTapeLoop(0, 0);
+        drivecontrol::FollowTapeLoop(0, 0);
     }
 }

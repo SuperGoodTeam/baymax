@@ -42,91 +42,91 @@ void setup() {
 
 void loop() {
     if(stopbutton()) {
-	statemanager::SwitchState(statemanager::kMenu);
+        statemanager::SwitchState(statemanager::kMenu);
     }
 
     switch (statemanager::currentstate) {
-	
+
     case statemanager::kMenu:
-	switch (menu::currentmenu) {
-	    
-	case menu::kMainMenu:
-	    menu::MainMenuLoop();
-	    break;
-	    
-	case menu::kStrategyMenu:
-	    menu::StrategyMenuLoop();
-	    break;
-	    
-	case menu::kParameterMenu:
-	    menu::ParameterMenuLoop();
-	    break;
-	}
-	    
-	break;
+        switch (menu::currentmenu) {
+
+        case menu::kMainMenu:
+            menu::MainMenuLoop();
+            break;
+
+        case menu::kStrategyMenu:
+            menu::StrategyMenuLoop();
+            break;
+
+        case menu::kParameterMenu:
+            menu::ParameterMenuLoop();
+            break;
+        }
+
+        break;
 
     case statemanager::kClawTest:
-	clawarmtest::ClawArmTestLoop();
-	break;
+        clawarmtest::ClawArmTestLoop();
+        break;
 
     case statemanager::kTapeTest:
-	tapefollowtest::TapeFollowTestLoop();
-	break;
+        tapefollowtest::TapeFollowTestLoop();
+        break;
 
     case statemanager::kPivotTest:
-	pivotservotest::PivotServoTestLoop();
-	break;
+        pivotservotest::PivotServoTestLoop();
+        break;
 
     case statemanager::kInitializing:
-	break;
+        break;
 
     case statemanager::kTapeBottom:
-	while (!sensorsuite::SideTapeDetect()) {
-	    followbottomtape::FollowBottomTapeLoop();
-	}
-	
-	break;
+        while (!sensorsuite::SideTapeDetect()) {
+            followbottomtape::FollowBottomTapeLoop();
+        }
+
+        break;
 
     case statemanager::kCollectItemOne:
-	collectitemone::CollectItemOne();
-	break;
+        collectitemone::CollectItemOne();
+        break;
 
     case statemanager::kTapeTurnLeft:
-	followlefttape::FollowLeftTapeLoop();
-	break;
+        followlefttape::FollowLeftTapeLoop();
+        break;
 
     case statemanager::kCollectItemTwo:
-	break;
+        break;
 
     case statemanager::kTapeHill:
-	break;
+        break;
 
     case statemanager::kCollectItemThree:
-	break;
+        break;
 
     case statemanager::kTapeTurnRight:
-	break;
+        break;
 
     case statemanager::kCollectItemFour:
-	break;
+        break;
 
     case statemanager::kFollowIr:
-	break;
+        break;
 
     case statemanager::kCollectItemFive:
-	break;
+        break;
 
     case statemanager::kCollectItemSix:
-	break;
+        break;
 
     case statemanager::kGrabZipline:
-	break;
+        break;
 
     case statemanager::kDescendZipline:
-	break;
-	
+        break;
+
     default:
-	break;
-	
+        break;
+
     }
 }
