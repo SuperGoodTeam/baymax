@@ -8,12 +8,15 @@
 
 namespace pivotservotest {
 
-    void PivotServoTestLoop() {
-        int pivotservoposition = 90;
-        bool moveservo = false;
+    bool moveservo = false;
+    int pivotservoposition = 90;
 
-        if (startbutton())
+    void PivotServoTestLoop() {
+
+        if (startbutton()) {
             moveservo = !moveservo;
+	    libconstants::kLongDelay;
+	}
 
         if (moveservo)
             servocontrol::SetPivotarmServo(pivotservoposition);

@@ -49,6 +49,7 @@ namespace drivecontrol {
         totalcorrection = proportionalcorrection + derivativecorrection;
 
         if (lcdrefreshrate == 30) {
+	    LCD.clear();
             LCD.print("L: " + String(leftqrd));
             LCD.print("R: " + String(rightqrd));
             lcdrefreshrate = 0;

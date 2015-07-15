@@ -11,7 +11,7 @@ namespace statemanager {
         kTapeTest,
         kPivotTest,
         kIrTest,
-        kInitializing,
+        kInitialising,
         kTapeBottom,
         kCollectItemOne,
         kTapeTurnLeft,

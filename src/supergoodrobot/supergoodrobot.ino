@@ -25,9 +25,12 @@
 #include "libconstants.h"
 #include "followbottomtape.h"
 #include "followlefttape.h"
+#include "initialise.h"
 #include "menu.h"
 #include "pivotservotest.h"
 #include "sensorsuite.h"
+#include "strategies.h" //temp
+
 #include "statemanager.h"
 #include "tapefollowtest.h"
 
@@ -44,6 +47,8 @@ void loop() {
     if(stopbutton()) {
         statemanager::SwitchState(statemanager::kMenu);
     }
+    
+    Serial.println((int) strategies::chosenstrategy);
 
     switch (statemanager::currentstate) {
 
@@ -58,9 +63,9 @@ void loop() {
             menu::StrategyMenuLoop();
             break;
 
-        case menu::kStateMenu:
-            menu::StateMenuLoop();
-            break;
+	case menu::kStateMenu:
+	    menu::StateMenuLoop();
+	    break;
 
         case menu::kParameterMenu:
             menu::ParameterMenuLoop();
@@ -81,9 +86,10 @@ void loop() {
         pivotservotest::PivotServoTestLoop();
         break;
     case statemanager::kIrTest:
-        break;
+	break;
 
-    case statemanager::kInitializing:
+    case statemanager::kInitialising:
+        initialise::SetupStrategy();
         break;
 
     case statemanager::kTapeBottom:

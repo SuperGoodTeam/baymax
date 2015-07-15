@@ -45,7 +45,7 @@ namespace menu {
                 break;
             case kStart:
                 currentmenu = kMainMenu;
-                statemanager::SwitchState(statemanager::kInitializing);
+                statemanager::SwitchState(statemanager::kInitialising);
                 break;
             }
         }

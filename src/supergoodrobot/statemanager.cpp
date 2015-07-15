@@ -1,7 +1,9 @@
+#include "statemanager.h"
+
 #include <Arduino.h>
 
+#include "drivecontrol.h"
 #include "menu.h"
-#include "statemanager.h"
 
 namespace statemanager {
 
@@ -22,6 +24,7 @@ namespace statemanager {
         switch (nextstate) {
 
         case kMenu:
+	    drivecontrol::StopDriveMotors();
             menu::currentmenu = menu::kMainMenu;
             break;
 
@@ -48,8 +51,8 @@ namespace statemanager {
         case kIrTest:
             return "IR Test";
             break;
-        case kInitializing:
-            return "Initializing";
+        case kInitialising:
+            return "Initialising";
             break;
         case kTapeBottom:
             return "Tape Bottom";
