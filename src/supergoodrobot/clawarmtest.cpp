@@ -35,18 +35,19 @@ namespace clawarmtest {
 
         if (startbutton()) {
             clawopening = !clawopening;
+        }
 
-            if (clawopening) {
-                if (!clawopen) {
-                    motor.speed(libconstants::kClawMotor, libconstants::kClawSpeed);
-                }
-                else
-                    motor.speed(libconstants::kClawMotor, 0);
 
+        if (clawopening) {
+            if (!clawopen) {
+                motor.speed(libconstants::kClawMotor, libconstants::kClawSpeed);
             }
             else
-                motor.speed(libconstants::kClawMotor, -libconstants::kClawSpeed);
+                motor.speed(libconstants::kClawMotor, 0);
+
         }
+        else
+            motor.speed(libconstants::kClawMotor, -libconstants::kClawSpeed);
 
 
     }

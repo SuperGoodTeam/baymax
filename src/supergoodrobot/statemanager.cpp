@@ -45,6 +45,9 @@ namespace statemanager {
         case kPivotTest:
             return "Pivot Test";
             break;
+        case kIrTest:
+            return "IR Test";
+            break;
         case kInitializing:
             return "Initializing";
             break;

@@ -6,25 +6,26 @@
 namespace statemanager {
 
     enum RobotState {
-	kMenu,
-	kClawTest,
-	kTapeTest,
-	kPivotTest,
-	kInitializing,
-	kTapeBottom,
-	kCollectItemOne,
-	kTapeTurnLeft,
-	kCollectItemTwo,
-	kTapeHill,
-	kCollectItemThree,
-	kTapeTurnRight,
-	kCollectItemFour,
-	kFollowIr,
-	kCollectItemFive,
-	kCollectItemSix,
-	kGrabZipline,
-	kDescendZipline,
-	kRobotStateMax
+        kMenu,
+        kClawTest,
+        kTapeTest,
+        kPivotTest,
+        kIrTest,
+        kInitializing,
+        kTapeBottom,
+        kCollectItemOne,
+        kTapeTurnLeft,
+        kCollectItemTwo,
+        kTapeHill,
+        kCollectItemThree,
+        kTapeTurnRight,
+        kCollectItemFour,
+        kFollowIr,
+        kCollectItemFive,
+        kCollectItemSix,
+        kGrabZipline,
+        kDescendZipline,
+        kRobotStateMax
     };
 
     extern RobotState currentstate;

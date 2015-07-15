@@ -58,6 +58,10 @@ void loop() {
             menu::StrategyMenuLoop();
             break;
 
+        case menu::kStateMenu:
+            menu::StateMenuLoop();
+            break;
+
         case menu::kParameterMenu:
             menu::ParameterMenuLoop();
             break;
@@ -75,6 +79,8 @@ void loop() {
 
     case statemanager::kPivotTest:
         pivotservotest::PivotServoTestLoop();
+        break;
+    case statemanager::kIrTest:
         break;
 
     case statemanager::kInitializing:

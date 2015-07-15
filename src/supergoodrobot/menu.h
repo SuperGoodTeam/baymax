@@ -8,11 +8,12 @@ namespace menu {
     enum MainMenu {
         kStrategies,
         kParameters,
+        kStates,
         kStart,
         kMainMenuMax
     };
 
-    enum Strategy {
+    enum StrategyMenu {
         kFull,
         kStartTwo,
         kStartThree,
@@ -23,10 +24,27 @@ namespace menu {
         kSkipFive,
         kSkipSix,
         kSkipFiveAndSix,
+        kStrategyMax
+    };
+
+    enum StateMenu {
         kClawTest,
         kTapeTest,
-        kIrTest,
-        kStrategyMax
+        kPivotTest,
+        kTapeBottom,
+        kCollectItemOne,
+        kTapeTurnLeft,
+        kCollectItemTwo,
+        kTapeHill,
+        kCollectItemThree,
+        kTapeTurnRight,
+        kCollectItemFour,
+        kFollowIr,
+        kCollectItemFive,
+        kCollectItemSix,
+        kGrabZipline,
+        kDescendZipline,
+        kStateMenuMax
     };
 
     enum ParameterMenu {
@@ -42,20 +60,27 @@ namespace menu {
     enum Menu {
         kMainMenu,
         kStrategyMenu,
+        kStateMenu,
         kParameterMenu
     };
 
     extern Menu currentmenu;
 
+    //extern Strategy currentstrategy;
+
     void MainMenuLoop();
 
     void StrategyMenuLoop();
+
+    void StateMenuLoop();
 
     void ParameterMenuLoop();
 
     String MainMenuToString(MainMenu menu);
 
-    String StrategyMenuToString(Strategy strategy);
+    String StrategyMenuToString(StrategyMenu strategy);
+
+    String StateMenuToString(StateMenu menu);
 
     String ParameterMenuToString(ParameterMenu menu);
 

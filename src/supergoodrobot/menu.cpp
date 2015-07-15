@@ -11,11 +11,13 @@
 #include "libconstants.h"
 #include "parameters.h"
 #include "statemanager.h"
+#include "strategies.h"
 
 namespace menu {
 
     MainMenu currentmainselection = kStrategies;
-    Strategy currentstrategy = kFull;
+    StrategyMenu currentstrategyselection = kFull;
+    StateMenu currentstateselection = kClawTest;
     ParameterMenu currentparameterselection = kDisplay;
 
     Menu currentmenu = kMainMenu;
@@ -27,13 +29,16 @@ namespace menu {
         delay(libconstants::kLongDelay);
         LCD.clear();
 
-        currentmainselection = static_cast<MainMenu> (map(knob(6), 0, libconstants::kKnobMax, 0, kMainMenuMax));
+        currentmainselection = static_cast<MainMenu> (map(knob(6), 0, libconstants::kKnobMax, 0, kMainMenuMax-1));
 
         LCD.print("Menu: " + MainMenuToString(currentmainselection));
         if (startbutton()) {
             switch (currentmainselection) {
             case kStrategies:
                 currentmenu = kStrategyMenu;
+                break;
+            case kStates:
+                currentmenu = kStateMenu;
                 break;
             case kParameters:
                 currentmenu = kParameterMenu;
@@ -50,11 +55,25 @@ namespace menu {
         delay(libconstants::kLongDelay);
         LCD.clear();
 
-        currentstrategy = static_cast<Strategy> (map(knob(6), 0, libconstants::kKnobMax, 0, kStrategyMax));
+        strategies::chosenstrategy = static_cast<strategies::Strategy> (map(knob(6), 0, libconstants::kKnobMax, 0, kStrategyMax-1));
+        currentstrategyselection = static_cast<StrategyMenu> (map(knob(6), 0, libconstants::kKnobMax, 0, kStrategyMax-1));
 
         LCD.print("Strategy:");
-        LCD.setCursor(0,1);
-        LCD.print(StrategyMenuToString(currentstrategy));
+        LCD.setCursor(0, 1);
+        LCD.print(StrategyMenuToString(currentstrategyselection));
+    }
+
+    void StateMenuLoop() {
+        delay(libconstants::kLongDelay);
+        LCD.clear();
+
+        currentstateselection = static_cast<StateMenu> (map(knob(6), 0, libconstants::kKnobMax, 0, kStateMenuMax-1));
+
+        strategies::chosenstrategy = static_cast<strategies::Strategy> (static_cast<int16_t> (currentstateselection) + 10);
+
+        LCD.print("State:");
+        LCD.setCursor(0, 1);
+        LCD.print(StateMenuToString(currentstateselection));
     }
 
     //TODO:
@@ -105,15 +124,15 @@ namespace menu {
             LCD.print("s:" + String(parameters::basespeed));
             break;
         case kProportionalGain:
-            parameters::proportionalgain = knob(6);
+            parameters::proportionalgain = knob(6)/10;
             LCD.print("kP: 6: " + String(parameters::proportionalgain));
             break;
         case kDerivativeGain:
-            parameters::derivativegain = knob(6);
+            parameters::derivativegain = knob(6)/5;
             LCD.print("kD: 6: " + String(parameters::derivativegain));
             break;
         case kBaseSpeed:
-            parameters::basespeed = knob(6);
+            parameters::basespeed = knob(6)/5;
             LCD.print("bSpeed: 6: " + String(parameters::derivativegain));
             break;
         default:
@@ -129,6 +148,9 @@ namespace menu {
         case kParameters:
             return "Parameters";
             break;
+        case kStates:
+            return "DEB States";
+            break;
         case kStart:
             return "Start!";
             break;
@@ -138,7 +160,7 @@ namespace menu {
         }
     }
 
-    String StrategyMenuToString(Strategy strategy) {
+    String StrategyMenuToString(StrategyMenu strategy) {
 
         switch (strategy) {
         case kFull:
@@ -169,16 +191,7 @@ namespace menu {
             return "Skip Sixth";
             break;
         case kSkipFiveAndSix:
-            return "Skip Last2";
-            break;
-        case kClawTest:
-            return "Claw Test";
-            break;
-        case kTapeTest:
-            return "Tape Test";
-            break;
-        case kIrTest:
-            return "IR Test";
+            return "Skip Last Two";
             break;
         default:
             return "OoBMenu";
@@ -186,8 +199,65 @@ namespace menu {
         }
     }
 
+    String StateMenuToString(StateMenu state) {
+
+        switch (state) {
+        case kClawTest:
+            return "Claw Test";
+            break;
+        case kTapeTest:
+            return "Tape Test";
+            break;
+        case kPivotTest:
+            return "Pivot Test";
+            break;
+        case kTapeBottom:
+            return "Tape Bottom";
+            break;
+        case kCollectItemOne:
+            return "Collect Item 1";
+            break;
+        case kTapeTurnLeft:
+            return "Tape Left Turn";
+            break;
+        case kCollectItemTwo:
+            return "Collect Item 2";
+            break;
+        case kTapeHill:
+            return "Tape Hill";
+            break;
+        case kCollectItemThree:
+            return "Collect Item 3";
+            break;
+        case kTapeTurnRight:
+            return "Tape Right Turn";
+            break;
+        case kCollectItemFour:
+            return "Collect Item 4";
+            break;
+        case kFollowIr:
+            return "Follow IR";
+            break;
+        case kCollectItemFive:
+            return "Collect Item 5";
+            break;
+        case kCollectItemSix:
+            return "Collect Item 6";
+            break;
+        case kGrabZipline:
+            return "Grabbing Zipline";
+            break;
+        case kDescendZipline:
+            return "Exiting Course";
+            break;
+        default:
+            return "OutoBounds State";
+            break;
+        }
+    }
+
     //TODO? Possibly unneeded:
-    String ParameterMenuToString(Menu menu) {
+    String ParameterMenuToString(ParameterMenu menu) {
         switch (menu) {
         case kDisplay:
             return "";
@@ -220,6 +290,9 @@ namespace menu {
             break;
         case kStrategyMenu:
             return "Strategy";
+            break;
+        case kStateMenu:
+            return "State";
             break;
         case kParameterMenu:
             return "Parameters";
