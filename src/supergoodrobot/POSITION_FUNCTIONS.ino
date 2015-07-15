@@ -33,7 +33,7 @@ void setBaseMotor(int voltagePosition) {
 			}
 			else if (voltagePosition > currentPosition) {
 				currentPosition=readMotorBase();
-				D(currentPosition=knob(7);)
+				D(currentPosition=knob(7);)//turn this off later
 				motor.speed(MOTOR_BASE, -SPEED_BASE_MOTOR); 
 				D(LCD.clear();
 				LCD.print("BM -: "+String(voltagePosition)+" "+String(currentPosition));

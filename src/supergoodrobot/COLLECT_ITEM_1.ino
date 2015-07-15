@@ -23,7 +23,7 @@ void start_collect_item_1() {
 	while (!clawOpen) {
 		
 		D(LCD.clear();
-		LCD.print("Claw opening");)
+		LCD.print("Claw opening init 1");)
 		
 		motor.speed(MOTOR_CLAW, SPEED_CLAW_OPEN);
 	}

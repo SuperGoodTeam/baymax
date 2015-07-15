@@ -24,7 +24,7 @@ void base_motor_test(){
 			delay(STANDARD_DELAY_2);
 			break;
 		case 1:
-			setBaseMotor(BASE_POSITION); //fairly certain this works, uncomment this out later
+			setBaseMotor(BASE_POSITION);
 			break;
 	}
 }

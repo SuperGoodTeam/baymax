@@ -1,4 +1,5 @@
 byte motorSwitchVal=1;
+bool clawopening;
 
 void start_claw_arm_test() {
 	LCD.clear();
@@ -24,25 +25,17 @@ void claw_arm_test() {
 	LCD.print("O: "+String(clawOpen)+" P: "+String(digitalRead(SWITCH_PLUSH_DETECT)));
 	delay(STANDARD_DELAY_2);
 			
-	if (startbutton()){
-		if (!clawOpen){
-			while (!clawOpen && startbutton()){
+			
+	if (startbutton()) {
+	clawopening = !clawopening;
+		if (clawopening) {
+			if (!clawOpen) {
 				motor.speed(MOTOR_CLAW, SPEED_CLAW_OPEN);
-				checkClawOpen();
-				D(LCD.setCursor(0,1);
-				LCD.print("Claw opening test");
-				delay(STANDARD_DELAY_1);)
 			}
+			else
+				motor.speed(MOTOR_CLAW, 0);
 		}
-		
-		else{
-			while (clawOpen && startbutton()){
-				motor.speed(MOTOR_CLAW, SPEED_CLAW_CLOSE);
-				checkClawOpen();
-				D(LCD.setCursor(0,1);
-				LCD.print("Claw closing test");
-				delay(STANDARD_DELAY_1);)
-			}
-		}
+		else
+			motor.speed(MOTOR_CLAW, -SPEED_CLAW_OPEN);
 	}
 }
