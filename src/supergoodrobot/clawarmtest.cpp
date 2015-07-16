@@ -19,7 +19,7 @@ namespace clawarmtest {
         basearmposition = map(knob(7), 0, libconstants::kKnobMax, 0, libconstants::kServoDegreesMax);
 
         RCServo0.write(forearmposition);
-        RCServo1.write(forearmposition);
+        RCServo1.write(basearmposition);
 
         LCD.clear();
         LCD.home();
