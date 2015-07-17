@@ -30,6 +30,7 @@
 #include "followbottomtape.h"
 #include "followlefttape.h"
 #include "followhilltape.h"
+#include "followrighttape.h"
 #include "initialise.h"
 #include "menu.h"
 #include "pivotservotest.h"
@@ -155,10 +156,25 @@ void loop() {
 		break;
 
     case statemanager::kCollectItemThree:
-    		collectitemthree::CollectItemThree();
+    	collectitemthree::CollectItemThree();
+				
+		while(sensorsuite::SideTapeDetect()) {
+            followrighttape::FollowRightTapeLoop();
+        }
+		
+		if (strategies::chosenstrategy != strategies::kCollectItemThree){
+			strategymanager::GoToNextState();
+        }
+
         break;
 
-    case statemanager::kTapeTurnRight: // how can we tell when this happens?
+    case statemanager::kTapeTurnRight: 
+		while(!sensorsuite::SideTapeDetect()) {
+            followrighttape::FollowRightTapeLoop();
+		}
+		if (strategies::chosenstrategy != strategies::kTapeTurnRight){
+			strategymanager::GoToNextState();
+        }
         break;
 
     case statemanager::kCollectItemFour:
