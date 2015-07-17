@@ -29,6 +29,7 @@
 #include "libconstants.h"
 #include "followbottomtape.h"
 #include "followlefttape.h"
+#include "followhilltape.h"
 #include "initialise.h"
 #include "menu.h"
 #include "pivotservotest.h"
@@ -51,6 +52,7 @@ void setup() {
 void loop() {
     if(stopbutton()) {
         statemanager::SwitchState(statemanager::kMenu);
+		strategymanager::strategyiterator=0;
     }
     
     D(Serial.println((int) strategies::chosenstrategy);)
@@ -90,8 +92,9 @@ void loop() {
     case statemanager::kPivotTest:
         pivotservotest::PivotServoTestLoop();
         break;
+		
     case statemanager::kIrTest:
-	break;
+		break;
 
     case statemanager::kInitialising:
         initialise::SetupStrategy();
@@ -101,23 +104,55 @@ void loop() {
         while(!sensorsuite::SideTapeDetect()) {
             followbottomtape::FollowBottomTapeLoop();
         }
-		strategymanager::GoToNextState();
-        break;
+		if (strategies::chosenstrategy != strategies::kTapeBottomOnly){
+			strategymanager::GoToNextState();
+        }
+		break;
 
     case statemanager::kCollectItemOne:
         collectitemone::CollectItemOne();
+		
+		while(sensorsuite::SideTapeDetect()) {
+            followbottomtape::FollowBottomTapeLoop();
+        }
+		
+		if (strategies::chosenstrategy != strategies::kCollectItemOne){
+			strategymanager::GoToNextState();
+        }
         break;
 
     case statemanager::kTapeTurnLeft:
-        followlefttape::FollowLeftTapeLoop(); // where does this end? 2nd sidetape?
+        
+		while(!sensorsuite::SideTapeDetect()) {
+            followlefttape::FollowLeftTapeLoop(); // ends at 2nd side tape
+		}
+		if (strategies::chosenstrategy != strategies::kTapeTurnLeftOnly){
+			strategymanager::GoToNextState();
+        }
+		
         break;
 
     case statemanager::kCollectItemTwo:
         collectitemtwo::CollectItemTwo();
+				
+		while(sensorsuite::SideTapeDetect()) {
+            followlefttape::FollowLeftTapeLoop();
+        }
+		
+		if (strategies::chosenstrategy != strategies::kCollectItemTwo){
+			strategymanager::GoToNextState();
+        }
+
 		break;
 
-    case statemanager::kTapeHill: // where does this start/end? 3rd sidetape? not quite it
-        break;
+    case statemanager::kTapeHill: // ends at 3rd sidetape
+		while(!sensorsuite::SideTapeDetect()) {
+            followhilltape::FollowHillTapeLoop();
+		}
+		if (strategies::chosenstrategy != strategies::kTapeHill){
+			strategymanager::GoToNextState();
+        }
+		break;
 
     case statemanager::kCollectItemThree:
     		collectitemthree::CollectItemThree();

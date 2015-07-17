@@ -15,7 +15,9 @@ namespace statemanager {
 
         SetupState(nextstate);
 		LCD.clear();
-		LCD.print("SWITCH: "+RobotStateToString(nextstate));
+		LCD.print("SWITCH:");
+		LCD.setCursor(0, 1);
+		LCD.print(RobotStateToString(nextstate));
 		delay(500); //temp
         currentstate = nextstate;
 

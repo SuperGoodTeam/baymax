@@ -133,6 +133,59 @@ namespace strategymanager {
 					EndStrategy();
 				}
 				break;
+				
+			/*======"States"======*/
+			case strategies::kClawTest:
+				statemanager::SwitchState(statemanager::kClawTest);
+				break;
+			case strategies::kTapeTest:
+				statemanager::SwitchState(statemanager::kTapeTest);
+				break;
+			case strategies::kPivotTest:
+				statemanager::SwitchState(statemanager::kPivotTest);
+				break;
+			case strategies::kIrTest:
+				statemanager::SwitchState(statemanager::kIrTest);
+				break;
+			case strategies::kTapeBottomOnly:
+				statemanager::SwitchState(statemanager::kTapeBottom);
+				break;
+			case strategies::kCollectItemOne:
+				statemanager::SwitchState(statemanager::kCollectItemOne);
+				break;
+			case strategies::kTapeTurnLeftOnly:
+				statemanager::SwitchState(statemanager::kTapeTurnLeft);
+				break;
+			case strategies::kCollectItemTwo:
+				statemanager::SwitchState(statemanager::kCollectItemTwo);
+				break;
+			case strategies::kTapeHill:
+				statemanager::SwitchState(statemanager::kTapeHill);
+				break;
+			case strategies::kCollectItemThree:
+				statemanager::SwitchState(statemanager::kCollectItemThree);
+				break;
+			case strategies::kTapeTurnRight:
+				statemanager::SwitchState(statemanager::kTapeTurnRight);
+				break;
+			case strategies::kCollectItemFour:
+				statemanager::SwitchState(statemanager::kCollectItemFour);
+				break;
+			case strategies::kFollowIr:
+				statemanager::SwitchState(statemanager::kFollowIr);
+				break;
+			case strategies::kCollectItemFive:
+				statemanager::SwitchState(statemanager::kCollectItemFive);
+				break;
+			case strategies::kCollectItemSix:
+				statemanager::SwitchState(statemanager::kCollectItemSix);
+				break;
+			case strategies::kGrabZipline:
+				statemanager::SwitchState(statemanager::kGrabZipline);
+				break;
+			case strategies::kDescendZipline:
+				statemanager::SwitchState(statemanager::kDescendZipline);
+				break;
 			default:
 				break;
 		}

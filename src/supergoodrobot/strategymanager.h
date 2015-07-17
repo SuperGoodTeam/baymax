@@ -3,6 +3,7 @@
 
 namespace strategymanager {
 
+	extern int strategyiterator;
     void GoToNextState();
 	
 	void EndStrategy();

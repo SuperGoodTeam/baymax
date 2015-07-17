@@ -208,6 +208,9 @@ namespace menu {
         case kTapeTest:
             return "Tape Test";
             break;
+		case kIrTest:
+			return "IR Test";
+			break;
         case kPivotTest:
             return "Pivot Test";
             break;
