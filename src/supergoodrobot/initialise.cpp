@@ -2,6 +2,7 @@
 
 #include "statemanager.h"
 #include "strategies.h"
+#include "strategymanager.h"
 
 namespace initialise {
 
@@ -19,6 +20,9 @@ namespace initialise {
         case strategies::kIrTest:
             statemanager::SwitchState(statemanager::kIrTest);
             break;
+		default:
+			strategymanager::GoToNextState();
+			break;
         }
 
     }

@@ -20,7 +20,7 @@ namespace strategies {
 	kPivotTest,
         kIrTest,
 	kTapeBottomOnly,
-	kCollectItemOneOnly,
+	kCollectItemOne,
 	kTapeTurnLeftOnly,
 	kCollectItemTwo,
 	kTapeHill,

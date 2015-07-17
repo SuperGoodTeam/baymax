@@ -48,8 +48,8 @@ namespace libconstants {
     const uint16_t kForearmStartItemOne = 90;
     const uint16_t kPivotarmStartItemOne = 90;
 
-    const uint16_t kBasearmGrabItemOne = 90;
-    const uint16_t kForearmGrabItemOne = 90;
+    const uint16_t kBasearmGrabItemOne = 40;
+    const uint16_t kForearmGrabItemOne = 155;
     const uint16_t kPivotarmGrabItemOne = 90;
 
     const uint16_t kBasearmRetreiveItemOne = 90;
@@ -60,13 +60,25 @@ namespace libconstants {
     const uint16_t kForearmStartItemTwo = 90;
     const uint16_t kPivotarmStartItemTwo = 90;
 
-    const uint16_t kBasearmGrabItemTwo = 90;
-    const uint16_t kForearmGrabItemTwo = 90;
+    const uint16_t kBasearmGrabItemTwo = 85;
+    const uint16_t kForearmGrabItemTwo = 180;
     const uint16_t kPivotarmGrabItemTwo = 90;
 
     const uint16_t kBasearmRetreiveItemTwo = 90;
     const uint16_t kForearmRetreiveItemTwo = 90;
     const uint16_t kPivotarmRetreiveItemTwo = 90;
+
+    const uint16_t kBasearmStartItemThree = 90;
+    const uint16_t kForearmStartItemThree = 90;
+    const uint16_t kPivotarmStartItemThree = 90;
+
+    const uint16_t kBasearmGrabItemThree = 16;
+    const uint16_t kForearmGrabItemThree = 140;
+    const uint16_t kPivotarmGrabItemThree = 90;
+
+    const uint16_t kBasearmRetreiveItemThree = 90;
+    const uint16_t kForearmRetreiveItemThree = 90;
+    const uint16_t kPivotarmRetreiveItemThree = 90;
 
     const int16_t kPivotarmSpeed = 128;
 

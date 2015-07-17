@@ -21,7 +21,11 @@
 #include <EEPROMVar.h>
 
 #include "clawarmtest.h"
+
 #include "collectitemone.h"
+#include "collectitemtwo.h"
+#include "collectitemthree.h"
+
 #include "libconstants.h"
 #include "followbottomtape.h"
 #include "followlefttape.h"
@@ -30,6 +34,7 @@
 #include "pivotservotest.h"
 #include "sensorsuite.h"
 #include "strategies.h" //temp
+#include "strategymanager.h"
 
 #include "statemanager.h"
 #include "tapefollowtest.h"
@@ -48,7 +53,7 @@ void loop() {
         statemanager::SwitchState(statemanager::kMenu);
     }
     
-    Serial.println((int) strategies::chosenstrategy);
+    D(Serial.println((int) strategies::chosenstrategy);)
 
     switch (statemanager::currentstate) {
 
@@ -63,9 +68,9 @@ void loop() {
             menu::StrategyMenuLoop();
             break;
 
-	case menu::kStateMenu:
-	    menu::StateMenuLoop();
-	    break;
+		case menu::kStateMenu:
+			menu::StateMenuLoop();
+			break;
 
         case menu::kParameterMenu:
             menu::ParameterMenuLoop();
@@ -93,10 +98,10 @@ void loop() {
         break;
 
     case statemanager::kTapeBottom:
-        while (!sensorsuite::SideTapeDetect()) {
+        while(!sensorsuite::SideTapeDetect()) {
             followbottomtape::FollowBottomTapeLoop();
         }
-
+		strategymanager::GoToNextState();
         break;
 
     case statemanager::kCollectItemOne:
@@ -104,19 +109,21 @@ void loop() {
         break;
 
     case statemanager::kTapeTurnLeft:
-        followlefttape::FollowLeftTapeLoop();
+        followlefttape::FollowLeftTapeLoop(); // where does this end? 2nd sidetape?
         break;
 
     case statemanager::kCollectItemTwo:
-        break;
+        collectitemtwo::CollectItemTwo();
+		break;
 
-    case statemanager::kTapeHill:
+    case statemanager::kTapeHill: // where does this start/end? 3rd sidetape? not quite it
         break;
 
     case statemanager::kCollectItemThree:
+    		collectitemthree::CollectItemThree();
         break;
 
-    case statemanager::kTapeTurnRight:
+    case statemanager::kTapeTurnRight: // how can we tell when this happens?
         break;
 
     case statemanager::kCollectItemFour:

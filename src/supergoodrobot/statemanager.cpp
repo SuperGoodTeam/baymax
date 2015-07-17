@@ -1,6 +1,8 @@
 #include "statemanager.h"
 
 #include <Arduino.h>
+#include <LiquidCrystal.h>
+#include <phys253.h>
 
 #include "drivecontrol.h"
 #include "menu.h"
@@ -12,7 +14,9 @@ namespace statemanager {
     void SwitchState(RobotState nextstate) {
 
         SetupState(nextstate);
-
+		LCD.clear();
+		LCD.print("SWITCH: "+RobotStateToString(nextstate));
+		delay(500); //temp
         currentstate = nextstate;
 
         /*Update as more changes need to be made
