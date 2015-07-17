@@ -4,6 +4,10 @@
 namespace sensorsuite {
 
     bool SideTapeDetect();
+	
+	bool SideIrDetect();
+	
+	bool FrontSensorDetect();
 }
 
 #endif

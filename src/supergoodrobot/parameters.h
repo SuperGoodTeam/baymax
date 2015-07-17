@@ -6,6 +6,8 @@ namespace parameters {
     extern uint8_t derivativegain;
     extern uint8_t basespeed;
     extern uint8_t qrdthreshold;
+	//extern uint8_t irthreshold;
+	extern uint8_t sideirthreshold;
 }
 
 #endif

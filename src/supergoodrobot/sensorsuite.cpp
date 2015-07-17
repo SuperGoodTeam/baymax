@@ -13,4 +13,19 @@ namespace sensorsuite {
         else
             return false;
     }
+	
+	bool SideIrDetect() {
+		if (analogRead(libconstants::kSideIr) > parameters::sideirthreshold)
+			return true;
+		else
+			return false;
+	}
+	
+	bool FrontSensorDetect() {
+		if (!digitalRead(libconstants::kItemDetectSwitch))
+			return true;
+		else
+			return false;
+	}
+	
 }

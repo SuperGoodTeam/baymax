@@ -1,11 +1,12 @@
 #include "followrighttape.h"
 
 #include "drivecontrol.h"
+#include "libconstants.h"
 
 namespace followrighttape {
 
     void FollowRightTapeLoop() {
 
-        drivecontrol::FollowTapeLoop(0, 0);
+        drivecontrol::FollowTapeLoop(libconstants::kRightTapeSpeedChange, libconstants::kRightTapeTurnBias);
     }
 }

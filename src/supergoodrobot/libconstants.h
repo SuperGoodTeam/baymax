@@ -35,6 +35,23 @@ namespace libconstants {
     const uint8_t kHookarmRelease = 14;
     const uint8_t kHookarmRaiseToggle = 15;
 
+    /*============SPEED & TURNBIAS CONSTANTS============*/
+
+	const uint8_t kBottomTapeSpeedChange = 0;
+	const uint8_t kBottomTapeTurnBias = 0;
+	
+	const uint8_t kLeftTapeSpeedChange = 0;
+	const uint8_t kLeftTapeTurnBias = 0;
+	
+	const uint8_t kHillTapeSpeedChange = 0;
+	const uint8_t kHillTapeTurnBias = 0;
+	
+	const uint8_t kFollowIrSpeedChange = 0;
+	const uint8_t kFollowIrTurnBias = 0;
+	
+	const uint8_t kRightTapeSpeedChange = 0;
+	const uint8_t kRightTapeTurnBias = 0;
+	
     /*============GEOMETRIC CONSTANTS============*/
 
     // Servos
@@ -79,7 +96,43 @@ namespace libconstants {
     const uint16_t kBasearmRetreiveItemThree = 90;
     const uint16_t kForearmRetreiveItemThree = 90;
     const uint16_t kPivotarmRetreiveItemThree = 90;
+	
+	const uint16_t kBasearmStartItemFour = 90;
+    const uint16_t kForearmStartItemFour = 90;
+    const uint16_t kPivotarmStartItemFour = 90;
 
+    const uint16_t kBasearmGrabItemFour = 90;
+    const uint16_t kForearmGrabItemFour = 90;
+    const uint16_t kPivotarmGrabItemFour = 90;
+
+    const uint16_t kBasearmRetreiveItemFour = 90;
+    const uint16_t kForearmRetreiveItemFour = 90;
+    const uint16_t kPivotarmRetreiveItemFour = 90;
+
+	const uint16_t kBasearmStartItemFive = 90;
+    const uint16_t kForearmStartItemFive = 90;
+    const uint16_t kPivotarmStartItemFive = 90;
+
+    const uint16_t kBasearmGrabItemFive = 90;
+    const uint16_t kForearmGrabItemFive = 90;
+    const uint16_t kPivotarmGrabItemFive = 90;
+
+    const uint16_t kBasearmRetreiveItemFive = 90;
+    const uint16_t kForearmRetreiveItemFive = 90;
+    const uint16_t kPivotarmRetreiveItemFive = 90;
+	
+	const uint16_t kBasearmStartItemSix = 90;
+    const uint16_t kForearmStartItemSix = 90;
+    const uint16_t kPivotarmStartItemSix = 90;
+
+    const uint16_t kBasearmGrabItemSix = 90;
+    const uint16_t kForearmGrabItemSix = 90;
+    const uint16_t kPivotarmGrabItemSix = 90;
+
+    const uint16_t kBasearmRetreiveItemSix = 90;
+    const uint16_t kForearmRetreiveItemSix = 90;
+    const uint16_t kPivotarmRetreiveItemSix = 90;
+	
     const int16_t kPivotarmSpeed = 128;
 
     // Claw

@@ -1,11 +1,12 @@
 #include "followhilltape.h"
 
 #include "drivecontrol.h"
+#include "libconstants.h"
 
 namespace followhilltape {
 
     void FollowHillTapeLoop() {
 
-        drivecontrol::FollowTapeLoop(0, 0);
+        drivecontrol::FollowTapeLoop(libconstants::kHillTapeSpeedChange, libconstants::kHillTapeTurnBias);
     }
 }

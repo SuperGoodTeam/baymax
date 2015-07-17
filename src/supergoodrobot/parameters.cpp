@@ -5,4 +5,6 @@ namespace parameters {
     int16_t derivativegain = 80;
     int16_t basespeed = 80;
     uint8_t qrdthreshold = 200;
+	//uint8_t irthreshold = 20; //???
+	uint8_t sideirthreshold = 20; //???
 }

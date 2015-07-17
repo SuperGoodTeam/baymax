@@ -20,6 +20,57 @@ namespace drivecontrol {
     uint16_t leftqrd;
     uint16_t rightqrd;
 
+	uint16_t leftir;
+	uint16_t rightir;
+	
+	void FollowIrLoop(int8_t speedchange, int8_t turnbias) { 
+		leftir = analogRead(libconstants::kLeftFrontIr);
+		rightir = analogRead(libconstants::kRightFrontIr);
+		
+		if (leftir > rightir) {
+			error = +1; //some value
+		}
+		else if (leftir < rightir) {
+			error = -1; //some value
+		}
+		else {
+			if (lasterror > 0) {
+				error = 5; //some value
+			}
+			else {
+				error = -5; //some value
+			}
+		}
+
+        if (error != lasterror) { //might have to constrain the errors?
+            lasterrorstate = lasterror;
+            lasterrorstatetime = errorstatetime;
+            errorstatetime = 1;
+        }
+
+        proportionalcorrection = parameters::proportionalgain * error;
+        derivativecorrection = parameters::derivativegain * (error - lasterrorstate) / (lasterrorstatetime + errorstatetime);
+
+        totalcorrection = proportionalcorrection + derivativecorrection;
+
+        if (lcdrefreshrate == 30) {
+			LCD.clear();
+			LCD.setCursor(0,0);
+            LCD.print("LIR: " + String(leftir));
+            LCD.setCursor(0,1);
+			LCD.print("RIR: " + String(rightir));
+            lcdrefreshrate = 0;
+        }
+        lcdrefreshrate++;
+
+        errorstatetime++;
+
+        lasterror = error;
+
+        motor.speed(libconstants::kLeftMotor, -parameters::basespeed - totalcorrection - speedchange);
+        motor.speed(libconstants::kRightMotor,+parameters::basespeed - totalcorrection + speedchange);
+	}
+	
     void FollowTapeLoop(int8_t speedchange, int8_t turnbias) {
         leftqrd = analogRead(libconstants::kLeftTapeSensor);
         rightqrd = analogRead(libconstants::kRightTapeSensor);
