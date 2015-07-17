@@ -22,25 +22,27 @@ namespace drivecontrol {
 
 	uint16_t leftir;
 	uint16_t rightir;
-	
+		
 	void FollowIrLoop(int8_t speedchange, int8_t turnbias) { 
 		leftir = analogRead(libconstants::kLeftFrontIr);
 		rightir = analogRead(libconstants::kRightFrontIr);
 		
-		if (leftir > rightir) {
-			error = +1; //some value
-		}
-		else if (leftir < rightir) {
-			error = -1; //some value
-		}
-		else {
-			if (lasterror > 0) {
-				error = 5; //some value
-			}
-			else {
-				error = -5; //some value
-			}
-		}
+		error = (leftir-rightir)*(libconstants::kIrScalingFactor);
+		
+		// if (leftir > rightir) {
+			// error = +1; //some value left-right ir
+		// }
+		// else if (leftir < rightir) {
+			// error = -1; //some value
+		// }
+		// else {
+			// if (lasterror > 0) {
+				// error = 5; //some value
+			// }
+			// else {
+				// error = -5; //some value
+			// }
+		// }
 
         if (error != lasterror) { //might have to constrain the errors?
             lasterrorstate = lasterror;

@@ -138,6 +138,9 @@ namespace libconstants {
     // Claw
     const int16_t kClawSpeed = 90;
 
+	// Ir
+	const int16_t kIrScalingFactor = 0.5;
+	
     // Arduino Board
     const uint16_t kKnobMax = 1023;
 
