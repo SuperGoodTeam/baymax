@@ -36,7 +36,7 @@ namespace sensorsuite {
 	}
 	
 	bool HookarmBaseTouchDetect() {
-		if (!digitalRead(libconstants::HookarmBaseTouchSwitch))
+		if (!digitalRead(libconstants::kHookarmBaseTouchSwitch))
 			return true;
 		else
 			return false;

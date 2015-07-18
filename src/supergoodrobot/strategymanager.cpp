@@ -11,45 +11,45 @@ namespace strategymanager {
 	
 	int strategyiterator = 0;
 	
-	int arrFull[] = { statemanager::kTapeBottom, statemanager::kCollectItemOne, statemanager::kTapeTurnLeft, statemanager::kCollectItemTwo, statemanager::kTapeHill, statemanager::kCollectItemThree, statemanager::kTapeTurnRight, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kCollectItemFive, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
+	statemanager::RobotState arrFull[] = { statemanager::kTapeBottom, statemanager::kCollectItemOne, statemanager::kTapeTurnLeft, statemanager::kCollectItemTwo, statemanager::kTapeHill, statemanager::kCollectItemThree, statemanager::kTapeTurnRight, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kCollectItemFive, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
 
-	int lenarrFull=sizeof(arrFull) / sizeof(arrFull[0]);
+	uint8_t lenarrFull=sizeof(arrFull) / sizeof(arrFull[0]);
 
-	int arrStartTwo[] = { statemanager::kTapeBottom, statemanager::kTapeTurnLeft, statemanager::kCollectItemTwo, statemanager::kTapeHill, statemanager::kCollectItemThree, statemanager::kTapeTurnRight, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kCollectItemFive, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline }; 
+	statemanager::RobotState arrStartTwo[] = { statemanager::kTapeBottom, statemanager::kTapeTurnLeft, statemanager::kCollectItemTwo, statemanager::kTapeHill, statemanager::kCollectItemThree, statemanager::kTapeTurnRight, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kCollectItemFive, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline }; 
 	
-	int lenarrStartTwo=sizeof(arrStartTwo) / sizeof(arrStartTwo[0]);
+	uint8_t lenarrStartTwo=sizeof(arrStartTwo) / sizeof(arrStartTwo[0]);
 	
-	int arrStartThree[] = { statemanager::kTapeBottom, statemanager::kTapeTurnLeft, statemanager::kTapeHill, statemanager::kCollectItemThree, statemanager::kTapeTurnRight, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kCollectItemFive, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
+	statemanager::RobotState arrStartThree[] = { statemanager::kTapeBottom, statemanager::kTapeTurnLeft, statemanager::kTapeHill, statemanager::kCollectItemThree, statemanager::kTapeTurnRight, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kCollectItemFive, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
 	
-	int lenarrStartThree=sizeof(arrStartThree) / sizeof(arrStartThree[0]);
+	uint8_t lenarrStartThree=sizeof(arrStartThree) / sizeof(arrStartThree[0]);
 	
-	int arrStartFour[] = { statemanager::kTapeBottom, statemanager::kTapeTurnLeft, statemanager::kTapeHill, statemanager::kTapeTurnRight, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kCollectItemFive, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
+	statemanager::RobotState arrStartFour[] = { statemanager::kTapeBottom, statemanager::kTapeTurnLeft, statemanager::kTapeHill, statemanager::kTapeTurnRight, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kCollectItemFive, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
 	
-	int lenarrStartFour=sizeof(arrStartFour) / sizeof(arrStartFour[0]);
+	uint8_t lenarrStartFour=sizeof(arrStartFour) / sizeof(arrStartFour[0]);
 	
-	int arrStartFive[] = { statemanager::kTapeBottom, statemanager::kTapeTurnLeft, statemanager::kTapeHill, statemanager::kTapeTurnRight, statemanager::kFollowIr, statemanager::kCollectItemFive, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
+	statemanager::RobotState arrStartFive[] = { statemanager::kTapeBottom, statemanager::kTapeTurnLeft, statemanager::kTapeHill, statemanager::kTapeTurnRight, statemanager::kFollowIr, statemanager::kCollectItemFive, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
 	
-	int lenarrStartFive=sizeof(arrStartFive) / sizeof(arrStartFive[0]);
+	uint8_t lenarrStartFive=sizeof(arrStartFive) / sizeof(arrStartFive[0]);
 	
-	int arrStartSix[] = { statemanager::kTapeBottom, statemanager::kTapeTurnLeft, statemanager::kTapeHill,  statemanager::kTapeTurnRight, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
+	statemanager::RobotState arrStartSix[] = { statemanager::kTapeBottom, statemanager::kTapeTurnLeft, statemanager::kTapeHill,  statemanager::kTapeTurnRight, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
 	
-	int lenarrStartSix=sizeof(arrStartSix) / sizeof(arrStartSix[0]);
+	uint8_t lenarrStartSix=sizeof(arrStartSix) / sizeof(arrStartSix[0]);
 	
-	int arrSkipFour[] = { statemanager::kTapeBottom, statemanager::kCollectItemOne, statemanager::kTapeTurnLeft, statemanager::kCollectItemTwo, statemanager::kTapeHill, statemanager::kCollectItemThree, statemanager::kTapeTurnRight, statemanager::kFollowIr, statemanager::kCollectItemFive, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
+	statemanager::RobotState arrSkipFour[] = { statemanager::kTapeBottom, statemanager::kCollectItemOne, statemanager::kTapeTurnLeft, statemanager::kCollectItemTwo, statemanager::kTapeHill, statemanager::kCollectItemThree, statemanager::kTapeTurnRight, statemanager::kFollowIr, statemanager::kCollectItemFive, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
 	
-	int lenarrSkipFour=sizeof(arrSkipFour) / sizeof(arrSkipFour[0]);
+	uint8_t lenarrSkipFour=sizeof(arrSkipFour) / sizeof(arrSkipFour[0]);
 	
-	int arrSkipFive[] = { statemanager::kTapeBottom, statemanager::kCollectItemOne, statemanager::kTapeTurnLeft, statemanager::kCollectItemTwo, statemanager::kTapeHill, statemanager::kCollectItemThree, statemanager::kTapeTurnRight, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
+	statemanager::RobotState arrSkipFive[] = { statemanager::kTapeBottom, statemanager::kCollectItemOne, statemanager::kTapeTurnLeft, statemanager::kCollectItemTwo, statemanager::kTapeHill, statemanager::kCollectItemThree, statemanager::kTapeTurnRight, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
 	
-	int lenarrSkipFive=sizeof(arrSkipFive) / sizeof(arrSkipFive[0]);
+	uint8_t lenarrSkipFive=sizeof(arrSkipFive) / sizeof(arrSkipFive[0]);
 	
-	int arrSkipSix[] = { statemanager::kTapeBottom, statemanager::kCollectItemOne, statemanager::kTapeTurnLeft, statemanager::kCollectItemTwo, statemanager::kTapeHill, statemanager::kCollectItemThree, statemanager::kTapeTurnRight, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kCollectItemFive, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
+	statemanager::RobotState arrSkipSix[] = { statemanager::kTapeBottom, statemanager::kCollectItemOne, statemanager::kTapeTurnLeft, statemanager::kCollectItemTwo, statemanager::kTapeHill, statemanager::kCollectItemThree, statemanager::kTapeTurnRight, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kCollectItemFive, statemanager::kFollowIr, statemanager::kCollectItemSix, statemanager::kGrabZipline, statemanager::kDescendZipline };
 	
-	int lenarrSkipSix=sizeof(arrSkipSix) / sizeof(arrSkipSix[0]);
+	uint8_t lenarrSkipSix=sizeof(arrSkipSix) / sizeof(arrSkipSix[0]);
 	
-	int arrSkipFiveAndSix[] = { statemanager::kTapeBottom, statemanager::kCollectItemOne, statemanager::kTapeTurnLeft, statemanager::kCollectItemTwo, statemanager::kTapeHill, statemanager::kCollectItemThree, statemanager::kTapeTurnRight, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kGrabZipline, statemanager::kDescendZipline };
+	statemanager::RobotState arrSkipFiveAndSix[] = { statemanager::kTapeBottom, statemanager::kCollectItemOne, statemanager::kTapeTurnLeft, statemanager::kCollectItemTwo, statemanager::kTapeHill, statemanager::kCollectItemThree, statemanager::kTapeTurnRight, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kGrabZipline, statemanager::kDescendZipline };
 
-	int lenarrSkipFiveAndSix=sizeof(arrSkipFiveAndSix) / sizeof(arrSkipFiveAndSix[0]);
+	uint8_t lenarrSkipFiveAndSix=sizeof(arrSkipFiveAndSix) / sizeof(arrSkipFiveAndSix[0]);
 	
     void GoToNextState() {
 		switch(strategies::chosenstrategy){

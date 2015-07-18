@@ -197,7 +197,8 @@ void loop() {
         }
 
 		//extend hook arm up
-				
+		
+		
 		if (strategies::chosenstrategy != strategies::kCollectItemFour){
 			strategymanager::GoToNextState();
         }
@@ -238,6 +239,8 @@ void loop() {
 			LCD.clear();
 			LCD.print("Haven't grabbed zipline!");
 		}
+		LCD.clear();
+		LCD.print("Grabbed zipline!");
 		if (strategies::chosenstrategy != strategies::kGrabZipline){
 			strategymanager::GoToNextState();
 		}*/
@@ -246,9 +249,12 @@ void loop() {
     case statemanager::kDescendZipline:
 		/*while (!sensorsuite::HookarmBaseTouchDetect){
 				//pull motor up
+				LCD.clear();
+				LCD.print("Pulling up zipline");
 				motor.speed(libconstants::kHookarmMotor, libconstants::kHookarmMotorSpeed);
 			}
-		
+		LCD.clear();
+		LCD.print("Ziplining down");
 		motor.speed(libconstants::kHookarmMotor, 0);
 		
 		if (strategies::chosenstrategy != strategies::kGrabZipline){

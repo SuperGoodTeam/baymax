@@ -24,7 +24,7 @@ namespace libconstants {
     const uint8_t kRightMotor = 1;
     const uint8_t kPivotarmMotor = 2;
     const uint8_t kClawMotor = 3;
-	//const uint8_t kHookarmMotor = 2;
+	//const uint8_t kHookarmMotor = 2; 
 
     // Digital IO
     // IN
@@ -32,7 +32,7 @@ namespace libconstants {
     const uint8_t kItemDetectSwitch = 5;
 	const uint8_t kFrontDetectSwitch = 6;
     const uint8_t kHookarmAttachSwitch = 7;
-	const uint8_t HookarmBaseTouchSwitch = 8;
+	const uint8_t kHookarmBaseTouchSwitch = 8;
 
     //OUT
     const uint8_t kHookarmRelease = 14;
