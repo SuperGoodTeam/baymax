@@ -8,6 +8,9 @@ namespace sensorsuite {
 	bool SideIrDetect();
 	
 	bool FrontSensorDetect();
+	
+	bool HookarmAttachDetect();
+	
 }
 
 #endif

@@ -21,7 +21,10 @@ namespace servocontrol {
     }
 
     void SetPivotarmServo(uint8_t angle) {
-        desiredreading = angle * libconstants::kPivotReadingPerDegree + 256;
+	
+		//RCServo2.write(angle);
+        
+		desiredreading = angle * libconstants::kPivotReadingPerDegree + 256;
 
         do {
             pivotarmreading = analogRead(libconstants::kMotorBaseSensor);

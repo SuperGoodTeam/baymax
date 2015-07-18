@@ -195,7 +195,9 @@ void loop() {
 		while(sensorsuite::SideTapeDetect()) {
             followbottomtape::FollowBottomTapeLoop();
         }
-		
+
+		//extend hook arm up
+				
 		if (strategies::chosenstrategy != strategies::kCollectItemFour){
 			strategymanager::GoToNextState();
         }
@@ -231,10 +233,27 @@ void loop() {
 		
         break;
 
-    case statemanager::kGrabZipline:
+    case statemanager::kGrabZipline: //to pull up zipline
+		/*while (!sensorsuite::HookarmAttachDetect){
+			LCD.clear();
+			LCD.print("Haven't grabbed zipline!");
+		}
+		if (strategies::chosenstrategy != strategies::kGrabZipline){
+			strategymanager::GoToNextState();
+		}*/
         break;
 
     case statemanager::kDescendZipline:
+		/*while (!sensorsuite::HookarmBaseTouchDetect){
+				//pull motor up
+				motor.speed(libconstants::kHookarmMotor, libconstants::kHookarmMotorSpeed);
+			}
+		
+		motor.speed(libconstants::kHookarmMotor, 0);
+		
+		if (strategies::chosenstrategy != strategies::kGrabZipline){
+			strategymanager::GoToNextState();
+		}*/
         break;
 
     default:

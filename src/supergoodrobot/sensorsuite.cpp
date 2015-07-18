@@ -22,10 +22,23 @@ namespace sensorsuite {
 	}
 	
 	bool FrontSensorDetect() {
-		if (!digitalRead(libconstants::kItemDetectSwitch))
+		if (!digitalRead(libconstants::kFrontDetectSwitch))
 			return true;
 		else
 			return false;
 	}
 	
+	bool HookarmAttachDetect() {
+		if (!digitalRead(libconstants::kHookarmAttachSwitch))
+			return true;
+		else
+			return false;
+	}
+	
+	bool HookarmBaseTouchDetect() {
+		if (!digitalRead(libconstants::HookarmBaseTouchSwitch))
+			return true;
+		else
+			return false;
+	}
 }
