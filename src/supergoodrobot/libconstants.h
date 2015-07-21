@@ -16,8 +16,8 @@ namespace libconstants {
     const uint8_t kMotorBaseSensor = 7;
 
     // Servos
-    const uint8_t kForearmServo = 0;
-    const uint8_t kBasearmServo = 1;
+    const uint8_t kBasearmServo = 0;
+    const uint8_t kForearmServo = 1;
 
     // Motors
     const uint8_t kLeftMotor = 0;
@@ -62,81 +62,81 @@ namespace libconstants {
     // Servos
     const uint8_t kServoDegreesMax = 180;
 
-    const uint16_t kBasearmStartPosition = 90;
-    const uint16_t kForearmStartPosition = 90;
-    const uint16_t kPivotarmStartPosition = 90;
+    const uint16_t kForearmStartPosition = 123;
+    const uint16_t kBasearmStartPosition = 91;
+    const uint16_t kPivotarmStartPosition = 0;
 
-    const uint16_t kBasearmStartItemOne = 90;
-    const uint16_t kForearmStartItemOne = 90;
-    const uint16_t kPivotarmStartItemOne = 90;
+    const uint16_t kForearmStartItemOne = 180;
+    const uint16_t kBasearmStartItemOne = 180;
+    const uint16_t kPivotarmStartItemOne = 0;
 
-    const uint16_t kBasearmGrabItemOne = 40;
-    const uint16_t kForearmGrabItemOne = 155;
-    const uint16_t kPivotarmGrabItemOne = 90;
+    const uint16_t kForearmGrabItemOne = 120;
+    const uint16_t kBasearmGrabItemOne = 0;
+    const uint16_t kPivotarmGrabItemOne = 105;
 
-    const uint16_t kBasearmRetreiveItemOne = 90;
-    const uint16_t kForearmRetreiveItemOne = 90;
-    const uint16_t kPivotarmRetreiveItemOne = 90;
+    const uint16_t kForearmRetreiveItemOne = 0;
+    const uint16_t kBasearmRetreiveItemOne = 0;
+    const uint16_t kPivotarmRetreiveItemOne = 180;
 
-    const uint16_t kBasearmStartItemTwo = 90;
-    const uint16_t kForearmStartItemTwo = 90;
-    const uint16_t kPivotarmStartItemTwo = 90;
+    const uint16_t kForearmStartItemTwo = 180;
+    const uint16_t kBasearmStartItemTwo = 180;
+    const uint16_t kPivotarmStartItemTwo = 0;
 
-    const uint16_t kBasearmGrabItemTwo = 85;
-    const uint16_t kForearmGrabItemTwo = 180;
+    const uint16_t kForearmGrabItemTwo = 85;
+    const uint16_t kBasearmGrabItemTwo = 0;
     const uint16_t kPivotarmGrabItemTwo = 90;
 
-    const uint16_t kBasearmRetreiveItemTwo = 90;
-    const uint16_t kForearmRetreiveItemTwo = 90;
-    const uint16_t kPivotarmRetreiveItemTwo = 90;
+    const uint16_t kForearmRetreiveItemTwo = 0;
+    const uint16_t kBasearmRetreiveItemTwo = 0;
+    const uint16_t kPivotarmRetreiveItemTwo = 180;
 
-    const uint16_t kBasearmStartItemThree = 90;
-    const uint16_t kForearmStartItemThree = 90;
-    const uint16_t kPivotarmStartItemThree = 90;
+    const uint16_t kForearmStartItemThree = 0;
+    const uint16_t kBasearmStartItemThree = 0;
+    const uint16_t kPivotarmStartItemThree = 0;
 
-    const uint16_t kBasearmGrabItemThree = 16;
-    const uint16_t kForearmGrabItemThree = 140;
-    const uint16_t kPivotarmGrabItemThree = 90;
+    const uint16_t kForearmGrabItemThree = 16;
+    const uint16_t kBasearmGrabItemThree = 140;
+    const uint16_t kPivotarmGrabItemThree = 105;
 
-    const uint16_t kBasearmRetreiveItemThree = 90;
-    const uint16_t kForearmRetreiveItemThree = 90;
-    const uint16_t kPivotarmRetreiveItemThree = 90;
+    const uint16_t kForearmRetreiveItemThree = 0;
+    const uint16_t kBasearmRetreiveItemThree = 0;
+    const uint16_t kPivotarmRetreiveItemThree = 0;
 	
-	const uint16_t kBasearmStartItemFour = 90;
-    const uint16_t kForearmStartItemFour = 90;
-    const uint16_t kPivotarmStartItemFour = 90;
+	const uint16_t kForearmStartItemFour = 0;
+    const uint16_t kBasearmStartItemFour = 0;
+    const uint16_t kPivotarmStartItemFour = 0;
 
-    const uint16_t kBasearmGrabItemFour = 90;
-    const uint16_t kForearmGrabItemFour = 90;
-    const uint16_t kPivotarmGrabItemFour = 90;
+    const uint16_t kForearmGrabItemFour = 0;
+    const uint16_t kBasearmGrabItemFour = 0;
+    const uint16_t kPivotarmGrabItemFour = 0;
 
-    const uint16_t kBasearmRetreiveItemFour = 90;
-    const uint16_t kForearmRetreiveItemFour = 90;
-    const uint16_t kPivotarmRetreiveItemFour = 90;
+    const uint16_t kForearmRetreiveItemFour = 0;
+    const uint16_t kBasearmRetreiveItemFour = 0;
+    const uint16_t kPivotarmRetreiveItemFour = 0;
 
-	const uint16_t kBasearmStartItemFive = 90;
-    const uint16_t kForearmStartItemFive = 90;
-    const uint16_t kPivotarmStartItemFive = 90;
+	const uint16_t kForearmStartItemFive = 0;
+    const uint16_t kBasearmStartItemFive = 0;
+    const uint16_t kPivotarmStartItemFive = 0;
 
-    const uint16_t kBasearmGrabItemFive = 90;
-    const uint16_t kForearmGrabItemFive = 90;
-    const uint16_t kPivotarmGrabItemFive = 90;
+    const uint16_t kForearmGrabItemFive = 0;
+    const uint16_t kBasearmGrabItemFive = 0;
+    const uint16_t kPivotarmGrabItemFive = 0;
 
-    const uint16_t kBasearmRetreiveItemFive = 90;
-    const uint16_t kForearmRetreiveItemFive = 90;
-    const uint16_t kPivotarmRetreiveItemFive = 90;
+    const uint16_t kForearmRetreiveItemFive = 0;
+    const uint16_t kBasearmRetreiveItemFive = 0;
+    const uint16_t kPivotarmRetreiveItemFive = 0;
 	
-	const uint16_t kBasearmStartItemSix = 90;
-    const uint16_t kForearmStartItemSix = 90;
-    const uint16_t kPivotarmStartItemSix = 90;
+	const uint16_t kForearmStartItemSix = 0;
+    const uint16_t kBasearmStartItemSix = 0;
+    const uint16_t kPivotarmStartItemSix = 0;
 
-    const uint16_t kBasearmGrabItemSix = 90;
-    const uint16_t kForearmGrabItemSix = 90;
-    const uint16_t kPivotarmGrabItemSix = 90;
+    const uint16_t kForearmGrabItemSix = 0;
+    const uint16_t kBasearmGrabItemSix = 0;
+    const uint16_t kPivotarmGrabItemSix = 0;
 
-    const uint16_t kBasearmRetreiveItemSix = 90;
-    const uint16_t kForearmRetreiveItemSix = 90;
-    const uint16_t kPivotarmRetreiveItemSix = 90;
+    const uint16_t kForearmRetreiveItemSix = 0;
+    const uint16_t kBasearmRetreiveItemSix = 0;
+    const uint16_t kPivotarmRetreiveItemSix = 0;
 	
     const int16_t kPivotarmSpeed = 128;
 
@@ -156,9 +156,9 @@ namespace libconstants {
 
     /*============TIME CONSTANTS============*/
 
-    const uint16_t kWaitServoTurn = 1000; // milliseconds
-    const uint16_t kWaitServoDown = 500;  // milliseconds
-    const uint16_t kWaitServoUp = 5000;   // milliseconds
+    const uint16_t kWaitServoTurn = 1000*5; // milliseconds
+    const uint16_t kWaitServoDown = 1000*5;  // milliseconds
+    const uint16_t kWaitServoUp = 5000*2;   // milliseconds
     const uint16_t kWaitClawGrab = 1500;  // milliseconds
     const uint16_t kLongDelay = 500;      // milliseconds
     const uint16_t kShortDelay = 200;     // milliseconds

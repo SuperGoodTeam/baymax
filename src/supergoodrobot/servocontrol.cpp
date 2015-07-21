@@ -22,9 +22,9 @@ namespace servocontrol {
 
     void SetPivotarmServo(uint8_t angle) {
 	
-		//RCServo2.write(angle);
+		RCServo2.write(angle);
         
-		desiredreading = angle * libconstants::kPivotReadingPerDegree + 256;
+		/*desiredreading = angle * libconstants::kPivotReadingPerDegree + 256;
 
         do {
             pivotarmreading = analogRead(libconstants::kMotorBaseSensor);
@@ -36,6 +36,6 @@ namespace servocontrol {
 
         } while ((pivotarmreading - desiredreading) > 1); //Imperfect system
 
-        motor.speed(libconstants::kPivotarmMotor, 0);
+        motor.speed(libconstants::kPivotarmMotor, 0);*/
     }
 }

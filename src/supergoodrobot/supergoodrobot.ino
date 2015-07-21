@@ -1,3 +1,4 @@
+
 /* ENPH 253 PRELIMINARY CODE
    last updated: 14/07/15
    version 0.3
@@ -41,6 +42,7 @@
 #include "menu.h"
 #include "pivotservotest.h"
 #include "sensorsuite.h"
+#include "servocontrol.h"
 #include "strategies.h" //temp
 #include "strategymanager.h"
 
@@ -54,6 +56,11 @@ void setup() {
 
     // Set Digital pins 8-15 to input
     DDRB = DDRB | B11111111;
+	
+	servocontrol::SetBasearmServo(libconstants::kForearmStartPosition);
+    servocontrol::SetForearmServo(libconstants::kBasearmStartPosition);
+    servocontrol::SetPivotarmServo(libconstants::kPivotarmStartPosition);
+	
 }
 
 void loop() {

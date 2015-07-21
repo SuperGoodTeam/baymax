@@ -95,26 +95,32 @@ namespace drivecontrol {
             lasterrorstatetime = errorstatetime;
             errorstatetime = 1;
         }
-
+		LCD.clear();
+		LCD.home();
+		LCD.setCursor(0,0);
+		LCD.print("pg: "+String(parameters::proportionalgain));
+		LCD.print("pd: "+String(parameters::derivativegain));
+		LCD.setCursor(0,1);
+		LCD.print("speed: " + String(parameters::basespeed));
         proportionalcorrection = parameters::proportionalgain * error;
         derivativecorrection = parameters::derivativegain * (error - lasterrorstate) / (lasterrorstatetime + errorstatetime);
 
         totalcorrection = proportionalcorrection + derivativecorrection;
 
-        if (lcdrefreshrate == 30) {
-	    LCD.clear();
-            LCD.print("L: " + String(leftqrd));
-            LCD.print("R: " + String(rightqrd));
-            lcdrefreshrate = 0;
-        }
-        lcdrefreshrate++;
+        //if (lcdrefreshrate == 30) {
+	    //LCD.clear();
+            //LCD.print("L: " + String(leftqrd));
+            //LCD.print("R: " + String(rightqrd));
+        //    lcdrefreshrate = 0;
+        //}
+        //lcdrefreshrate++;
 
         errorstatetime++;
 
         lasterror = error;
 
-        motor.speed(libconstants::kLeftMotor, -parameters::basespeed - totalcorrection - speedchange);
-        motor.speed(libconstants::kRightMotor,+parameters::basespeed - totalcorrection + speedchange);
+        motor.speed(libconstants::kLeftMotor, -parameters::basespeed + totalcorrection - speedchange);
+        motor.speed(libconstants::kRightMotor,+parameters::basespeed + totalcorrection + speedchange);
     }
 
     void StopDriveMotors() {

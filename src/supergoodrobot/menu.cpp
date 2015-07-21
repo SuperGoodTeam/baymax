@@ -28,8 +28,7 @@ namespace menu {
     void MainMenuLoop() {
         delay(libconstants::kLongDelay);
         LCD.clear();
-
-        currentmainselection = static_cast<MainMenu> (map(knob(6), 0, libconstants::kKnobMax, 0, kMainMenuMax-1));
+        currentmainselection = static_cast<MainMenu> constrain((map(knob(6), 0, libconstants::kKnobMax, 0, kMainMenuMax)),0,kMainMenuMax-1);
 
         LCD.print("Menu: " + MainMenuToString(currentmainselection));
         if (startbutton()) {
@@ -56,7 +55,7 @@ namespace menu {
         LCD.clear();
 
         strategies::chosenstrategy = static_cast<strategies::Strategy> (map(knob(6), 0, libconstants::kKnobMax, 0, kStrategyMax-1));
-        currentstrategyselection = static_cast<StrategyMenu> (map(knob(6), 0, libconstants::kKnobMax, 0, kStrategyMax-1));
+        currentstrategyselection = static_cast<StrategyMenu> constrain((map(knob(6), 0, libconstants::kKnobMax, 0, kStrategyMax)),0,kStrategyMax-1);
 
         LCD.print("Strategy:");
         LCD.setCursor(0, 1);
@@ -67,7 +66,7 @@ namespace menu {
         delay(libconstants::kLongDelay);
         LCD.clear();
 
-        currentstateselection = static_cast<StateMenu> (map(knob(6), 0, libconstants::kKnobMax, 0, kStateMenuMax-1));
+        currentstateselection = static_cast<StateMenu> constrain((map(knob(6), 0, libconstants::kKnobMax, 0, kStateMenuMax)),0,kStateMenuMax-1);
 
         strategies::chosenstrategy = static_cast<strategies::Strategy> (static_cast<int16_t> (currentstateselection) + 10);
 
@@ -133,7 +132,7 @@ namespace menu {
             break;
         case kBaseSpeed:
             parameters::basespeed = knob(6)/5;
-            LCD.print("bSpeed: 6: " + String(parameters::derivativegain));
+            LCD.print("bSpeed: 6: " + String(parameters::basespeed));
             break;
         default:
             break;
