@@ -9,13 +9,13 @@
 
 namespace drivecontrol {
 
-    uint8_t lcdrefreshrate = 0;
-    int8_t error, lasterror, lasterrorstate = 0;
-    int8_t lasterrorstatetime = 0;
-    int8_t errorstatetime = 1;
-    int8_t proportionalcorrection = 0;
-    int8_t derivativecorrection = 0;
-    int8_t totalcorrection = 0;
+    uint16_t lcdrefreshrate = 0;
+    int16_t error, lasterror, lasterrorstate = 0;
+    int16_t lasterrorstatetime = 0;
+    int16_t errorstatetime = 1;
+    int16_t proportionalcorrection = 0;
+    int16_t derivativecorrection = 0;
+    int16_t totalcorrection = 0;
 
     uint16_t leftqrd;
     uint16_t rightqrd;
@@ -27,38 +27,23 @@ namespace drivecontrol {
 		leftir = analogRead(libconstants::kLeftFrontIr);
 		rightir = analogRead(libconstants::kRightFrontIr);
 		
-		error = (leftir-rightir)*(libconstants::kIrScalingFactor);
+		error = - ((leftir - libconstants::kLeftIrOffset)-(rightir - libconstants::kRightIrOffset))*(libconstants::kIrScalingFactor);
 		
-		// if (leftir > rightir) {
-			// error = +1; //some value left-right ir
-		// }
-		// else if (leftir < rightir) {
-			// error = -1; //some value
-		// }
-		// else {
-			// if (lasterror > 0) {
-				// error = 5; //some value
-			// }
-			// else {
-				// error = -5; //some value
-			// }
-		// }
-
         if (error != lasterror) { //might have to constrain the errors?
             lasterrorstate = lasterror;
             lasterrorstatetime = errorstatetime;
             errorstatetime = 1;
         }
 
-        proportionalcorrection = parameters::proportionalgain * error;
-        derivativecorrection = parameters::derivativegain * (error - lasterrorstate) / (lasterrorstatetime + errorstatetime);
+        proportionalcorrection = parameters::irproportionalgain * error;
+        derivativecorrection = parameters::irderivativegain * (error - lasterrorstate) / (lasterrorstatetime + errorstatetime);
 
         totalcorrection = proportionalcorrection + derivativecorrection;
 
         if (lcdrefreshrate == 30) {
 			LCD.clear();
 			LCD.setCursor(0,0);
-            LCD.print("LIR: " + String(leftir));
+            LCD.print("LIR: " + String(leftir)));
             LCD.setCursor(0,1);
 			LCD.print("RIR: " + String(rightir));
             lcdrefreshrate = 0;
@@ -95,32 +80,29 @@ namespace drivecontrol {
             lasterrorstatetime = errorstatetime;
             errorstatetime = 1;
         }
-		LCD.clear();
-		LCD.home();
-		LCD.setCursor(0,0);
-		LCD.print("pg: "+String(parameters::proportionalgain));
-		LCD.print("pd: "+String(parameters::derivativegain));
-		LCD.setCursor(0,1);
-		LCD.print("speed: " + String(parameters::basespeed));
+		
         proportionalcorrection = parameters::proportionalgain * error;
         derivativecorrection = parameters::derivativegain * (error - lasterrorstate) / (lasterrorstatetime + errorstatetime);
 
         totalcorrection = proportionalcorrection + derivativecorrection;
 
-        //if (lcdrefreshrate == 30) {
-	    //LCD.clear();
-            //LCD.print("L: " + String(leftqrd));
-            //LCD.print("R: " + String(rightqrd));
-        //    lcdrefreshrate = 0;
-        //}
-        //lcdrefreshrate++;
+         /*if (lcdrefreshrate == 30) {
+	     LCD.clear();
+			 LCD.setCursor(0,0);
+             LCD.print("L: " + String(leftqrd));
+             LCD.print("R: " + String(rightqrd));
+			 LCD.setCursor(0,1);
+			 LCD.print("S: " + String(analogRead(libconstants::kSideTapeSensor)));
+             lcdrefreshrate = 0;
+         }
+         lcdrefreshrate++;*/
 
         errorstatetime++;
 
         lasterror = error;
 
-        motor.speed(libconstants::kLeftMotor, -parameters::basespeed + totalcorrection - speedchange);
-        motor.speed(libconstants::kRightMotor,+parameters::basespeed + totalcorrection + speedchange);
+        motor.speed(libconstants::kLeftMotor, (-parameters::basespeed - totalcorrection - speedchange));
+        motor.speed(libconstants::kRightMotor, (+parameters::basespeed - totalcorrection + speedchange));
     }
 
     void StopDriveMotors() {

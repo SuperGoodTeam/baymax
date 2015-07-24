@@ -21,7 +21,7 @@ namespace collectitemone {
 
         delay(libconstants::kWaitServoDown);
 
-        motor.speed(libconstants::kClawMotor, -libconstants::kClawSpeed);
+        motor.speed(libconstants::kClawMotor, libconstants::kClawSpeed);
 
         delay(libconstants::kWaitClawGrab);
 
@@ -30,9 +30,9 @@ namespace collectitemone {
         servocontrol::SetPivotarmServo(libconstants::kPivotarmRetreiveItemOne);
         delay(libconstants::kWaitServoUp);
 
-        while (!digitalRead(libconstants::kClawOpenSwitch)) {
-            motor.speed(libconstants::kClawMotor, libconstants::kClawSpeed);
+        while (digitalRead(libconstants::kClawOpenSwitch)) {
+            motor.speed(libconstants::kClawMotor, -libconstants::kClawSpeed);
         }
-
+		motor.speed(libconstants::kClawMotor, 0);
     }
 }

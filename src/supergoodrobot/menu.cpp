@@ -123,7 +123,7 @@ namespace menu {
             LCD.print("s:" + String(parameters::basespeed));
             break;
         case kProportionalGain:
-            parameters::proportionalgain = knob(6)/10;
+            parameters::proportionalgain = knob(6)/5;
             LCD.print("kP: 6: " + String(parameters::proportionalgain));
             break;
         case kDerivativeGain:

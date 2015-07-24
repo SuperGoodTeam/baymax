@@ -11,6 +11,8 @@ namespace sensorsuite {
 	
 	bool HookarmAttachDetect();
 	
+	bool QRDTapeDetect();
+	
 }
 
 #endif

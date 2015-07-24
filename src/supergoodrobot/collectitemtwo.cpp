@@ -26,14 +26,20 @@ namespace collectitemtwo {
         delay(libconstants::kWaitClawGrab);
 
         servocontrol::SetBasearmServo(libconstants::kBasearmRetreiveItemTwo);
-        servocontrol::SetForearmServo(libconstants::kForearmRetreiveItemTwo);
+		
+		delay(libconstants::kWaitBasearmTurn);
+		
         servocontrol::SetPivotarmServo(libconstants::kPivotarmRetreiveItemTwo);
+		
+		delay(libconstants::kWaitForearmTurn);
+		
+        servocontrol::SetForearmServo(libconstants::kForearmRetreiveItemTwo);
 
         delay(libconstants::kWaitServoUp);
 
-        while (!digitalRead(libconstants::kClawOpenSwitch)) {
+        while (digitalRead(libconstants::kClawOpenSwitch)) {
             motor.speed(libconstants::kClawMotor, -libconstants::kClawSpeed);
         }
-
+		motor.speed(libconstants::kClawMotor, 0);
     }
 }

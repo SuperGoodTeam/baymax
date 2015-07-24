@@ -26,13 +26,19 @@ namespace collectitemthree {
         delay(libconstants::kWaitClawGrab);
 
         servocontrol::SetBasearmServo(libconstants::kBasearmRetreiveItemThree);
-        servocontrol::SetForearmServo(libconstants::kForearmRetreiveItemThree);
+		
+		delay(libconstants::kWaitBasearmTurn);
+		
         servocontrol::SetPivotarmServo(libconstants::kPivotarmRetreiveItemThree);
-        delay(libconstants::kWaitServoUp);
+		
+		delay(libconstants::kWaitForearmTurn);
+		
+        servocontrol::SetForearmServo(libconstants::kForearmRetreiveItemThree);
 
-        while (!digitalRead(libconstants::kClawOpenSwitch)) {
+        delay(libconstants::kWaitServoUp);
+        while (digitalRead(libconstants::kClawOpenSwitch)) {
             motor.speed(libconstants::kClawMotor, -libconstants::kClawSpeed);
         }
-
+		motor.speed(libconstants::kClawMotor, 0);
     }
 }

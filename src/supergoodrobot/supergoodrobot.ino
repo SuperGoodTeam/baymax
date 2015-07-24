@@ -40,6 +40,7 @@
 #include "initialise.h"
 #include "irtest.h"
 #include "menu.h"
+#include "parameters.h"
 #include "pivotservotest.h"
 #include "sensorsuite.h"
 #include "servocontrol.h"
@@ -49,6 +50,10 @@
 #include "statemanager.h"
 #include "tapefollowtest.h"
 
+uint32_t oldtime = 0;
+uint8_t motordirection = +1;
+uint32_t motorswitchtime = millis();
+		
 void setup() {
 
     #include <phys253setup.txt>
@@ -119,6 +124,7 @@ void loop() {
         while(!sensorsuite::SideTapeDetect()) {
             followbottomtape::FollowBottomTapeLoop();
         }
+		
 		if (strategies::chosenstrategy != strategies::kTapeBottomOnly){
 			drivecontrol::StopDriveMotors();
 			strategymanager::GoToNextState();
@@ -139,10 +145,23 @@ void loop() {
         break;
 
     case statemanager::kTapeTurnLeft:
-        
-		while(!sensorsuite::SideTapeDetect()) {
+		motordirection = +1;
+		motorswitchtime = millis();
+		while(!sensorsuite::QRDTapeDetect()){
+			motor.speed(libconstants::kRightMotor, +motordirection*libconstants::kMotorCorrectionSpeed);
+			motor.speed(libconstants::kLeftMotor, +motordirection*libconstants::kMotorCorrectionSpeed);
+			if (motorswitchtime - millis() > 1000){
+				motordirection *= (-1);
+				motorswitchtime = millis() - 1000;
+			}
+		}
+		drivecontrol::StopDriveMotors();
+		
+		oldtime=millis();
+        while(!sensorsuite::SideTapeDetect() || millis() - oldtime < 1500) {
             followlefttape::FollowLeftTapeLoop(); // ends at 2nd side tape
 		}
+		
 		if (strategies::chosenstrategy != strategies::kTapeTurnLeftOnly){
 			drivecontrol::StopDriveMotors();
 			strategymanager::GoToNextState();
@@ -156,15 +175,21 @@ void loop() {
 		while(sensorsuite::SideTapeDetect()) {
             followlefttape::FollowLeftTapeLoop();
         }
-		
-		if (strategies::chosenstrategy != strategies::kCollectItemTwo){
+		while(analogRead(libconstants::kRightTapeSensor) < parameters::qrdthreshold && analogRead(libconstants::kLeftTapeSensor) < parameters::qrdthreshold){
+			motor.speed(libconstants::kRightMotor, -libconstants::kMotorCorrectionSpeed);
+			motor.speed(libconstants::kLeftMotor, +libconstants::kMotorCorrectionSpeed);
+		}
+		if (strategies::chosenstrategy != strategies::kCollectItemTwo){	
 			strategymanager::GoToNextState();
         }
 
 		break;
 
     case statemanager::kTapeHill: // ends at 3rd sidetape
-		while(!sensorsuite::SideTapeDetect()) {
+		oldtime=millis();
+		while(!sensorsuite::SideTapeDetect() || millis() - oldtime < 1500) {
+		//while(!sensorsuite::SideTapeDetect()) {
+
             followhilltape::FollowHillTapeLoop();
 		}
 		if (strategies::chosenstrategy != strategies::kTapeHill){
@@ -177,9 +202,13 @@ void loop() {
     	collectitemthree::CollectItemThree();
 				
 		while(sensorsuite::SideTapeDetect()) {
-            followrighttape::FollowRightTapeLoop();
+            followhilltape::FollowHillTapeLoop();
         }
 		
+		while(analogRead(libconstants::kRightTapeSensor) < parameters::qrdthreshold && analogRead(libconstants::kLeftTapeSensor) < parameters::qrdthreshold){
+			motor.speed(libconstants::kRightMotor, -libconstants::kMotorCorrectionSpeed);
+			motor.speed(libconstants::kLeftMotor, +libconstants::kMotorCorrectionSpeed);
+		}
 		if (strategies::chosenstrategy != strategies::kCollectItemThree){
 			strategymanager::GoToNextState();
         }
@@ -205,6 +234,11 @@ void loop() {
 
 		//extend hook arm up
 		
+		oldtime=millis();
+		while (millis() - oldtime < 3000){
+			motor.speed(libconstants::kLeftMotor, -100);
+			motor.speed(libconstants::kRightMotor, 80);
+		}
 		
 		if (strategies::chosenstrategy != strategies::kCollectItemFour){
 			strategymanager::GoToNextState();

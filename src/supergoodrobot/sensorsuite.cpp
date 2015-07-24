@@ -8,7 +8,7 @@
 namespace sensorsuite {
 
     bool SideTapeDetect() {
-        if (analogRead(libconstants::kSideTapeSensor) > parameters::qrdthreshold)
+        if (analogRead(libconstants::kSideTapeSensor) > parameters::sideqrdthreshold)
             return true;
         else
             return false;
@@ -41,4 +41,14 @@ namespace sensorsuite {
 		else
 			return false;
 	}
+	
+	bool QRDTapeDetect() {
+		if (analogRead(libconstants::kRightTapeSensor) > parameters::qrdthreshold || analogRead(libconstants::kLeftTapeSensor) > parameters::qrdthreshold){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+	
 }
