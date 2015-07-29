@@ -252,6 +252,9 @@ namespace menu {
         case kDescendZipline:
             return "Exiting Course";
             break;
+		case kTurnAroundAndGoHome:
+			return ("Turning around and going home");
+			break;
         default:
             return "OutoBounds State";
             break;

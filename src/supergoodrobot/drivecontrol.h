@@ -10,6 +10,11 @@ namespace drivecontrol {
     void FollowIrLoop(int8_t speedchange, int8_t turnbias);
 
     void StopDriveMotors();
+	
+	void BrakeDriveMotors();
+	
+	void BrakeAndStopDriveMotors();
+	
 }
 
 #endif

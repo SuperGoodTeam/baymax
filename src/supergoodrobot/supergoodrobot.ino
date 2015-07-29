@@ -14,8 +14,8 @@
 
 /*============LIBRARIES============*/
 
-#include <LiquidCrystal.h>
 #include <phys253.h>
+#include <LiquidCrystal.h>
 #include <avr/interrupt.h>
 
 #include <EEPROMex.h>
@@ -126,7 +126,7 @@ void loop() {
         }
 		
 		if (strategies::chosenstrategy != strategies::kTapeBottomOnly){
-			drivecontrol::StopDriveMotors();
+			drivecontrol::BrakeAndStopDriveMotors();
 			strategymanager::GoToNextState();
         }
 		break;
@@ -155,7 +155,7 @@ void loop() {
 				motorswitchtime = millis() - 1000;
 			}
 		}
-		drivecontrol::StopDriveMotors();
+		drivecontrol::BrakeAndStopDriveMotors();
 		
 		oldtime=millis();
         while(!sensorsuite::SideTapeDetect() || millis() - oldtime < 1500) {
@@ -163,7 +163,7 @@ void loop() {
 		}
 		
 		if (strategies::chosenstrategy != strategies::kTapeTurnLeftOnly){
-			drivecontrol::StopDriveMotors();
+			drivecontrol::BrakeAndStopDriveMotors();
 			strategymanager::GoToNextState();
         }
 		
@@ -193,7 +193,7 @@ void loop() {
             followhilltape::FollowHillTapeLoop();
 		}
 		if (strategies::chosenstrategy != strategies::kTapeHill){
-			drivecontrol::StopDriveMotors();
+			drivecontrol::BrakeAndStopDriveMotors();
 			strategymanager::GoToNextState();
         }
 		break;
@@ -220,7 +220,7 @@ void loop() {
             followrighttape::FollowRightTapeLoop();
 		}
 		if (strategies::chosenstrategy != strategies::kTapeTurnRight){
-			drivecontrol::StopDriveMotors();
+			drivecontrol::BrakeAndStopDriveMotors();
 			strategymanager::GoToNextState();
         }
         break;
@@ -234,8 +234,9 @@ void loop() {
 
 		//extend hook arm up
 		
+		//controlled turn to get us to IR following range?
 		oldtime=millis();
-		while (millis() - oldtime < 3000){
+		while (millis() - oldtime < libconstants::kWaitTurnDelay){
 			motor.speed(libconstants::kLeftMotor, -100);
 			motor.speed(libconstants::kRightMotor, 80);
 		}
@@ -251,7 +252,7 @@ void loop() {
 			followir::FollowIrLoop();
 		}
 		if (strategies::chosenstrategy != strategies::kFollowIr){
-			drivecontrol::StopDriveMotors();
+			drivecontrol::BrakeAndStopDriveMotors();
 			strategymanager::GoToNextState();
         }
 		
@@ -302,7 +303,33 @@ void loop() {
 			strategymanager::GoToNextState();
 		}*/
         break;
+	case statemanager::kTurnAroundAndGoHome:
+		//drive backwards
+		oldtime=millis();
+		while (millis() - oldtime < libconstants::kWaitTurnDelay){
+			motor.speed(libconstants::kRightMotor, -libconstants::kMotorSlowSpeed);
+			motor.speed(libconstants::kLeftMotor, libconstants::kMotorSlowSpeed);
+		}
 
+		//turn around (time needs to be adjusted?)
+		oldtime=millis();
+		while (millis() - oldtime < libconstants::kWaitTurnDelay){
+			motor.speed(libconstants::kRightMotor, -libconstants::kMotorSlowSpeed);
+			motor.speed(libconstants::kLeftMotor, libconstants::kMotorSlowSpeed);
+		}
+		
+		//while we don't detect tape in the front QRDs...drive forwards slowly (should we be twitching while we do this?)
+		//alternatively, we follow the 1 kHz beacon
+		while (!sensorsuite::QRDTapeDetect){
+			motor.speed(libconstants::kRightMotor,libconstants::kMotorSlowSpeed);
+			motor.speed(libconstants::kLeftMotor,-libconstants::kMotorSlowSpeed);
+		}
+		
+		//when we detect tape...follow the tape forwards?
+		while (!stopbutton()){
+			followbottomtape::FollowBottomTapeLoop();
+		}
+		break;
     default:
         break;
 

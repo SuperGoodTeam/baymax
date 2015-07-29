@@ -196,6 +196,8 @@ namespace strategymanager {
 			case strategies::kDescendZipline:
 				statemanager::SwitchState(statemanager::kDescendZipline);
 				break;
+			case strategies::kTurnAroundAndGoHome:
+				statemanager::SwitchState(statemanager::kTurnAroundAndGoHome);
 			default:
 				break;
 		}

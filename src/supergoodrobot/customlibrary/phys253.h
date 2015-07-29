@@ -12,7 +12,7 @@
 #include <motor.h>
 #include <phys253pins.h>
 //#include <Tone.cpp>
-#include <ServoTimer2.h>
+#include <ServoTINAH.h>
 
 //setup the variables and classes used throughout phys 253.
 
@@ -20,9 +20,9 @@ extern LiquidCrystal LCD;
 
 extern motorClass motor;
 
-extern ServoTimer2 RCServo0;    // declare variables for up to eight servos.   Replaced old Servo253 implementation 2015Jan2
-extern ServoTimer2 RCServo1;
-extern ServoTimer2 RCServo2;
+extern ServoTINAH RCServo0;    // declare variables for up to eight servos.   Replaced old Servo253 implementation 2015Jan2
+extern ServoTINAH RCServo1;
+extern ServoTINAH RCServo2;
 
 
 int knob(int value) ;   //      { return analogRead(knobInput[value]) ;}

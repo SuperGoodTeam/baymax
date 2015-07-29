@@ -25,6 +25,7 @@ namespace statemanager {
         kCollectItemSix,
         kGrabZipline,
         kDescendZipline,
+		kTurnAroundAndGoHome,
         kRobotStateMax
     };
 

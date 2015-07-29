@@ -59,6 +59,8 @@ namespace libconstants {
 	
 	const uint8_t kMotorCorrectionSpeed = 20;
 	
+	const uint8_t kMotorSlowSpeed = 40;
+	
     /*============GEOMETRIC CONSTANTS============*/
 
     // Servos
@@ -76,7 +78,7 @@ namespace libconstants {
     const uint16_t kBasearmGrabItemOne = 0;
     const uint16_t kPivotarmGrabItemOne = 90;
 
-    const uint16_t kForearmRetreiveItemOne = 180;
+    const uint16_t kForearmRetreiveItemOne = 150;
     const uint16_t kBasearmRetreiveItemOne = 180;
     const uint16_t kPivotarmRetreiveItemOne = 180;
 
@@ -88,7 +90,7 @@ namespace libconstants {
     const uint16_t kBasearmGrabItemTwo = 0;
     const uint16_t kPivotarmGrabItemTwo = 80;
 
-    const uint16_t kForearmRetreiveItemTwo = 180;
+    const uint16_t kForearmRetreiveItemTwo = 150;
     const uint16_t kBasearmRetreiveItemTwo = 180;
     const uint16_t kPivotarmRetreiveItemTwo = 180;
 
@@ -100,7 +102,7 @@ namespace libconstants {
     const uint16_t kBasearmGrabItemThree = 0;
     const uint16_t kPivotarmGrabItemThree = 90;
 
-    const uint16_t kForearmRetreiveItemThree = 180;
+    const uint16_t kForearmRetreiveItemThree = 150;
     const uint16_t kBasearmRetreiveItemThree = 180;
     const uint16_t kPivotarmRetreiveItemThree = 180;
 	
@@ -112,7 +114,7 @@ namespace libconstants {
     const uint16_t kBasearmGrabItemFour = 0;
     const uint16_t kPivotarmGrabItemFour = 30;
 
-    const uint16_t kForearmRetreiveItemFour = 180;
+    const uint16_t kForearmRetreiveItemFour = 150;
     const uint16_t kBasearmRetreiveItemFour = 180;
     const uint16_t kPivotarmRetreiveItemFour = 180;
 
@@ -124,7 +126,7 @@ namespace libconstants {
     const uint16_t kBasearmGrabItemFive = 0;
     const uint16_t kPivotarmGrabItemFive = 0;
 
-    const uint16_t kForearmRetreiveItemFive = 180;
+    const uint16_t kForearmRetreiveItemFive = 150;
     const uint16_t kBasearmRetreiveItemFive = 180;
     const uint16_t kPivotarmRetreiveItemFive = 180;
 	
@@ -159,15 +161,26 @@ namespace libconstants {
     const float kPivotReadingPerDegree = 2.8444444; // degree per analog read
 
     /*============TIME CONSTANTS============*/
+    const uint16_t kWaitServoTurn = 1000*0.5; // milliseconds
+    const uint16_t kWaitServoDown = 1000*1;  // milliseconds
+    const uint16_t kWaitServoUp = 1000*1;   // milliseconds
+    const uint16_t kWaitClawGrab = 1000*0.5;  // milliseconds
+	const uint16_t kWaitBasearmTurn = 1000*1;
+	const uint16_t kWaitForearmTurn = 1000*0.5;
 
-    const uint16_t kWaitServoTurn = 1000*2; // milliseconds
+	/*const uint16_t kWaitServoTurn = 1000*2; // milliseconds
     const uint16_t kWaitServoDown = 1000*2;  // milliseconds
     const uint16_t kWaitServoUp = 1000*2;   // milliseconds
     const uint16_t kWaitClawGrab = 1500;  // milliseconds
 	const uint16_t kWaitBasearmTurn = 1000*2;
-	const uint16_t kWaitForearmTurn = 1000*2;
+	const uint16_t kWaitForearmTurn = 1000*2;*/
+
     const uint16_t kLongDelay = 500;      // milliseconds
     const uint16_t kShortDelay = 200;     // milliseconds
+	
+	const uint16_t kWaitTurnDelay = 2000;
+	const uint16_t kBrakeDelay = 200;
+	
 }
 
 #endif

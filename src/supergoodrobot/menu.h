@@ -45,6 +45,7 @@ namespace menu {
         kCollectItemSix,
         kGrabZipline,
         kDescendZipline,
+		kTurnAroundAndGoHome,
         kStateMenuMax
     };
 

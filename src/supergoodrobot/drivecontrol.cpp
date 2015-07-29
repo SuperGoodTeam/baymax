@@ -22,7 +22,9 @@ namespace drivecontrol {
 
 	uint16_t leftir;
 	uint16_t rightir;
-		
+	
+	uint32_t oldtime;
+	
 	void FollowIrLoop(int8_t speedchange, int8_t turnbias) { 
 		leftir = analogRead(libconstants::kLeftFrontIr);
 		rightir = analogRead(libconstants::kRightFrontIr);
@@ -43,7 +45,7 @@ namespace drivecontrol {
         if (lcdrefreshrate == 30) {
 			LCD.clear();
 			LCD.setCursor(0,0);
-            LCD.print("LIR: " + String(leftir)));
+            LCD.print("LIR: " + String(leftir));
             LCD.setCursor(0,1);
 			LCD.print("RIR: " + String(rightir));
             lcdrefreshrate = 0;
@@ -89,6 +91,7 @@ namespace drivecontrol {
          /*if (lcdrefreshrate == 30) {
 	     LCD.clear();
 			 LCD.setCursor(0,0);
+			 LCD.print(String(analogRead(libconstants::kSideTapeSensor)));
              LCD.print("L: " + String(leftqrd));
              LCD.print("R: " + String(rightqrd));
 			 LCD.setCursor(0,1);
@@ -109,4 +112,18 @@ namespace drivecontrol {
         motor.speed(libconstants::kLeftMotor, 0);
         motor.speed(libconstants::kRightMotor, 0);
     }
+	
+	void BrakeDriveMotors() {
+		oldtime=millis();
+		while (millis() - oldtime < libconstants::kBrakeDelay){
+			motor.speed(libconstants::kRightMotor, libconstants::kMotorSlowSpeed);
+			motor.speed(libconstants::kLeftMotor, -libconstants::kMotorSlowSpeed);
+		}
+	}
+	
+	void BrakeAndStopDriveMotors() {
+		BrakeDriveMotors();
+		StopDriveMotors();
+	}
+	
 }

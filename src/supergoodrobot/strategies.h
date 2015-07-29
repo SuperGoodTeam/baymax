@@ -32,7 +32,8 @@ namespace strategies {
 	kCollectItemSix,
 	kGrabZipline,
 	kDescendZipline,
-        kStrategyMax
+	kTurnAroundAndGoHome,    
+    kStrategyMax
     };
 
     extern Strategy chosenstrategy;
