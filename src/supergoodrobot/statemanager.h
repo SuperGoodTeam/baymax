@@ -21,11 +21,13 @@ namespace statemanager {
         kTapeTurnRight,
         kCollectItemFour,
         kFollowIr,
+		kDriveStraightUntilSideIr,
         kCollectItemFive,
         kCollectItemSix,
         kGrabZipline,
         kDescendZipline,
 		kTurnAroundAndGoHome,
+		kDriveStraightUp,
         kRobotStateMax
     };
 

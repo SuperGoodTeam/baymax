@@ -26,13 +26,21 @@ namespace collectitemone {
         delay(libconstants::kWaitClawGrab);
 
         servocontrol::SetBasearmServo(libconstants::kBasearmRetreiveItemOne);
-        servocontrol::SetForearmServo(libconstants::kForearmRetreiveItemOne);
+		
+		delay(libconstants::kWaitBasearmTurn);
+		
         servocontrol::SetPivotarmServo(libconstants::kPivotarmRetreiveItemOne);
+		
+		delay(libconstants::kWaitForearmTurn);
+		
+        servocontrol::SetForearmServo(libconstants::kForearmRetreiveItemOne);
+
         delay(libconstants::kWaitServoUp);
 
-        while (digitalRead(libconstants::kClawOpenSwitch)) {
+        /*while (digitalRead(libconstants::kClawOpenSwitch)) {
             motor.speed(libconstants::kClawMotor, -libconstants::kClawSpeed);
         }
-		motor.speed(libconstants::kClawMotor, 0);
+		motor.speed(libconstants::kClawMotor, 0);*/
+
     }
 }

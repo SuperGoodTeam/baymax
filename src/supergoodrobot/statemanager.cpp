@@ -87,6 +87,9 @@ namespace statemanager {
         case kFollowIr:
             return "Follow IR";
             break;
+		case kDriveStraightUntilSideIr:
+			return "Drive until side IR";
+			break;
         case kCollectItemFive:
             return "Collect Item 5";
             break;
@@ -101,6 +104,9 @@ namespace statemanager {
             break;
 		case kTurnAroundAndGoHome:
 			return "Turning around and going home";
+			break;
+		case kDriveStraightUp:
+			return "Driving straight up";
 			break;
         default:
             return "Unknown State";

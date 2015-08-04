@@ -3,6 +3,7 @@
 #include <phys253.h>
 #include "followir.h"
 
+#include "parameters.h"
 #include "drivecontrol.h"
 #include "libconstants.h"
 

@@ -6,7 +6,6 @@
 namespace followrighttape {
 
     void FollowRightTapeLoop() {
-
         drivecontrol::FollowTapeLoop(libconstants::kRightTapeSpeedChange, libconstants::kRightTapeTurnBias);
     }
 }

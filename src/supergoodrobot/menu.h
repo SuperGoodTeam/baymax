@@ -15,6 +15,7 @@ namespace menu {
 
     enum StrategyMenu {
         kFull,
+		kAlternateFull,
         kStartTwo,
         kStartThree,
         kStartFour,
@@ -41,11 +42,13 @@ namespace menu {
         kTapeTurnRight,
         kCollectItemFour,
         kFollowIr,
+		kDriveStraightUntilSideIr,
         kCollectItemFive,
         kCollectItemSix,
         kGrabZipline,
         kDescendZipline,
 		kTurnAroundAndGoHome,
+		kDriveStraightUp,
         kStateMenuMax
     };
 

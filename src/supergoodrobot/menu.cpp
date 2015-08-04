@@ -16,7 +16,7 @@
 namespace menu {
 
     MainMenu currentmainselection = kStrategies;
-    StrategyMenu currentstrategyselection = kFull;
+    StrategyMenu currentstrategyselection = kAlternateFull;
     StateMenu currentstateselection = kClawTest;
     ParameterMenu currentparameterselection = kDisplay;
 
@@ -68,7 +68,7 @@ namespace menu {
 
         currentstateselection = static_cast<StateMenu> constrain((map(knob(6), 0, libconstants::kKnobMax, 0, kStateMenuMax)),0,kStateMenuMax-1);
 
-        strategies::chosenstrategy = static_cast<strategies::Strategy> (static_cast<int16_t> (currentstateselection) + 10);
+        strategies::chosenstrategy = static_cast<strategies::Strategy> (static_cast<int16_t> (currentstateselection) + 11);
 
         LCD.print("State:");
         LCD.setCursor(0, 1);
@@ -165,6 +165,9 @@ namespace menu {
         case kFull:
             return "Full";
             break;
+		case kAlternateFull:
+			return "Alternate Full";
+			break;
         case kStartTwo:
             return "Start Second";
             break;
@@ -240,6 +243,9 @@ namespace menu {
         case kFollowIr:
             return "Follow IR";
             break;
+		case kDriveStraightUntilSideIr:
+			return "Drive until side IR";
+			break;
         case kCollectItemFive:
             return "Collect Item 5";
             break;
@@ -254,6 +260,9 @@ namespace menu {
             break;
 		case kTurnAroundAndGoHome:
 			return ("Turning around and going home");
+			break;
+		case kDriveStraightUp:
+			return ("Drive straight up");
 			break;
         default:
             return "OutoBounds State";

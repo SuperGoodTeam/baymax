@@ -2,5 +2,5 @@
 
 namespace strategies {
 
-    Strategy chosenstrategy = kFull;
+    Strategy chosenstrategy = kAlternateFull;
 }

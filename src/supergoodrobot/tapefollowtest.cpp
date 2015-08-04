@@ -8,8 +8,14 @@
 #include "parameters.h"
 
 namespace tapefollowtest {
-
-    void TapeFollowTestLoop() {
+	void TapeFollowTestLoop() {
+		//LCD.clear();
         drivecontrol::FollowTapeLoop(0, 0);
+		/*if (drivecontrol::LocateTapeTrack(40, 500) == true){
+			LCD.print("True");
+		}
+		else{
+			LCD.print("False");
+		}*/
     }
 }

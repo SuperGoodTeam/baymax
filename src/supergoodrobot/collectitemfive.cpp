@@ -9,7 +9,7 @@
 namespace collectitemfive {
 
     void CollectItemFive() {
-        servocontrol::SetBasearmServo(libconstants::kBasearmStartItemFive);
+                servocontrol::SetBasearmServo(libconstants::kBasearmStartItemFive);
         servocontrol::SetForearmServo(libconstants::kForearmStartItemFive);
         servocontrol::SetPivotarmServo(libconstants::kPivotarmStartItemFive);
 
@@ -26,13 +26,21 @@ namespace collectitemfive {
         delay(libconstants::kWaitClawGrab);
 
         servocontrol::SetBasearmServo(libconstants::kBasearmRetreiveItemFive);
-        servocontrol::SetForearmServo(libconstants::kForearmRetreiveItemFive);
+		
+		delay(libconstants::kWaitBasearmTurn);
+		
         servocontrol::SetPivotarmServo(libconstants::kPivotarmRetreiveItemFive);
+		
+		delay(libconstants::kWaitForearmTurn);
+		
+        servocontrol::SetForearmServo(libconstants::kForearmRetreiveItemFive);
+
         delay(libconstants::kWaitServoUp);
 
-        while (!digitalRead(libconstants::kClawOpenSwitch)) {
+        while (digitalRead(libconstants::kClawOpenSwitch)) {
             motor.speed(libconstants::kClawMotor, -libconstants::kClawSpeed);
         }
+		motor.speed(libconstants::kClawMotor, 0);
 
     }
 }

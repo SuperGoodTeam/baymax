@@ -5,6 +5,7 @@ namespace strategies {
 
     enum Strategy {
         kFull,
+		kAlternateFull,
         kStartTwo,
         kStartThree,
         kStartFour,
@@ -28,11 +29,13 @@ namespace strategies {
 	kTapeTurnRight,
 	kCollectItemFour,
 	kFollowIr,
+	kDriveStraightUntilSideIr,
 	kCollectItemFive,
 	kCollectItemSix,
 	kGrabZipline,
 	kDescendZipline,
-	kTurnAroundAndGoHome,    
+	kTurnAroundAndGoHome,
+	kDriveStraightUp,
     kStrategyMax
     };
 
