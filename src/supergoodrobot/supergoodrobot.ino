@@ -233,9 +233,7 @@ void loop() {
 		parameters::proportionalgain = 20;
 		parameters::derivativegain = 100;
 		parameters::basespeed = 100;
-		
-        //collectitemfour::CollectItemFour();
-		
+				
 		while(!sensorsuite::SideTapeRightDetect()) {
 			drivecontrol::FollowTapeLoop(0,0);		
 		}
@@ -243,7 +241,6 @@ void loop() {
 		drivecontrol::StopDriveMotors();
 		
 		while (!sensorsuite::SideTapeDetect()) {
-			//drivecontrol::RightTurnDriveMotors(libconstants::kMotorSlowSpeed);
 			motor.speed(libconstants::kLeftMotor, -libconstants::kMotorSlowSpeed);
 			motor.speed(libconstants::kRightMotor, 0);
 		}
@@ -251,35 +248,9 @@ void loop() {
 		motor.speed(libconstants::kRightMotor, parameters::basespeed+10);
 		motor.speed(libconstants::kLeftMotor, -parameters::basespeed);
 
-		//drivecontrol::StraightDriveMotors(parameters::basespeed);
-		//delay(500);
 		delay(2500);
 		drivecontrol::StopDriveMotors();
-		
-		/*
-			motor.speed(libconstants::kLeftMotor, -libconstants::kMotorSlowSpeed);
-			motor.speed(libconstants::kRightMotor, 0);
-			delay(100);*/
-		
-		/*
-		count=0;
-		while(count<=5){
-			drivecontrol::FollowTapeLoop(0,0);
-			if (sensorsuite::QRDTapeDetect()){
-				count++;
-			}
-			else{
-				count=0;
-			}
-			count=0;
-		}*/
-		
-		/*oldtime=millis();
-		
-		while (millis() - oldtime < 2000) {
-			drivecontrol::FollowTapeLoop(0,0);
-		}*/
-		
+				
 		if (strategies::chosenstrategy != strategies::kCollectItemFour){
 			drivecontrol::StopDriveMotors();
 			strategymanager::GoToNextState();
@@ -288,10 +259,8 @@ void loop() {
 		break;
 		
 	case statemanager::kDriveStraightUntilSideIr:
-		//while (!sensorsuite::SideIrDetect() || !sensorsuite::FrontSensorDetect()){
 		oldtime = millis();
 		while (!sensorsuite::SideIrDetect() && millis() - oldtime < libconstants::kWaitFindFive){
-			//drivecontrol::StraightDriveMotors(parameters::basespeed);
 			drivecontrol::FollowIrLoop(0,0);
 		}
 		
@@ -303,12 +272,9 @@ void loop() {
 		break;
 
     case statemanager::kFollowIr:
-		//while (!sensorsuite::SideIrDetect() || !sensorsuite::FrontSensorDetect()){
 		oldtime = millis();
-		//while (!sensorsuite::SideIrDetect()){
 		while(millis() - oldtime < 4000) { //2300
 			followir::FollowIrLoop();
-			//drivecontrol::StraightDriveMotors(150);
 		}
 		drivecontrol::StopDriveMotors();
 		
@@ -382,28 +348,8 @@ void loop() {
 		break;
 
 	case statemanager::kTurnAroundAndGoHome:
-		//drive backwards
-		/*oldtime=millis();
-		while (millis() - oldtime < libconstants::kWaitTurnDelay){
-			motor.speed(libconstants::kRightMotor, -libconstants::kMotorSlowSpeed);
-			motor.speed(libconstants::kLeftMotor, libconstants::kMotorSlowSpeed);
-		}*/
-		
-		//turn around (time needs to be adjusted?)
-		
-		//while we don't detect tape in the front QRDs...drive forwards slowly (should we be twitching while we do this?)
-		//alternatively, we follow the 10 kHz beacon
-		
-		/*drivecontrol::StraightDriveMotors(60);
-		delay(500);*/
-		
-		/*while (!sensorsuite::SideTapeRightDetect() && !sensorsuite::SideTapeDetect()){
-			drivecontrol::FollowIrLoop(libconstants::kFollowIrSpeedChange, libconstants::kFollowIrTurnBias);	
-		}*/
-		
 		oldtime = millis();
 		while (millis() - oldtime < 2000){
-		//while (!sensorsuite::SideTapeRightDetect() && !sensorsuite::SideTapeDetect()){
 			drivecontrol::StraightDriveMotors(parameters::basespeed);
 		}
 		
@@ -411,22 +357,12 @@ void loop() {
 		
 		}
 		
-		/*
-		while((sensorsuite::QRDTapeDetect() && !sensorsuite::SideTapeDetect()) || (sensorsuite::QRDTapeDetect() && !sensorsuite::SideTapeRightDetect())){
-			drivecontrol::FollowIrLoop(libconstants::kFollowIrSpeedChange, libconstants::kFollowIrTurnBias);
-		}*/
-
-		//wait for the robot to get past the 4th sidetape
-		/*oldtime = millis();
-		while(millis() - oldtime < libconstants::kWaitPastFourSideTape){
-			followrighttape::FollowRightTapeLoop();
-		}*/
-		
 		if (strategies::chosenstrategy != strategies::kTurnAroundAndGoHome){
 			drivecontrol::StopDriveMotors();
 			strategymanager::GoToNextState();
 		}
 		break;
+		
 	case statemanager::kReturnHome:
 		drivecontrol::LeftTurnDriveMotors(libconstants::kMotorTurnSpeed);
 		delay(libconstants::kWaitTurnDelay);
