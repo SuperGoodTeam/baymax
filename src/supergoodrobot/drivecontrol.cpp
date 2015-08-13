@@ -13,13 +13,14 @@ namespace drivecontrol {
 
     uint16_t lcdrefreshrate = 0;
     int16_t error, lasterror, lasterrorstate = 0;
+	int16_t oldleftqrd, oldrightqrd = 0;
     int16_t lasterrorstatetime = 0;
     int16_t errorstatetime = 1;
     int16_t proportionalcorrection = 0;
     int16_t derivativecorrection = 0;
     int16_t totalcorrection = 0;
-	uint8_t errorcount = 0;
-	
+	uint8_t lefterrorcount, righterrorcount = 0;
+	uint8_t errorstatemax = 5;
 
     uint16_t leftqrd;
     uint16_t rightqrd;
@@ -38,7 +39,7 @@ namespace drivecontrol {
 		//working params calc
 		//parameters::irproportionalgain = abs(1.5*500.f/(leftir+rightir));
 		
-		parameters::irproportionalgain = abs(1.75*500.f/(leftir+rightir));
+		parameters::irproportionalgain = abs(3*500.f/(leftir+rightir));
 		
         if (error != lasterror) { //might have to constrain the errors?
             lasterrorstate = lasterror;
@@ -129,24 +130,55 @@ namespace drivecontrol {
         leftqrd = analogRead(libconstants::kLeftTapeSensor);
         rightqrd = analogRead(libconstants::kRightTapeSensor);
 
+		if ((leftqrd > parameters::qrdthreshold) != (oldleftqrd > parameters::qrdthreshold)){
+			lefterrorcount++;
+		}
+		else{
+			lefterrorcount=0;
+		}
+		if ((rightqrd > parameters::qrdthreshold) != (oldrightqrd > parameters::qrdthreshold)){
+			righterrorcount++;
+		}
+		else{
+			righterrorcount=0;
+		}
+		
+		if(lefterrorcount < errorstatemax)
+		{ leftqrd = oldleftqrd; }
+		else
+		{
+			lefterrorcount = 0;
+			oldleftqrd = leftqrd;
+		}
+		if(righterrorcount < errorstatemax)
+		{ rightqrd = oldrightqrd; }
+		else
+		{
+			righterrorcount = 0;
+			oldrightqrd = rightqrd;
+		}
+		
         if (leftqrd > parameters::qrdthreshold) {
-            if (rightqrd > parameters::qrdthreshold)
+            if (rightqrd > parameters::qrdthreshold){
                 error = 0;
-            else
+				//errorcount=0;
+				}
+            else{
                 error = -1;
+				//errorcount=0;
+				}
         }
-        else if (rightqrd > parameters::qrdthreshold)
+        else if (rightqrd > parameters::qrdthreshold){
             error = 1;
+			//errorcount=0;
+			}
         else if (lasterror > 0)
             error = 5;
         else
             error = -5;
 			
-		if (error != lasterror){
-			errorcount++;
-		}
-
-		if (errorcount==3){
+		
+		//if (errorcount==3){
 			if (error != lasterror) {
 				lasterrorstate = lasterror;
 				lasterrorstatetime = errorstatetime;
@@ -162,9 +194,9 @@ namespace drivecontrol {
 
 			lasterror = error;
 
-		}
-		errorcount=0;
-         /*if (lcdrefreshrate == 30) {
+		//}
+		//errorcount=0;
+         if (lcdrefreshrate == 30) {
 	     LCD.clear();
 			 LCD.setCursor(0,0);
 			 //LCD.print(String(analogRead(libconstants::kSideTapeSensor)));
@@ -174,7 +206,7 @@ namespace drivecontrol {
 			 LCD.print("S: " + String(analogRead(libconstants::kSideTapeSensor)) + " " + String(analogRead(libconstants::kSideTapeRightSensor)));
              lcdrefreshrate = 0;
          }
-         lcdrefreshrate++;*/
+         lcdrefreshrate++;
 	
         motor.speed(libconstants::kLeftMotor, (-parameters::basespeed - totalcorrection - speedchange));
         motor.speed(libconstants::kRightMotor, (+parameters::basespeed - totalcorrection + speedchange));
@@ -215,7 +247,7 @@ namespace drivecontrol {
 		
 	}
 	
-	bool LocateTapeTrack(int16_t speed, int16_t correctiontime = 400) {
+	bool LocateTapeLeftTrack(int16_t speed, int16_t correctiontime = 400) {
 		RightTurnDriveMotors(speed);
 		oldtime = millis();
 		while (millis() - oldtime < correctiontime) {
@@ -234,6 +266,40 @@ namespace drivecontrol {
 		}
 		StopDriveMotors();
 		return false;
+	}
+	
+		bool LocateTapeRightTrack(int16_t speed, int16_t correctiontime = 400) {
+		LeftTurnDriveMotors(speed);
+		oldtime = millis();
+		while (millis() - oldtime < correctiontime) {
+			if (sensorsuite::QRDTapeDetect()) {
+				StopDriveMotors();
+				return true;
+			}
+		}
+		RightTurnDriveMotors(speed);
+		oldtime = millis();
+		while (millis() - oldtime < 2 * correctiontime + 100) {
+			if (sensorsuite::QRDTapeDetect()) {
+				StopDriveMotors();
+				return true;
+			}
+		}
+		StopDriveMotors();
+		return false;
+	}
+
+	
+	//Makes the assumption that 
+	void OrientIrBeacon() {
+		StopDriveMotors();
+		
+		while (analogRead(libconstants::kRightFrontIr) - analogRead(libconstants::kLeftFrontIr) > 20) {
+			RightTurnDriveMotors(30);
+		}
+		
+		
+		StopDriveMotors();
 	}
 	
 }

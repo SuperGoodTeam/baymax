@@ -11,8 +11,8 @@ namespace parameters {
     extern uint8_t basespeed;
     extern uint8_t qrdthreshold;
 	//extern uint8_t irthreshold;
-	extern uint8_t sideqrdthreshold;
-	extern uint8_t sideirthreshold;
+	extern uint16_t sideqrdthreshold;
+	extern uint16_t sideirthreshold;
 }
 
 #endif

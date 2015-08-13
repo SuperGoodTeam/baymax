@@ -108,6 +108,9 @@ namespace statemanager {
 		case kDriveStraightUp:
 			return "Driving straight up";
 			break;
+		case kReturnHome:
+			return "Returning home";
+			break;
         default:
             return "Unknown State";
             break;

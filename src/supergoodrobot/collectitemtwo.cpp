@@ -1,4 +1,4 @@
-#include "collectitemtwo.h"
+#include "collectitemTwo.h"
 
 #include <LiquidCrystal.h>
 #include <phys253.h>
@@ -15,10 +15,13 @@ namespace collectitemtwo {
 
         delay(libconstants::kWaitServoTurn);
 
-        servocontrol::SetBasearmServo(libconstants::kBasearmGrabItemTwo);
-        servocontrol::SetForearmServo(libconstants::kForearmGrabItemTwo);
         servocontrol::SetPivotarmServo(libconstants::kPivotarmGrabItemTwo);
 
+        delay(libconstants::kWaitServoTurn);
+		
+        servocontrol::SetBasearmServo(libconstants::kBasearmGrabItemTwo);
+        servocontrol::SetForearmServo(libconstants::kForearmGrabItemTwo);
+		
         delay(libconstants::kWaitServoDown);
 
         motor.speed(libconstants::kClawMotor, libconstants::kClawSpeed);
@@ -35,11 +38,13 @@ namespace collectitemtwo {
 		
         servocontrol::SetForearmServo(libconstants::kForearmRetreiveItemTwo);
 
-        delay(libconstants::kWaitServoUp);
-
+        /*delay(libconstants::kWaitServoUp);
         while (digitalRead(libconstants::kClawOpenSwitch)) {
             motor.speed(libconstants::kClawMotor, -libconstants::kClawSpeed);
         }
-		motor.speed(libconstants::kClawMotor, 0);
+		motor.speed(libconstants::kClawMotor, 0);*/
+
+		servocontrol::SetPivotarmServo(libconstants::kPivotarmStartPosition);
+
     }
 }

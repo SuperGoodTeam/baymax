@@ -17,27 +17,34 @@ namespace strategymanager {
 	uint8_t lenarrFull=sizeof(arrFull) / sizeof(arrFull[0]);
 
 	/*============*/
-	statemanager::RobotState arrAlternateFull[] = { statemanager::kDriveStraightUp, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kDriveStraightUntilSideIr, statemanager::kCollectItemFive, statemanager::kTurnAroundAndGoHome, statemanager::kTapeTurnRight, statemanager::kCollectItemThree, statemanager::kTapeHill, statemanager::kCollectItemTwo, statemanager::kTapeTurnLeft, statemanager::kCollectItemOne, statemanager::kTapeBottom };
+	statemanager::RobotState arrAlternateFull[] = { statemanager::kDriveStraightUp, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kDriveStraightUntilSideIr, statemanager::kCollectItemFive, statemanager::kTurnAroundAndGoHome, statemanager::kTapeTurnRight, statemanager::kCollectItemThree, statemanager::kTapeHill, statemanager::kCollectItemTwo, statemanager::kTapeTest }; //statemanager::kTapeTurnLeft, statemanager::kCollectItemOne, 
 	
 	uint8_t lenarrAlternateFull = sizeof(arrAlternateFull) / sizeof(arrAlternateFull[0]);
 	
 	/*============*/
-	statemanager::RobotState arrStartTwo[] = { statemanager::kCollectItemTwo, statemanager::kTapeTurnLeft, statemanager::kCollectItemOne, statemanager::kTapeBottom };
+	//statemanager::RobotState arrStartTwo[] = { statemanager::kCollectItemTwo, statemanager::kTapeTurnLeft, statemanager::kCollectItemOne, statemanager::kTapeBottom };
 	
+	statemanager::RobotState arrStartTwo[] = { statemanager::kDriveStraightUp, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kDriveStraightUntilSideIr, statemanager::kTurnAroundAndGoHome, statemanager::kTapeTurnRight, statemanager::kTapeHill, statemanager::kCollectItemTwo, statemanager::kTapeTurnLeft, statemanager::kCollectItemOne, statemanager::kTapeBottom };
+
 	uint8_t lenarrStartTwo=sizeof(arrStartTwo) / sizeof(arrStartTwo[0]);
 	
 	/*============*/
-	statemanager::RobotState arrStartThree[] = { statemanager::kCollectItemThree, statemanager::kTapeHill, statemanager::kCollectItemTwo, statemanager::kTapeTurnLeft, statemanager::kCollectItemOne, statemanager::kTapeBottom };
+	//statemanager::RobotState arrStartThree[] = { statemanager::kCollectItemThree, statemanager::kTapeHill, statemanager::kCollectItemTwo, statemanager::kTapeTurnLeft, statemanager::kCollectItemOne, statemanager::kTapeBottom };
+	
+	statemanager::RobotState arrStartThree[] = { statemanager::kDriveStraightUp, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kDriveStraightUntilSideIr, statemanager::kTurnAroundAndGoHome, statemanager::kTapeTurnRight, statemanager::kCollectItemThree, statemanager::kTapeHill, statemanager::kCollectItemTwo, statemanager::kTapeTurnLeft, statemanager::kCollectItemOne, statemanager::kTapeBottom };
 	
 	uint8_t lenarrStartThree=sizeof(arrStartThree) / sizeof(arrStartThree[0]);
 	
 	/*============*/
-	statemanager::RobotState arrStartFour[] = { statemanager::kCollectItemFour, statemanager::kDriveStraightUntilSideIr, statemanager::kCollectItemFive, statemanager::kTurnAroundAndGoHome, statemanager::kTapeTurnRight, statemanager::kCollectItemThree, statemanager::kTapeHill, statemanager::kCollectItemTwo, statemanager::kTapeTurnLeft, statemanager::kCollectItemOne, statemanager::kTapeBottom };
+	//statemanager::RobotState arrStartFour[] = { statemanager::kCollectItemFour, statemanager::kDriveStraightUntilSideIr, statemanager::kCollectItemFive, statemanager::kTurnAroundAndGoHome, statemanager::kTapeTurnRight, statemanager::kCollectItemThree, statemanager::kTapeHill, statemanager::kCollectItemTwo, statemanager::kTapeTurnLeft, statemanager::kCollectItemOne, statemanager::kTapeBottom };
+	
+	statemanager::RobotState arrStartFour[] = { statemanager::kDriveStraightUp, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kDriveStraightUntilSideIr, statemanager::kTurnAroundAndGoHome, statemanager::kTapeTurnRight, statemanager::kCollectItemThree, statemanager::kTapeHill, statemanager::kCollectItemTwo, statemanager::kTapeTurnLeft, statemanager::kCollectItemOne, statemanager::kTapeBottom };
 	
 	uint8_t lenarrStartFour=sizeof(arrStartFour) / sizeof(arrStartFour[0]);
 	
 	/*============*/
-	statemanager::RobotState arrStartFive[] = { statemanager::kCollectItemFive, statemanager::kTurnAroundAndGoHome, statemanager::kTapeTurnRight, statemanager::kCollectItemThree, statemanager::kTapeHill, statemanager::kCollectItemTwo, statemanager::kTapeTurnLeft, statemanager::kCollectItemOne, statemanager::kTapeBottom };
+	statemanager::RobotState arrStartFive[] = { statemanager::kDriveStraightUp, statemanager::kCollectItemFour, statemanager::kFollowIr, statemanager::kDriveStraightUntilSideIr, statemanager::kCollectItemFive, statemanager::kTurnAroundAndGoHome, statemanager::kTapeTurnRight, statemanager::kCollectItemThree, statemanager::kTapeHill, statemanager::kCollectItemTwo, statemanager::kTapeTurnLeft, statemanager::kCollectItemOne, statemanager::kTapeBottom };
+	
 	
 	uint8_t lenarrStartFive=sizeof(arrStartFive) / sizeof(arrStartFive[0]);
 	
@@ -214,6 +221,8 @@ namespace strategymanager {
 				break;
 			case strategies::kTurnAroundAndGoHome:
 				statemanager::SwitchState(statemanager::kTurnAroundAndGoHome);
+			case strategies::kReturnHome:
+				statemanager::SwitchState(statemanager::kReturnHome);
 			default:
 				break;
 		}

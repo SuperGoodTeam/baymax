@@ -23,7 +23,11 @@ namespace drivecontrol {
 	
 	void RightTurnDriveMotors(int16_t speed);
 	
-	bool LocateTapeTrack(int16_t speed, int16_t correctiontime);
+	bool LocateTapeLeftTrack(int16_t speed, int16_t correctiontime);
+	
+	bool LocateTapeRightTrack(int16_t speed, int16_t correctiontime);
+
+	void OrientIrBeacon();
 }
 
 #endif

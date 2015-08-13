@@ -49,6 +49,7 @@ namespace menu {
         kDescendZipline,
 		kTurnAroundAndGoHome,
 		kDriveStraightUp,
+		kReturnHome,
         kStateMenuMax
     };
 

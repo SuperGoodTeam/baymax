@@ -28,6 +28,7 @@ namespace statemanager {
         kDescendZipline,
 		kTurnAroundAndGoHome,
 		kDriveStraightUp,
+		kReturnHome,
         kRobotStateMax
     };
 

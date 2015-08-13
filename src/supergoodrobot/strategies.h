@@ -36,6 +36,7 @@ namespace strategies {
 	kDescendZipline,
 	kTurnAroundAndGoHome,
 	kDriveStraightUp,
+	kReturnHome,
     kStrategyMax
     };
 

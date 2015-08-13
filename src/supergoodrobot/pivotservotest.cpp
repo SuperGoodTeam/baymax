@@ -18,7 +18,7 @@ namespace pivotservotest {
 	    libconstants::kLongDelay;
 	}
 
-        if ((moveservo) && (pivotservoposition >= 10) && (pivotservoposition < 178))
+        if ((moveservo) && (pivotservoposition >= 10) && (pivotservoposition <= 178))
             servocontrol::SetPivotarmServo(pivotservoposition);
         else {
             pivotservoposition = map(knob(6), 0, libconstants::kKnobMax, 0, libconstants::kServoDegreesMax);

@@ -63,8 +63,8 @@ void setup() {
     // Set Digital pins 8-15 to input
     DDRB = DDRB | B11111111;
 	
-	servocontrol::SetBasearmServo(libconstants::kForearmStartPosition);
-    servocontrol::SetForearmServo(libconstants::kBasearmStartPosition);
+	servocontrol::SetBasearmServo(libconstants::kBasearmStartPosition);
+    servocontrol::SetForearmServo(libconstants::kForearmStartPosition);
     servocontrol::SetPivotarmServo(libconstants::kPivotarmStartPosition);
 	
 }
@@ -122,7 +122,7 @@ void loop() {
         break;
 
     case statemanager::kTapeBottom:
-        while(!sensorsuite::SideTapeDetect()) {
+        while(!sensorsuite::SideTapeRightDetect()) {
             followbottomtape::FollowBottomTapeLoop();
         }
 		
@@ -133,10 +133,13 @@ void loop() {
 		break;
 
     case statemanager::kCollectItemOne:
-		
         collectitemone::CollectItemOne();
 		
-		while(sensorsuite::SideTapeDetect()) {
+		while(!drivecontrol::LocateTapeLeftTrack(50, 800)){
+		
+		}
+		
+		while(sensorsuite::SideTapeRightDetect()) {
             followbottomtape::FollowBottomTapeLoop();
         }
 		
@@ -147,7 +150,7 @@ void loop() {
 
     case statemanager::kTapeTurnLeft:
 		oldtime=millis();
-        while(!sensorsuite::SideTapeDetect() || millis() - oldtime < libconstants::kTapeTurnLeftImmunityZoneDelay) {
+        while(!sensorsuite::SideTapeRightDetect() || millis() - oldtime < libconstants::kTapeTurnLeftImmunityZoneDelay) {
             followlefttape::FollowLeftTapeLoop(); // ends at 2nd side tape
 		}
 		
@@ -160,10 +163,19 @@ void loop() {
 
     case statemanager::kCollectItemTwo:
         collectitemtwo::CollectItemTwo();
+		
+		while(!drivecontrol::LocateTapeRightTrack(50, 800)){
+		
+		}
 				
 		while(sensorsuite::SideTapeRightDetect()) {
             followlefttape::FollowLeftTapeLoop();
         }
+		
+		while(sensorsuite::SideTapeRightDetect()) {
+            followlefttape::FollowLeftTapeLoop();
+        }
+		
 		if (strategies::chosenstrategy != strategies::kCollectItemTwo){	
 			strategymanager::GoToNextState();
         }
@@ -172,7 +184,7 @@ void loop() {
 
     case statemanager::kTapeHill: // ends at 3rd sidetape
 		oldtime=millis();
-		while(!sensorsuite::SideTapeDetect() || millis() - oldtime < libconstants::kTapeHillImmunityZoneDelay) {
+		while(!sensorsuite::SideTapeRightDetect() || millis() - oldtime < libconstants::kTapeHillImmunityZoneDelay) {
 		    followhilltape::FollowHillTapeLoop();
 		}
 		if (strategies::chosenstrategy != strategies::kTapeHill){
@@ -183,10 +195,15 @@ void loop() {
 
     case statemanager::kCollectItemThree:
     	collectitemthree::CollectItemThree();
-				
-		while(sensorsuite::SideTapeDetect()) {
+
+		while(!drivecontrol::LocateTapeRightTrack(50, 800)){
+		
+		}
+
+		while(sensorsuite::SideTapeRightDetect()) {
             followhilltape::FollowHillTapeLoop();
         }
+
 		if (strategies::chosenstrategy != strategies::kCollectItemThree){
 			strategymanager::GoToNextState();
         }
@@ -194,7 +211,15 @@ void loop() {
         break;
 
     case statemanager::kTapeTurnRight:
-		while(!sensorsuite::SideTapeDetect()) {
+		motor.speed(libconstants::kRightMotor, 140);
+		motor.speed(libconstants::kLeftMotor, -75);
+		delay(4500);
+		
+		while(!drivecontrol::LocateTapeLeftTrack(50, 800)){
+		
+		}
+
+		while(!sensorsuite::SideTapeRightDetect()) {
             followrighttape::FollowRightTapeLoop();
 		}
 		if (strategies::chosenstrategy != strategies::kTapeTurnRight){
@@ -204,6 +229,11 @@ void loop() {
         break;
 
     case statemanager::kCollectItemFour:
+		
+		parameters::proportionalgain = 20;
+		parameters::derivativegain = 100;
+		parameters::basespeed = 100;
+		
         //collectitemfour::CollectItemFour();
 		
 		while(!sensorsuite::SideTapeRightDetect()) {
@@ -217,6 +247,20 @@ void loop() {
 			motor.speed(libconstants::kLeftMotor, -libconstants::kMotorSlowSpeed);
 			motor.speed(libconstants::kRightMotor, 0);
 		}
+		
+		motor.speed(libconstants::kRightMotor, parameters::basespeed+10);
+		motor.speed(libconstants::kLeftMotor, -parameters::basespeed);
+
+		//drivecontrol::StraightDriveMotors(parameters::basespeed);
+		//delay(500);
+		delay(2500);
+		drivecontrol::StopDriveMotors();
+		
+		/*
+			motor.speed(libconstants::kLeftMotor, -libconstants::kMotorSlowSpeed);
+			motor.speed(libconstants::kRightMotor, 0);
+			delay(100);*/
+		
 		/*
 		count=0;
 		while(count<=5){
@@ -245,10 +289,12 @@ void loop() {
 		
 	case statemanager::kDriveStraightUntilSideIr:
 		//while (!sensorsuite::SideIrDetect() || !sensorsuite::FrontSensorDetect()){
-		while (!sensorsuite::SideIrDetect()){
+		oldtime = millis();
+		while (!sensorsuite::SideIrDetect() && millis() - oldtime < libconstants::kWaitFindFive){
 			//drivecontrol::StraightDriveMotors(parameters::basespeed);
-			followir::FollowIrLoop();
+			drivecontrol::FollowIrLoop(0,0);
 		}
+		
 		if (strategies::chosenstrategy != strategies::kFollowIr){
 			drivecontrol::StopDriveMotors();
 			strategymanager::GoToNextState();
@@ -260,9 +306,9 @@ void loop() {
 		//while (!sensorsuite::SideIrDetect() || !sensorsuite::FrontSensorDetect()){
 		oldtime = millis();
 		//while (!sensorsuite::SideIrDetect()){
-		while(millis() - oldtime < 2300) {
-			//followir::FollowIrLoop();
-			drivecontrol::StraightDriveMotors(150);
+		while(millis() - oldtime < 4000) { //2300
+			followir::FollowIrLoop();
+			//drivecontrol::StraightDriveMotors(150);
 		}
 		drivecontrol::StopDriveMotors();
 		
@@ -348,14 +394,20 @@ void loop() {
 		//while we don't detect tape in the front QRDs...drive forwards slowly (should we be twitching while we do this?)
 		//alternatively, we follow the 10 kHz beacon
 		
-		drivecontrol::StraightDriveMotors(60);
-		delay(500);
+		/*drivecontrol::StraightDriveMotors(60);
+		delay(500);*/
 		
-		while (!sensorsuite::SideTapeRightDetect() && !sensorsuite::SideTapeDetect()){
+		/*while (!sensorsuite::SideTapeRightDetect() && !sensorsuite::SideTapeDetect()){
 			drivecontrol::FollowIrLoop(libconstants::kFollowIrSpeedChange, libconstants::kFollowIrTurnBias);	
+		}*/
+		
+		oldtime = millis();
+		while (millis() - oldtime < 2000){
+		//while (!sensorsuite::SideTapeRightDetect() && !sensorsuite::SideTapeDetect()){
+			drivecontrol::StraightDriveMotors(parameters::basespeed);
 		}
 		
-		while(!drivecontrol::LocateTapeTrack(50, 800)){
+		while(!drivecontrol::LocateTapeLeftTrack(50, 800)){
 		
 		}
 		
@@ -371,6 +423,23 @@ void loop() {
 		}*/
 		
 		if (strategies::chosenstrategy != strategies::kTurnAroundAndGoHome){
+			drivecontrol::StopDriveMotors();
+			strategymanager::GoToNextState();
+		}
+		break;
+	case statemanager::kReturnHome:
+		drivecontrol::LeftTurnDriveMotors(libconstants::kMotorTurnSpeed);
+		delay(libconstants::kWaitTurnDelay);
+		drivecontrol::StopDriveMotors(); //stop turning
+		
+		while(!drivecontrol::LocateTapeLeftTrack(50, 800)){
+		
+		}
+
+		while(!stopbutton) {
+			drivecontrol::FollowTapeLoop(0,0);
+		}
+		if (strategies::chosenstrategy != strategies::kReturnHome){
 			drivecontrol::StopDriveMotors();
 			strategymanager::GoToNextState();
 		}

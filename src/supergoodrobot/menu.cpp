@@ -16,8 +16,8 @@
 namespace menu {
 
     MainMenu currentmainselection = kStrategies;
-    StrategyMenu currentstrategyselection = kAlternateFull;
-    StateMenu currentstateselection = kClawTest;
+    StrategyMenu currentstrategyselection = kAlternateFull; 
+	StateMenu currentstateselection = kClawTest;
     ParameterMenu currentparameterselection = kDisplay;
 
     Menu currentmenu = kMainMenu;
@@ -263,6 +263,9 @@ namespace menu {
 			break;
 		case kDriveStraightUp:
 			return ("Drive straight up");
+			break;
+		case kReturnHome:
+			return ("Returning home");
 			break;
         default:
             return "OutoBounds State";
