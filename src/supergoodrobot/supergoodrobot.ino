@@ -167,11 +167,7 @@ void loop() {
 		while(!drivecontrol::LocateTapeRightTrack(50, 800)){
 		
 		}
-				
-		while(sensorsuite::SideTapeRightDetect()) {
-            followlefttape::FollowLeftTapeLoop();
-        }
-		
+
 		while(sensorsuite::SideTapeRightDetect()) {
             followlefttape::FollowLeftTapeLoop();
         }
